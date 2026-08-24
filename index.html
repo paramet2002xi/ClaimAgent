@@ -1417,6 +1417,56 @@
             background-color: var(--success-bg);
         }
 
+        /* ================= Modal ขยายวงเงิน (Modern UX) ================= */
+        #limitModal .modal-content-box {
+            max-width: 480px !important;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 55px rgba(16, 24, 40, 0.22);
+        }
+        #limitModal .limit-modal-titlebar { margin-bottom: 6px !important; }
+        #limitModal .limit-modal-subtitle {
+            font-size: 12.5px; color: var(--text-muted); margin: 0 0 18px 36px;
+        }
+        #limitModal .limit-detail-grid { gap: 12px; }
+        #limitModal .limit-detail-box {
+            background: #fff; border-color: var(--border-color); padding: 12px 14px;
+        }
+        #limitModal .limit-amount-row { background: #fff; padding: 13px 16px; }
+        #limitModal .limit-stat-box { min-height: 82px; display:flex; flex-direction:column; justify-content:center; }
+        #limitModal .limit-flat-box { min-height: 52px; }
+        #limitModal .modal-form-group-v2 { min-height: 44px; }
+        #limitModal .limit-modal-actions {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px !important;
+            width: 300px;
+            margin: 18px auto 0 !important;
+            flex-wrap: nowrap !important;
+        }
+        #limitModal .limit-modal-actions button {
+            width: 100%; height: 42px; padding: 0 18px;
+            display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 6px; font-family: 'Sarabun', sans-serif; font-weight: 500;
+        }
+        #limitModal .limit-modal-actions .btn-modal-confirm { background: var(--green-btn); }
+
+
+        /* Limit modal visual refresh - aligned to approved mockup */
+        #limitModal .modal-content-box { max-width: 640px !important; padding: 26px 28px; border-radius: 14px; }
+        #limitModal .limit-modal-subtitle { margin: 2px 0 16px 0; font-size: 13px; }
+        #limitModal .limit-claim-panel { border:1px solid var(--border-color); border-radius:10px; padding:14px; margin-bottom:16px; }
+        #limitModal .limit-section-title { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--primary-blue); margin-bottom:12px; }
+        #limitModal .limit-section-title .material-icons { font-size:20px; }
+        #limitModal .limit-detail-grid { grid-template-columns:1fr 1fr; }
+        #limitModal .limit-detail-box { min-height:72px; }
+        #limitModal .limit-amount-row { margin-bottom:0; }
+        #limitModal .limit-stat-box { min-height:88px; }
+        #limitModal .limit-flat-box { min-height:56px; }
+        #limitModal .limit-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        #limitModal .limit-modal-actions { width:340px; margin:20px auto 0 !important; }
+        #limitModal .limit-modal-actions button { height:44px; }
+
         /* ================= Modal ขยายวงเงิน (Spec28) ================= */
         .limit-detail-grid {
             display: grid;
@@ -1920,6 +1970,29 @@
 
         .icon-action-btn.orange {
             color: var(--warning-color);
+        }
+
+        /* สถานะการสอบถามธนาคาร */
+        .bank-inquiry-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 180px;
+        }
+
+        .bank-inquiry-reason {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.35;
+            text-align: center;
+            max-width: 220px;
+        }
+
+        .badge-info {
+            background-color: var(--info-bg);
+            color: var(--primary-blue);
+            border: 1px solid var(--info-border);
         }
 
         /* ================= สอบถามธนาคาร ================= */
@@ -2456,7 +2529,27 @@
             padding: 16px 24px !important;
             border-bottom: 1px solid var(--divider-bg) !important;
         }
-    </style>
+    
+        /* ===== Search CL / CC result modal ===== */
+        .search-claim-modal { max-width: 1000px; width: 94%; transition: max-width .2s ease; }
+        .search-claim-body { padding: 28px 24px 24px; }
+        .search-claim-row { display:flex; gap:16px; align-items:flex-start; }
+        .search-submit-btn { height:46px; min-width:120px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; background-color:var(--primary-blue); }
+        .search-title-icon { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background-color:var(--info-bg); flex-shrink:0; }
+        .search-title-icon .material-icons { font-size:18px; color:var(--primary-blue); }
+        .search-result-section { margin-top:16px; animation:pageFadeIn .25s ease; }
+        .search-result-table-wrap { border:1px solid var(--border-color); border-radius:4px; overflow:hidden; background:#fff; }
+        .search-result-table { border:none; border-radius:0; }
+        .search-result-table th { padding:14px 16px; }
+        .search-result-table td { padding:12px 16px; }
+        .search-result-table .select-result-btn { padding:7px 16px; border-radius:5px; border:none; background:var(--primary-blue); color:#fff; cursor:pointer; font-family:'Sarabun',sans-serif; }
+        .search-result-table tr.selected { background:var(--info-bg); }
+        .search-result-table tr.selected .select-result-btn { background:var(--green-btn); }
+        .search-result-pagination { border-top:1px solid var(--border-color); padding:12px 16px; justify-content:flex-end; }
+        .search-result-footer { display:flex; justify-content:flex-end; margin-top:16px; }
+        .search-result-footer .btn { min-width:120px; justify-content:center; text-align:center; }
+        .search-result-footer .btn:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
+</style>
 </head>
 
 <body>
@@ -2587,6 +2680,15 @@
                             class="material-icons mi" style="font-size:16px;">local_hospital</span> เคลมโรงพยาบาล</a>
                 </div>
             </div>
+
+            <!-- Mock Data สำหรับ Demo -->
+            <div class="menu-title" style="margin-top:8px;">สำหรับทดสอบ</div>
+            <a href="#" class="menu-item" id="menuMockData" onclick="selectMenu(this); switchPage('mockDataPage')">
+                <span class="material-icons mi">dataset</span> Mock Data
+            </a>
+            <a href="#" class="menu-item" id="menuSystemFlow" onclick="selectMenu(this); switchPage('systemFlowPage')">
+                <span class="material-icons mi">account_tree</span> System Flow
+            </a>
         </div>
     </div>
 
@@ -2884,35 +2986,6 @@
             <div class="container">
 
                 <div class="card">
-                    <div class="list-toolbar" style="flex-wrap:wrap;">
-                        <div class="form-group"
-                            style="height:46px; box-sizing:border-box; display:flex; align-items:center;">
-                            <label>ค้นหาจาก</label>
-                            <select class="form-control" id="transferSearchTypeSelect" onchange="filterTransferTable()">
-                                <option value="CL">เลขที่ CL</option>
-                                <option value="CC">เลขที่ CC</option>
-                            </select>
-                        </div>
-                        <div>
-                            <div class="form-group"
-                                style="min-width:280px; height:46px; box-sizing:border-box; display:flex; align-items:center;">
-                                <label>คำค้นหาเลขที่ CL/CC</label>
-                                <div style="display:flex; align-items:center; gap:8px; width:100%;">
-                                    <span class="material-icons"
-                                        style="color:var(--text-muted); font-size:20px; flex-shrink:0;">person_search</span>
-                                    <input type="text" class="form-control" id="transferSearchInput"
-                                        placeholder="คำค้นหาเลขที่ CL/CC"
-                                        oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''); filterTransferTable();"
-                                        onkeydown="if(event.key==='Enter'){ event.preventDefault(); filterTransferTable(); }">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary-blue" style="height:46px; box-sizing:border-box;"
-                            onclick="filterTransferTable()">
-                            <span class="material-icons" style="font-size:18px;">search</span> ค้นหา
-                        </button>
-                    </div>
-
                     <div class="list-toolbar">
                         <div class="form-group">
                             <label>สาขา</label>
@@ -3082,7 +3155,7 @@
                         <div class="card-body">
                             <div class="info-grid">
                                 <div class="info-item">
-                                    <span class="info-label">เลขที่ CPG :</span>
+                                    <span class="info-label">เลขที่ CL :</span>
                                     <span class="info-value link-style" id="transferDetailCPG">CPG690412538</span>
                                 </div>
                                 <div class="info-item">
@@ -3114,31 +3187,21 @@
                                         <th style="width: 60px; text-align: center;">ลำดับ</th>
                                         <th>ชื่อ-นามสกุล ผู้เอาประกัน</th>
                                         <th>ประเภทความคุ้มครอง</th>
-                                        <th>เลขที่เคลม</th>
+                                        <th>เลขที่เคส (CC)</th>
                                         <th style="text-align: right;">จำนวนเงินที่โอนแล้ว</th>
                                         <th style="text-align: right; width: 170px;">ยอดเงินที่ต้องการโอนเพิ่ม</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr id="selectedClaimRow">
                                         <td style="text-align: center;">1</td>
-                                        <td>นายกรภัทร วรวงศ์ศุภากร</td>
-                                        <td>อุบัติเหตุ/ค่ารักษา/OPD</td>
-                                        <td>CL6904000193</td>
-                                        <td style="text-align: right;">500.00</td>
+                                        <td id="selectedClaimName">นายกรภัทร วรวงศ์ศุภากร</td>
+                                        <td id="selectedClaimCoverage">อุบัติเหตุ/ค่ารักษา/OPD</td>
+                                        <td id="selectedClaimCC">CC6904000048</td>
+                                        <td id="selectedClaimTransferred" style="text-align: right;">4,000.00</td>
                                         <td style="text-align: right;"><input type="number" id="amount1"
-                                                class="input-table-amount" value="" placeholder="0.00" data-base="500"
-                                                data-limit="1000" oninput="calculateTotal()"></td>
-                                    </tr>
-                                    <tr id="claimRow2">
-                                        <td style="text-align: center;">2</td>
-                                        <td>นางสาวชลธิชา รัตนมณี</td>
-                                        <td>อุบัติเหตุ/ค่ารักษา/OPD</td>
-                                        <td>CL6904000194</td>
-                                        <td style="text-align: right;">1,800.00</td>
-                                        <td style="text-align: right;"><input type="number" id="amount2"
-                                                class="input-table-amount" value="" placeholder="0.00" data-base="1800"
-                                                data-limit="5000" oninput="calculateTotal()"></td>
+                                                class="input-table-amount" value="" placeholder="0.00" data-base="4000"
+                                                data-limit="10000" oninput="calculateTotal()"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="table-summary">โอนเพิ่มรวม :</td>
@@ -3351,35 +3414,6 @@
             <div class="container">
 
                 <div class="card">
-                    <div class="list-toolbar" style="flex-wrap:wrap;">
-                        <div class="form-group"
-                            style="height:46px; box-sizing:border-box; display:flex; align-items:center;">
-                            <label>ค้นหาจาก</label>
-                            <select class="form-control" id="refundSearchTypeSelect" onchange="filterRefundTable()">
-                                <option value="CL">เลขที่ CL</option>
-                                <option value="CC">เลขที่ CC</option>
-                            </select>
-                        </div>
-                        <div>
-                            <div class="form-group"
-                                style="min-width:280px; height:46px; box-sizing:border-box; display:flex; align-items:center;">
-                                <label>คำค้นหาเลขที่ CL/CC</label>
-                                <div style="display:flex; align-items:center; gap:8px; width:100%;">
-                                    <span class="material-icons"
-                                        style="color:var(--text-muted); font-size:20px; flex-shrink:0;">person_search</span>
-                                    <input type="text" class="form-control" id="refundSearchInput"
-                                        placeholder="คำค้นหาเลขที่ CL/CC"
-                                        oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, ''); filterRefundTable();"
-                                        onkeydown="if(event.key==='Enter'){ event.preventDefault(); filterRefundTable(); }">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary-blue" style="height:46px; box-sizing:border-box;"
-                            onclick="filterRefundTable()">
-                            <span class="material-icons" style="font-size:18px;">search</span> ค้นหา
-                        </button>
-                    </div>
-
                     <div class="list-toolbar">
                         <div class="form-group">
                             <label>สาขา</label>
@@ -3565,12 +3599,12 @@
                         <div class="card-body">
                             <div class="info-grid">
                                 <div class="info-item">
-                                    <span class="info-label">เลขที่ CPG :</span>
-                                    <span class="info-value link-style" id="refundCpgText">CPG690467210</span>
+                                    <span class="info-label">เลขที่ CL :</span>
+                                    <span class="info-value link-style" id="refundCpgText">CL690400010</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">ชื่อผู้เอาประกัน :</span>
-                                    <span class="info-value">โรงเรียนบ้านท่ามะกา</span>
+                                    <span class="info-value" id="refundDetailName">โรงเรียนบ้านท่ามะกา</span>
                                 </div>
                                 <div class="info-item">
                                     <span class="info-label">ผู้ทำรายการ :</span>
@@ -3597,23 +3631,23 @@
                                         <th style="width: 60px; text-align: center;">ลำดับ</th>
                                         <th>ชื่อ-นามสกุล ผู้เอาประกัน</th>
                                         <th>ประเภทความคุ้มครอง</th>
-                                        <th>เลขที่เคลม</th>
-                                        <th style="text-align: right;">จำนวนเงิน</th>
+                                        <th>เลขที่เคส (CC)</th>
+                                        <th style="text-align: right;">จำนวนเงินที่โอนแล้ว</th>
                                         <th style="text-align: right; width: 150px;">ยอดเงินโอนคืน</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr id="selectedRefundClaimRow">
                                         <td style="text-align: center;">1</td>
-                                        <td>นายกรภัทร วรวงศ์คุณากร</td>
-                                        <td>เจ็บป่วย/ค่ารักษา/OPD</td>
-                                        <td>CL6904000193</td>
-                                        <td style="text-align: right;">600.00</td>
+                                        <td id="selectedRefundClaimName">นายกรภัทร วรวงศ์ศุภากร</td>
+                                        <td id="selectedRefundClaimCoverage">อุบัติเหตุ/ค่ารักษา/OPD</td>
+                                        <td id="selectedRefundClaimCC">CC6904000048</td>
+                                        <td id="selectedRefundClaimTransferred" style="text-align: right;">4,000.00</td>
                                         <td style="text-align: right;"><input type="number" id="refundAmount1"
-                                                class="input-table-amount" value="" placeholder="0.00" data-base="600"
+                                                class="input-table-amount" value="" placeholder="0.00" data-base="4000"
                                                 oninput="calculateRefundTotal()"></td>
                                     </tr>
-                                    <tr id="refundClaimRow2">
+                                    <tr id="refundClaimRow2" style="display:none;">
                                         <td style="text-align: center;">2</td>
                                         <td>นางสาวชลธิชา รัตนมณี</td>
                                         <td>เจ็บป่วย/ค่ารักษา/OPD</td>
@@ -4216,6 +4250,38 @@
                                                 class="material-icons">fact_check</span></button>
                                     </td>
                                 </tr>
+                                <tr id="limitRow4" data-cpg="CPG690600901" data-cl="CL690800121"
+                                    data-cc="CC690800121" data-branch="กรุงเทพมหานคร" data-status="fail">
+                                    <td style="color:var(--primary-blue);">CL690800121</td><td>CC690800121</td><td>24/08/2569 09:18:42</td><td>กรุงเทพมหานคร</td>
+                                    <td style="text-align:right;">4,500.00</td><td>1821000612</td><td>โอนเงินเพิ่ม</td>
+                                    <td style="text-align:center;" id="limitRow4Status"><span class="badge-status badge-reject"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
+                                    <td id="limitRow4Reason">ระบบการโอนเงินขัดข้อง</td>
+                                    <td style="text-align:center;" id="limitRow4Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button></td>
+                                </tr>
+                                <tr id="limitRow5" data-cpg="CPG690600902" data-cl="CL690800122"
+                                    data-cc="CC690800122" data-branch="สำนักงานใหญ่" data-status="fail">
+                                    <td style="color:var(--primary-blue);">CL690800122</td><td>CC690800122</td><td>24/08/2569 10:32:15</td><td>สำนักงานใหญ่</td>
+                                    <td style="text-align:right;">6,200.00</td><td>1821000613</td><td>โอนเงินเพิ่ม</td>
+                                    <td style="text-align:center;" id="limitRow5Status"><span class="badge-status badge-reject"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
+                                    <td id="limitRow5Reason">ระบบไม่สามารถดำเนินการโอนเงินได้</td>
+                                    <td style="text-align:center;" id="limitRow5Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button></td>
+                                </tr>
+                                <tr id="limitRow6" data-cpg="CPG690600903" data-cl="CL690800123"
+                                    data-cc="CC690800123" data-branch="กรุงเทพมหานคร" data-status="rejected">
+                                    <td style="color:var(--primary-blue);">CL690800123</td><td>CC690800123</td><td>24/08/2569 11:05:27</td><td>กรุงเทพมหานคร</td>
+                                    <td style="text-align:right;">3,800.00</td><td>1821000614</td><td>โอนเงินเพิ่ม</td>
+                                    <td style="text-align:center;" id="limitRow6Status"><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span></td>
+                                    <td id="limitRow6Reason">คำนวนยอดผิด</td>
+                                    <td style="text-align:center;" id="limitRow6Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button></td>
+                                </tr>
+                                <tr id="limitRow7" data-cpg="CPG690600904" data-cl="CL690800124"
+                                    data-cc="CC690800124" data-branch="สำนักงานใหญ่" data-status="rejected">
+                                    <td style="color:var(--primary-blue);">CL690800124</td><td>CC690800124</td><td>24/08/2569 13:41:09</td><td>สำนักงานใหญ่</td>
+                                    <td style="text-align:right;">5,000.00</td><td>1821000615</td><td>โอนเงินเพิ่ม</td>
+                                    <td style="text-align:center;" id="limitRow7Status"><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span></td>
+                                    <td id="limitRow7Reason">โอนผิดคน</td>
+                                    <td style="text-align:center;" id="limitRow7Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button></td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="empty-state-row" id="limitTableEmptyState"
@@ -4227,7 +4293,7 @@
                             <select>
                                 <option>10</option>
                             </select>
-                            <span id="limitPaginationText">1-3 จาก 3</span>
+                            <span id="limitPaginationText">1-7 จาก 7</span>
                             <button class="page-nav-btn"><span class="material-icons">chevron_left</span></button>
                             <button class="page-nav-btn"><span class="material-icons">chevron_right</span></button>
                         </div>
@@ -4424,6 +4490,38 @@
                                         </table>
                                     </td>
                                 </tr>
+                                <tr id="bankRow4" data-cl="CL6904000192" data-cpg="CPG690400192">
+                                    <td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow4')"><span class="material-icons expand-arrow-icon" id="bankRow4ArrowIcon">chevron_right</span></button></td>
+                                    <td>CL6904000192</td><td>09/10/2569 10:18:42</td><td>1812000714</td>
+                                    <td>นางสาวกมลชนก ศรีสุข</td><td>กสิกรไทย</td><td style="text-align:right;">2,500.00</td>
+                                    <td style="text-align:center;" id="bankRow4Status"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
+                                    <td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openBankConfirmModal('bankRow4')"><span class="material-icons">send</span></button></td>
+                                </tr>
+                                <tr class="bank-detail-row" id="bankRow4Detail" style="display:none;">
+                                    <td colspan="9"><div class="bank-detail-label">รายละเอียด</div>
+                                        <table class="bank-detail-table"><thead><tr>
+                                            <th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th>
+                                        </tr></thead><tbody><tr>
+                                            <td>CT690400127</td><td>09/10/2569 10:18:45</td><td>KBANK</td><td>Fail</td><td>w001</td><td>Bank service unavailable</td>
+                                        </tr></tbody></table>
+                                    </td>
+                                </tr>
+                                <tr id="bankRow5" data-cl="CL6904000191" data-cpg="CPG690400191">
+                                    <td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow5')"><span class="material-icons expand-arrow-icon" id="bankRow5ArrowIcon">chevron_right</span></button></td>
+                                    <td>CL6904000191</td><td>08/10/2569 16:05:11</td><td>1821000842</td>
+                                    <td>นายธนภัทร วงศ์สวัสดิ์</td><td>กรุงศรี</td><td style="text-align:right;">750.00</td>
+                                    <td style="text-align:center;" id="bankRow5Status"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
+                                    <td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openBankConfirmModal('bankRow5')"><span class="material-icons">send</span></button></td>
+                                </tr>
+                                <tr class="bank-detail-row" id="bankRow5Detail" style="display:none;">
+                                    <td colspan="9"><div class="bank-detail-label">รายละเอียด</div>
+                                        <table class="bank-detail-table"><thead><tr>
+                                            <th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th>
+                                        </tr></thead><tbody><tr>
+                                            <td>CT690400126</td><td>08/10/2569 16:05:14</td><td>BAY</td><td>Fail</td><td>w004</td><td>Unable to process transaction</td>
+                                        </tr></tbody></table>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="empty-state-row" id="bankTableEmptyState"
@@ -4435,7 +4533,7 @@
                             <select>
                                 <option>10</option>
                             </select>
-                            <span id="bankPaginationText">1-3 จาก 3</span>
+                            <span id="bankPaginationText">1-5 จาก 5</span>
                             <button class="page-nav-btn"><span class="material-icons">chevron_left</span></button>
                             <button class="page-nav-btn"><span class="material-icons">chevron_right</span></button>
                         </div>
@@ -4460,7 +4558,7 @@
                                     onkeydown="if(event.key==='Enter'){ event.preventDefault(); submitEditSearch(); }">
                             </div>
                             <div class="field-error-text" id="editSearchErrorText"
-                                style="display:none; margin-top:4px;">กรุณากรอกเลขที่ CPG / CL</div>
+                                style="display:none; margin-top:4px;">กรุณากรอกเลขที่ CL / CC</div>
                         </div>
                         <button class="btn btn-primary-blue" style="height:46px; box-sizing:border-box;"
                             onclick="submitEditSearch()">
@@ -4709,6 +4807,140 @@
         </div>
 
         <!-- ================= PAGE 2: ตั้งค่าการโอนเงิน ================= -->
+        <!-- ================= PAGE: MOCK DATA ================= -->
+        <div id="mockDataPage" class="content-page">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <span class="material-icons" style="color:var(--primary-blue);">dataset</span>
+                            <span>Mock Data สำหรับทดสอบโอนเพิ่ม / คืนเงิน</span>
+                        </div>
+                        <span style="font-size:12px;color:var(--text-muted);font-weight:400;">ใช้เลข CL หรือ CC ด้านล่างเพื่อทดสอบการค้นหา</span>
+                    </div>
+                    <div class="card-body">
+                        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px;">
+                            <div class="form-group" style="margin:0;max-width:420px;flex:1;min-width:260px;">
+                                <label>ค้นหา Mock Data</label>
+                                <input id="mockDataSearch" class="form-control" type="text" placeholder="ค้นหา CL / CC / ชื่อ / ผลิตภัณฑ์" oninput="filterMockData()">
+                            </div>
+                            <button class="btn btn-default" type="button" onclick="document.getElementById('mockDataSearch').value=''; filterMockData();">
+                                <span class="material-icons" style="font-size:18px;">restart_alt</span> ล้างการค้นหา
+                            </button>
+                        </div>
+
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;">
+                            <span style="padding:6px 10px;border-radius:16px;background:var(--info-bg);color:var(--primary-blue);">PH: 1 CL มี 1 CC</span>
+                            <span style="padding:6px 10px;border-radius:16px;background:var(--warning-bg);color:var(--warning-color);">PA: 1 CLPA มีได้หลาย CC</span>
+                            <span style="padding:6px 10px;border-radius:16px;background:var(--info-bg);color:var(--primary-blue);">ค้นหา CL/CLPA → แสดงทุก CC ในเคลมนั้น</span>
+                            <span style="padding:6px 10px;border-radius:16px;background:var(--success-bg);color:var(--green-text);">ค้นหา CC → แสดงเฉพาะเคสนั้น</span>
+                            <span style="padding:6px 10px;border-radius:16px;background:var(--warning-bg);color:var(--warning-color);">วงเงินต่อวัน 30,000 บาท</span>
+                            <span style="padding:6px 10px;border-radius:16px;background:var(--red-light);color:var(--red-text);">เกิน 7 วัน / ไม่ใช่เคลมแรก / โอนแรกไม่สำเร็จ = ใช้งานไม่ได้</span>
+                        </div>
+
+                        <div style="overflow-x:auto;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ผลิตภัณฑ์</th>
+                                        <th>เลขที่ CL</th>
+                                        <th>เลขที่ CC</th>
+                                        <th>ชื่อผู้เอาประกัน</th>
+                                        <th style="text-align:right;">โอนแล้ว</th>
+                                        <th style="text-align:right;">วงเงินคุ้มครอง</th>
+                                        <th style="text-align:center;">วันหลังเคลมแรก</th>
+                                        <th>ผลทดสอบ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mockDataTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: SYSTEM FLOW ================= -->
+        <div id="systemFlowPage" class="content-page">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header" style="display:flex;align-items:center;gap:10px;">
+                        <span class="material-icons" style="color:var(--primary-blue);">account_tree</span>
+                        <span>System Flow</span>
+                    </div>
+                    <div class="card-body">
+                        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
+                            <div style="border:1px solid var(--border-color);border-radius:10px;padding:18px;background:#fff;">
+                                <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                                    <span class="material-icons" style="color:var(--primary-blue);">trending_up</span>
+                                    <strong>Monitor - ขยายวงเงิน</strong>
+                                </div>
+                                <div style="font-size:13px;line-height:1.9;color:var(--text-muted);">
+                                    เมื่อยอดโอนรวมต่อคนต่อวันเกิน 30,000 บาท รายการจะเข้าหน้าขยายวงเงินเพื่อรอพิจารณา
+                                </div>
+                                <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span class="badge-status badge-pending"><span class="badge-dot"></span> รอพิจารณา</span>
+                                    <span>→</span><span>อนุมัติ</span><span>→</span><span style="color:var(--green-text);font-weight:600;">เพิ่มวงเงินและโอนเงินทันที</span>
+                                </div>
+                                <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span class="badge-status badge-pending"><span class="badge-dot"></span> รอพิจารณา</span>
+                                    <span>→</span><span>ไม่อนุมัติ</span><span>→</span><span style="color:var(--red-text);font-weight:600;">ปฏิเสธและจบรายการ</span>
+                                </div>
+                            </div>
+
+                            <div style="border:1px solid var(--border-color);border-radius:10px;padding:18px;background:#fff;">
+                                <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                                    <span class="material-icons" style="color:var(--primary-blue);">assignment_turned_in</span>
+                                    <strong>Monitor - อนุมัติคืนเงิน</strong>
+                                </div>
+                                <div style="font-size:13px;line-height:1.9;color:var(--text-muted);">
+                                    รายการคืนเงินจะยังไม่โอนทันที แต่จะเข้าหน้าอนุมัติคืนเงินเพื่อให้ผู้ใช้งานตรวจสอบก่อน
+                                </div>
+                                <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>
+                                    <span>→</span><span>อนุมัติ</span><span>→</span><span style="color:var(--green-text);font-weight:600;">โอนเงินทันทีและหายจากรายการ</span>
+                                </div>
+                                <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>
+                                    <span>→</span><span>ไม่อนุมัติ</span><span>→</span><span style="color:var(--red-text);font-weight:600;">ปฏิเสธการคืนเงิน</span>
+                                </div>
+                            </div>
+
+                            <div style="border:1px solid var(--border-color);border-radius:10px;padding:18px;background:#fff;">
+                                <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                                    <span class="material-icons" style="color:var(--primary-blue);">account_balance</span>
+                                    <strong>สอบถามธนาคาร</strong>
+                                </div>
+                                <div style="font-size:13px;line-height:1.9;color:var(--text-muted);">
+                                    ใช้กรณี PayTransfer ไม่ตอบกลับ โดยหน้าหลักแสดงเฉพาะรายการสถานะโอนไม่สำเร็จ ส่วนสถานะรอดำเนินการและ Sleep การโอนเงินแสดงเฉพาะใน Transaction
+                                </div>
+                                <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span>ผลสำเร็จ</span><span>→</span><span style="color:var(--green-text);font-weight:600;">โอนสำเร็จและหายจากตาราง</span>
+                                </div>
+                                <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span>ผลไม่สำเร็จ</span><span>→</span><span style="color:var(--red-text);font-weight:600;">ยังคงอยู่ในตาราง</span>
+                                </div>
+                            </div>
+
+                            <div style="border:1px solid var(--border-color);border-radius:10px;padding:18px;background:#fff;">
+                                <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                                    <span class="material-icons" style="color:var(--primary-blue);">build_circle</span>
+                                    <strong>Monitor - แก้ไขการโอนเงิน</strong>
+                                </div>
+                                <div style="font-size:13px;line-height:1.9;color:var(--text-muted);">
+                                    ใช้เฉพาะกรณีระบบ ClaimAgent หรือระบบการโอนเกิดข้อขัดข้อง ทำให้ไม่สามารถโอนเงินได้ และต้องให้ผู้ใช้งานดำเนินการโอนใหม่
+                                </div>
+                                <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
+                                    <span class="badge-status badge-reject"><span class="badge-dot"></span> โอนไม่สำเร็จ</span>
+                                    <span>→</span><span>ตรวจสอบ</span><span>→</span><span style="color:var(--primary-blue);font-weight:600;">โอนใหม่</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="settingPage" class="content-page">
 
             <div class="container">
@@ -5008,36 +5240,57 @@
         </div>
     </div>
 
-    <!-- MODAL 4: ค้นหารายการ (Spec20) -->
+    <!-- MODAL 4: ค้นหารายการ (CL / CC) -->
     <div class="modal-overlay" id="searchTransferModal">
-        <div class="modal-box-edit-v2" style="max-width:440px;">
+        <div class="modal-box-edit-v2 search-claim-modal" id="searchTransferBox">
             <div class="modal-edit-header-v2">
                 <div class="title-group">
-                    <span
-                        style="display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background-color:var(--info-bg); flex-shrink:0;">
-                        <span class="material-icons" style="font-size:18px;">person_search</span>
-                    </span>
+                    <span class="search-title-icon"><span class="material-icons">person_search</span></span>
                     ค้นหารายการ
                 </div>
                 <button class="modal-close-btn" onclick="closeModal('searchTransferModal')">
                     <span class="material-icons" style="font-size:16px;">close</span>
                 </button>
             </div>
-            <div style="padding:20px 24px 24px; display:flex; gap:12px; align-items:flex-start;">
-                <div style="flex:1;">
-                    <div class="form-group"
-                        style="max-width:none; margin-bottom:0; height:46px; box-sizing:border-box;">
-                        <label>กรุณากรอกเลขที่ CPG / CL<span>*</span></label>
-                        <input type="text" class="form-control" id="searchCpgInput"
-                            placeholder="กรุณากรอกเลขที่ CPG / CL"
-                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
+            <div class="search-claim-body">
+                <div class="search-claim-row">
+                    <div style="flex:1;">
+                        <div class="form-group" style="max-width:none; margin-bottom:0; height:46px; box-sizing:border-box;">
+                            <label>กรุณากรอกเลขที่ CL / CC<span>*</span></label>
+                            <input type="text" class="form-control" id="searchCpgInput"
+                                placeholder="กรุณากรอกเลขที่ CL / CC"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(); resetTransferSearchResult();">
+                        </div>
+                        <div class="field-error-text" id="searchErrorText" style="margin-top:4px;">กรุณากรอกเลขที่ CL / CC</div>
                     </div>
-                    <div class="field-error-text" id="searchErrorText" style="margin-top:4px;">กรุณากรอกเลขที่ CPG / CL
+                    <button class="btn-modal-confirm search-submit-btn" onclick="submitSearchTransfer()">บันทึก</button>
+                </div>
+
+                <div class="search-result-section" id="transferSearchResult" style="display:none;">
+                    <div class="search-result-table-wrap">
+                        <table class="data-table search-result-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:100px;">เลือก</th>
+                                    <th>เลขที่ CC</th>
+                                    <th>ประเภทความคุ้มครอง</th>
+                                    <th>วันที่สร้างเคลม</th>
+                                    <th style="text-align:right;">จำนวนเงิน</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transferSearchResultBody"></tbody>
+                        </table>
+                        <div class="table-pagination search-result-pagination">
+                            <span>ข้อมูลต่อหน้า</span><select><option>10</option></select>
+                            <span id="transferSearchPaginationText">1-1 จาก 1</span>
+                            <button class="page-nav-btn" type="button"><span class="material-icons">chevron_left</span></button>
+                            <button class="page-nav-btn" type="button"><span class="material-icons">chevron_right</span></button>
+                        </div>
+                    </div>
+                    <div class="search-result-footer">
+                        <button class="btn btn-success" id="transferSearchActionBtn" onclick="confirmTransferSearchSelection()" disabled>โอนเพิ่ม</button>
                     </div>
                 </div>
-                <button class="btn-modal-confirm"
-                    style="height:46px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; background-color:var(--primary-blue);"
-                    onclick="submitSearchTransfer()">บันทึก</button>
             </div>
         </div>
     </div>
@@ -5061,42 +5314,63 @@
                 <span class="material-icons" style="font-size: 48px; color: var(--warning-color);">info</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกสำเร็จ</div>
-            <div class="modal-subtitle">รอขยายวงเงินจากเคลมออนไลน์</div>
+            <div class="modal-subtitle">รายการเกินวงเงินสูงสุดต่อวัน 30,000 บาท ระบบจะส่งไปรอพิจารณาที่หน้าขยายวงเงิน และยังไม่โอนเงินจนกว่าจะอนุมัติ</div>
             <button class="btn-modal-close"
                 onclick="closeModal('warningTransferModal'); switchPage('transferListPage')">ตกลง</button>
         </div>
     </div>
 
-    <!-- MODAL 7: ค้นหารายการ (Spec22 2.0) -->
+    <!-- MODAL 7: ค้นหารายการ (CL / CC) -->
     <div class="modal-overlay" id="searchRefundModal">
-        <div class="modal-box-edit-v2" style="max-width:440px;">
+        <div class="modal-box-edit-v2 search-claim-modal" id="searchRefundBox">
             <div class="modal-edit-header-v2">
                 <div class="title-group">
-                    <span
-                        style="display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background-color:var(--info-bg); flex-shrink:0;">
-                        <span class="material-icons" style="font-size:18px;">person_search</span>
-                    </span>
+                    <span class="search-title-icon"><span class="material-icons">person_search</span></span>
                     ค้นหารายการ
                 </div>
                 <button class="modal-close-btn" onclick="closeModal('searchRefundModal')">
                     <span class="material-icons" style="font-size:16px;">close</span>
                 </button>
             </div>
-            <div style="padding:20px 24px 24px; display:flex; gap:12px; align-items:flex-start;">
-                <div style="flex:1;">
-                    <div class="form-group"
-                        style="max-width:none; margin-bottom:0; height:46px; box-sizing:border-box;">
-                        <label>กรุณากรอกเลขที่ CPG / CL<span>*</span></label>
-                        <input type="text" class="form-control" id="searchRefundCpgInput"
-                            placeholder="กรุณากรอกเลขที่ CPG / CL"
-                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
+            <div class="search-claim-body">
+                <div class="search-claim-row">
+                    <div style="flex:1;">
+                        <div class="form-group" style="max-width:none; margin-bottom:0; height:46px; box-sizing:border-box;">
+                            <label>กรุณากรอกเลขที่ CL / CC<span>*</span></label>
+                            <input type="text" class="form-control" id="searchRefundCpgInput"
+                                placeholder="กรุณากรอกเลขที่ CL / CC"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase(); resetRefundSearchResult();">
+                        </div>
+                        <div class="field-error-text" id="searchRefundErrorText" style="margin-top:4px;">กรุณากรอกเลขที่ CL / CC</div>
                     </div>
-                    <div class="field-error-text" id="searchRefundErrorText" style="margin-top:4px;">
-                        กรุณากรอกข้อมูลให้ครบถ้วน</div>
+                    <button class="btn-modal-confirm search-submit-btn" onclick="submitSearchRefund()">โอนคืน</button>
                 </div>
-                <button class="btn-modal-confirm"
-                    style="height:46px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; background-color:var(--primary-blue);"
-                    onclick="submitSearchRefund()">โอนคืน</button>
+
+                <div class="search-result-section" id="refundSearchResult" style="display:none;">
+                    <div class="search-result-table-wrap">
+                        <table class="data-table search-result-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:100px;">เลือก</th>
+                                    <th>เลขที่ CC</th>
+                                    <th>ประเภทความคุ้มครอง</th>
+                                    <th>วันที่สร้างเคลม</th>
+                                    <th style="text-align:right;">จำนวนเงิน</th>
+                                </tr>
+                            </thead>
+                            <tbody id="refundSearchResultBody"></tbody>
+                        </table>
+                        <div class="table-pagination search-result-pagination">
+                            <span>ข้อมูลต่อหน้า</span><select><option>10</option></select>
+                            <span id="refundSearchPaginationText">1-1 จาก 1</span>
+                            <button class="page-nav-btn" type="button"><span class="material-icons">chevron_left</span></button>
+                            <button class="page-nav-btn" type="button"><span class="material-icons">chevron_right</span></button>
+                        </div>
+                    </div>
+                    <div class="search-result-footer">
+                        <button class="btn btn-success" id="refundSearchActionBtn" onclick="confirmRefundSearchSelection()" disabled>โอนคืน</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -5124,8 +5398,8 @@
             <div class="success-icon-wrapper">
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
             </div>
-            <div class="modal-title" style="font-weight: 500;">บันทึกคืนเงินสำเร็จ</div>
-            <div class="modal-subtitle">ทั้งหมด <span id="successRefundCount">2</span> รายการ</div>
+            <div class="modal-title" style="font-weight: 500;">บันทึกคำขอคืนเงินสำเร็จ</div>
+            <div class="modal-subtitle">สถานะรอดำเนินการ เพื่อรออนุมัติคืนเงิน (ทั้งหมด <span id="successRefundCount">2</span> รายการ)</div>
 
             <div class="success-account-card">
                 <div class="ktb-mini-logo" style="background-color:var(--primary-blue);">RT</div>
@@ -5521,7 +5795,7 @@
     <!-- ================= Modal ขยายวงเงิน (Spec28) ================= -->
     <div class="modal-overlay" id="limitModal">
         <div class="modal-content-box" style="text-align:left; max-width:420px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+            <div class="limit-modal-titlebar" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
                 <div style="display:flex; align-items:center; gap:8px;">
                     <span
                         style="display:flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background-color:var(--primary-blue); flex-shrink:0;">
@@ -5534,7 +5808,8 @@
                 </button>
             </div>
 
-            <div style="font-size:13px; color:var(--text-muted); margin-bottom:6px;">รายละเอียดเคลม :</div>
+            <div class="limit-claim-panel">
+                <div class="limit-section-title"><span class="material-icons">description</span>รายละเอียดเคลม</div>
             <div class="limit-detail-grid">
                 <div class="limit-detail-box">
                     <div class="limit-label">เลข CL :</div>
@@ -5552,10 +5827,11 @@
                         id="limitDetailAmount">7,000.00</span></span>
             </div>
 
+            </div>
+
             <hr style="border:none; border-top:1px solid var(--border-color); margin:0 0 14px;">
 
-            <div style="font-size:14px; font-weight:600; color:var(--text-dark); margin-bottom:10px;">อนุมัติวงเงิน :
-            </div>
+            <div class="limit-section-title"><span class="material-icons">verified_user</span>อนุมัติวงเงิน</div>
 
             <div class="limit-stat-grid">
                 <div class="limit-stat-box" style="background-color:var(--info-bg);">
@@ -5576,6 +5852,7 @@
                         id="limitRemainAmount">1,000.00</span></span>
             </div>
 
+            <div class="limit-form-grid">
             <div class="modal-form-group-v2" style="margin-bottom:14px;">
                 <label>วงเงินที่ขอเพิ่ม<span>*</span></label>
                 <input type="text" class="form-control" id="limitRequestAmount" value="฿ 6,000.00" readonly
@@ -5591,28 +5868,30 @@
                 </select>
             </div>
 
+            </div>
+
             <div class="limit-flat-box" style="background-color:var(--green-light);">
                 <span class="limit-flat-label" style="color:var(--green-text);">วงเงินคงเหลือ (ครั้งใหม่) :</span>
                 <span class="limit-flat-value" style="color:var(--green-text);">฿ <span
                         id="limitNewRemainAmount">7,000.00</span></span>
             </div>
 
-            <div class="modal-buttons" style="margin-top:6px; flex-wrap:wrap; gap:8px;">
+            <div class="modal-buttons limit-modal-actions" style="margin-top:6px; flex-wrap:wrap; gap:8px;">
                 <button class="btn-modal-cancel" id="limitRejectBtn" disabled
                     onclick="handleLimitRejectClick()">ปฏิเสธ</button>
-                <button class="btn-modal-confirm" onclick="handleLimitAddClick()">เพิ่มวงเงิน</button>
+                <button class="btn-modal-confirm" onclick="handleLimitAddClick()">อนุมัติ</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: ยืนยันเพิ่มวงเงิน? -->
+    <!-- MODAL: ยืนยันอนุมัติขยายวงเงิน? -->
     <div class="modal-overlay" id="confirmAddLimitModal">
         <div class="modal-content-box">
             <div class="confirm-icon-wrapper">
                 <span class="material-icons" style="font-size: 80px; color: var(--muted-icon);">question_mark</span>
             </div>
-            <div class="modal-title" style="font-weight: 500;">ยืนยันเพิ่มวงเงิน?</div>
-            <div class="modal-subtitle">ต้องการยืนยันการเพิ่มวงเงินหรือไม่</div>
+            <div class="modal-title" style="font-weight: 500;">ยืนยันอนุมัติขยายวงเงิน?</div>
+            <div class="modal-subtitle">เมื่ออนุมัติ ระบบจะเพิ่มวงเงินและดำเนินการโอนเงินทันที</div>
             <div class="modal-buttons">
                 <button class="btn-modal-cancel"
                     onclick="closeModal('confirmAddLimitModal'); document.getElementById('limitModal').classList.add('active');">ยกเลิก</button>
@@ -5627,8 +5906,8 @@
             <div class="success-icon-wrapper">
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
             </div>
-            <div class="modal-title" style="font-weight: 500;">เพิ่มวงเงินสำเร็จ</div>
-            <div class="modal-subtitle">เลข CL <span id="addLimitSuccessCL">CL6904000962</span></div>
+            <div class="modal-title" style="font-weight: 500;">อนุมัติขยายวงเงินและโอนเงินสำเร็จ</div>
+            <div class="modal-subtitle">ระบบดำเนินการโอนเงินเรียบร้อยแล้ว · เลข CL <span id="addLimitSuccessCL">CL6904000962</span></div>
             <div class="limit-flat-box" style="background-color:var(--green-light); margin: 16px 20px 4px;">
                 <span class="limit-flat-label" style="color:var(--green-text);">วงเงินคงเหลือ (ครั้งใหม่) :</span>
                 <span class="limit-flat-value" style="color:var(--green-text);">฿ <span
@@ -5662,6 +5941,7 @@
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">ปฏิเสธการขยายวงเงินสำเร็จ</div>
+            <div class="modal-subtitle">รายการสิ้นสุดและจะไม่มีการโอนเงิน</div>
             <button class="btn-modal-close"
                 onclick="closeModal('rejectLimitSuccessModal'); finalizeRejectLimit();">ตกลง</button>
         </div>
@@ -5982,6 +6262,10 @@
             document.getElementById('menuMonitorLimit').classList.remove('active');
             document.getElementById('menuBankInquiry').classList.remove('active');
             document.getElementById('menuEditTransfer').classList.remove('active');
+            var mockMenu = document.getElementById('menuMockData');
+            if (mockMenu) mockMenu.classList.remove('section-active');
+            var systemFlowMenu = document.getElementById('menuSystemFlow');
+            if (systemFlowMenu) systemFlowMenu.classList.remove('section-active');
 
             if (pageId === 'homePage') {
                 document.getElementById('homePage').classList.add('active');
@@ -5989,6 +6273,17 @@
 
                 document.getElementById('pageHeaderTitle').innerText = 'หน้าแรก';
                 document.getElementById('breadcrumbArea').innerHTML = 'หน้าแรก';
+            } else if (pageId === 'mockDataPage') {
+                document.getElementById('mockDataPage').classList.add('active');
+                if (mockMenu) mockMenu.classList.add('section-active');
+                document.getElementById('pageHeaderTitle').innerText = 'Mock Data';
+                document.getElementById('breadcrumbArea').innerHTML = 'สำหรับทดสอบ &gt; Mock Data';
+                renderMockData();
+            } else if (pageId === 'systemFlowPage') {
+                document.getElementById('systemFlowPage').classList.add('active');
+                if (systemFlowMenu) systemFlowMenu.classList.add('section-active');
+                document.getElementById('pageHeaderTitle').innerText = 'System Flow';
+                document.getElementById('breadcrumbArea').innerHTML = 'สำหรับทดสอบ &gt; System Flow';
             } else if (pageId === 'settingPage') {
                 document.getElementById('settingPage').classList.add('active');
                 document.getElementById('menuSettingTransfer').classList.add('section-active');
@@ -6051,128 +6346,185 @@
                 document.getElementById('menuClaimSection').classList.add('section-active');
                 document.getElementById('menuEditTransfer').classList.add('active');
 
-                document.getElementById('pageHeaderTitle').innerText = 'แก้ไขการโอนเงิน';
-                document.getElementById('breadcrumbArea').innerHTML = 'จัดการเงินเคลม &gt; แก้ไขการโอนเงิน';
+                document.getElementById('pageHeaderTitle').innerText = 'Monitor - แก้ไขการโอนเงิน';
+                document.getElementById('breadcrumbArea').innerHTML = 'จัดการเงินเคลม &gt; Monitor - แก้ไขการโอนเงิน';
             }
         }
 
-        // ข้อมูล Mock สำหรับใช้ค้นหา (อ้างอิงจากไฟล์ Mock_UP.xlsx ที่นำเข้าระบบ)
-        var mockClaimData = [
-            { cpg: 'CPG690400010', cl: 'CL690400010', name: 'นายปารเมศ อินทะปัญญา', school: 'โรงเรียนบ้านท่ามะกา', claimCount: '1', totalAmount: '4,000.00', claimStatus: 'normal' },
-            { cpg: 'CPG690400048', cl: 'CL690400048', name: 'นายณัฐพล สุวรรณโชค', school: 'โรงเรียนบ้านสันติสุข', claimCount: '1', totalAmount: '1,700.00', claimStatus: 'normal' },
-            { cpg: 'CPG690400069', cl: 'CL690400069', name: 'นางรัชชนก คำภาพันธ์', school: 'โรงเรียนวัดดอนไร่', claimCount: '1', totalAmount: '2,000.00', claimStatus: 'normal' },
-            { cpg: 'CPG690400101', cl: 'CL690400101', name: 'นายสมชาย แก้วมณี', school: 'โรงเรียนอนุบาลลำปาง', claimCount: '1', totalAmount: '3,500.00', claimStatus: 'normal' },
-            { cpg: 'CPG690400115', cl: 'CL690400115', name: 'นางสาวสุนิสา สุวรรณโชค', school: 'โรงเรียนวัดดอนไร่', claimCount: '1', totalAmount: '1,000.00', claimStatus: 'normal' },
-            { cpg: 'CPG690499001', cl: 'CL690499001', name: '-', school: '-', claimCount: '0', totalAmount: '0.00', claimStatus: 'transferring' }, // อยู่ระหว่างการโอนเงิน
-            { cpg: 'CPG690499002', cl: 'CL690499002', name: '-', school: '-', claimCount: '0', totalAmount: '0.00', claimStatus: 'cancelled' },     // ยกเลิก
-            { cpg: 'CPG690499003', cl: 'CL690499003', name: '-', school: '-', claimCount: '0', totalAmount: '0.00', claimStatus: 'pending_approval' }, // รออนุมัติ
+        // Mock business data: ระบบรองรับ 2 ผลิตภัณฑ์ PH / PA
+        // PH: 1 เคลม (CL) มี 1 เคส (CC) เท่านั้น
+        // PA: 1 เคลม (CLPA) สามารถมีได้หลายเคส (CC)
+        // การค้นหาด้วย CL/CLPA จะแสดงทุก CC ภายใต้เคลมนั้น ส่วนการค้นหาด้วย CC จะแสดงเฉพาะเคสนั้น
+        // ฟังก์ชันโอนเพิ่ม/โอนคืนใช้ได้เฉพาะเคลมครั้งแรกที่โอนครั้งแรกสำเร็จ และไม่เกิน 7 วันจากเคลมครั้งแรก
+        var claimSearchData = [
+            { product:'PH', cl:'CL690400010', cc:'CC6904000048', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 12:24:23', amount:'4,000.00', initialTransfer:3000, transferred:4000, coverageLimit:10000, dailyUsed:29500, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:true, name:'นายกรภัทร วรวงศ์ศุภากร', school:'โรงเรียนบ้านท่ามะกา', branch:'กาญจนบุรี', claimStatus:'normal' },
+            { product:'PA', cl:'CLPA690400020', cc:'CC6904000036', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 12:20:10', amount:'1,700.00', initialTransfer:1700, transferred:1700, coverageLimit:8000, dailyUsed:8500, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:true, name:'นางสาวชลธิชา รัตนมณี', school:'โรงเรียนบ้านท่ามะกา', branch:'กาญจนบุรี', claimStatus:'normal' },
+            { product:'PA', cl:'CLPA690400020', cc:'CC6904000010', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 12:18:05', amount:'1,000.00', initialTransfer:1000, transferred:1000, coverageLimit:6000, dailyUsed:8500, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:true, name:'นายกิตติ วงศ์สุวรรณ', school:'โรงเรียนบ้านท่ามะกา', branch:'กาญจนบุรี', claimStatus:'normal' },
+            { product:'PA', cl:'CLPA690400020', cc:'CC6904000201', coverage:'อุบัติเหตุส่วนบุคคล/PA', createdAt:'21/10/2569 09:10:00', amount:'6,000.00', initialTransfer:5000, transferred:6000, coverageLimit:20000, dailyUsed:12000, daysSinceFirstClaim:1, isFirstClaim:true, firstTransferSuccess:true, name:'เด็กชายธนภัทร ใจดี', school:'โรงเรียนบ้านสันติสุข', branch:'สำนักงานใหญ่', claimStatus:'normal' },
+            { product:'PA', cl:'CLPA690400020', cc:'CC6904000211', coverage:'อุบัติเหตุส่วนบุคคล/PA', createdAt:'21/10/2569 09:12:00', amount:'3,000.00', initialTransfer:3000, transferred:3000, coverageLimit:15000, dailyUsed:12000, daysSinceFirstClaim:1, isFirstClaim:true, firstTransferSuccess:true, name:'เด็กหญิงพิมพ์ชนก แก้วดี', school:'โรงเรียนบ้านสันติสุข', branch:'สำนักงานใหญ่', claimStatus:'normal' },
+            { product:'PH', cl:'CL690499007', cc:'CC6904990007', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'10/10/2569 08:30:00', amount:'2,000.00', initialTransfer:2000, transferred:2000, coverageLimit:10000, dailyUsed:5000, daysSinceFirstClaim:8, isFirstClaim:true, firstTransferSuccess:true, name:'นายทดสอบ เกินเจ็ดวัน', school:'โรงเรียนทดสอบ', branch:'สำนักงานใหญ่', claimStatus:'normal' },
+            { product:'PH', cl:'CL690499008', cc:'CC6904990008', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 08:30:00', amount:'2,000.00', initialTransfer:2000, transferred:2000, coverageLimit:10000, dailyUsed:5000, daysSinceFirstClaim:2, isFirstClaim:false, firstTransferSuccess:true, name:'นายทดสอบ เคลมต่อเนื่อง', school:'โรงเรียนทดสอบ', branch:'สำนักงานใหญ่', claimStatus:'normal' },
+            { product:'PH', cl:'CL690499009', cc:'CC6904990009', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 08:30:00', amount:'0.00', initialTransfer:0, transferred:0, coverageLimit:10000, dailyUsed:0, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:false, name:'นายทดสอบ โอนไม่สำเร็จ', school:'โรงเรียนทดสอบ', branch:'สำนักงานใหญ่', claimStatus:'normal' },
+            { product:'PH', cl:'CL690499001', cc:'CC6904990001', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'18/10/2569 08:30:00', amount:'0.00', initialTransfer:0, transferred:0, coverageLimit:10000, dailyUsed:0, daysSinceFirstClaim:1, isFirstClaim:true, firstTransferSuccess:false, name:'-', school:'-', branch:'-', claimStatus:'transferring' },
+            { product:'PH', cl:'CL690499002', cc:'CC6904990002', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'18/10/2569 08:30:00', amount:'0.00', initialTransfer:0, transferred:0, coverageLimit:10000, dailyUsed:0, daysSinceFirstClaim:1, isFirstClaim:true, firstTransferSuccess:false, name:'-', school:'-', branch:'-', claimStatus:'cancelled' },
+            { product:'PH', cl:'CL690499003', cc:'CC6904990003', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'18/10/2569 08:30:00', amount:'0.00', initialTransfer:0, transferred:0, coverageLimit:10000, dailyUsed:0, daysSinceFirstClaim:1, isFirstClaim:true, firstTransferSuccess:false, name:'-', school:'-', branch:'-', claimStatus:'pending_approval' }
         ];
 
-        function findMockClaim(searchValue) {
-            var val = (searchValue || '').trim().toUpperCase();
-            for (var i = 0; i < mockClaimData.length; i++) {
-                if (mockClaimData[i].cpg.toUpperCase() === val || mockClaimData[i].cl.toUpperCase() === val) {
-                    return mockClaimData[i];
-                }
-            }
-            return null;
+        function getMockEligibilityLabel(record) {
+            var e = getClaimFunctionEligibility(record);
+            if (e.ok) return { text:'ใช้งานได้', bg:'var(--success-bg)', color:'var(--green-text)' };
+            var text='ใช้งานไม่ได้';
+            if ((record.daysSinceFirstClaim || 0) > 7) text='เกิน 7 วัน';
+            else if (!record.isFirstClaim) text='ไม่ใช่เคลมครั้งแรก';
+            else if (!record.firstTransferSuccess) text='โอนครั้งแรกไม่สำเร็จ';
+            else if (record.claimStatus === 'transferring') text='อยู่ระหว่างโอนเงิน';
+            else if (record.claimStatus === 'cancelled') text='เคลมถูกยกเลิก';
+            else if (record.claimStatus !== 'normal') text='รออนุมัติ';
+            return { text:text, bg:'var(--red-light)', color:'var(--red-text)' };
         }
 
+        function renderMockData() {
+            var body=document.getElementById('mockDataTableBody');
+            if(!body) return;
+            var q=((document.getElementById('mockDataSearch')||{}).value||'').trim().toLowerCase();
+            var rows=claimSearchData.filter(function(r){
+                return !q || [r.product,r.cl,r.cc,r.name,r.school,r.claimStatus].join(' ').toLowerCase().indexOf(q)>-1;
+            });
+            body.innerHTML=rows.map(function(r){
+                var st=getMockEligibilityLabel(r);
+                return '<tr>' +
+                    '<td><span style="display:inline-block;padding:4px 8px;border-radius:12px;background:var(--info-bg);color:var(--primary-blue);font-weight:600;">'+r.product+'</span></td>' +
+                    '<td><button type="button" onclick="copyMockValue(\''+r.cl+'\')" title="คัดลอก" style="border:none;background:none;color:var(--primary-blue);text-decoration:underline;cursor:pointer;font:inherit;padding:0;">'+r.cl+'</button></td>' +
+                    '<td><button type="button" onclick="copyMockValue(\''+r.cc+'\')" title="คัดลอก" style="border:none;background:none;color:var(--primary-blue);text-decoration:underline;cursor:pointer;font:inherit;padding:0;">'+r.cc+'</button></td>' +
+                    '<td>'+r.name+'</td>' +
+                    '<td style="text-align:right;">'+formatMoney(r.transferred)+'</td>' +
+                    '<td style="text-align:right;">'+formatMoney(r.coverageLimit)+'</td>' +
+                    '<td style="text-align:center;">'+(r.daysSinceFirstClaim||0)+'</td>' +
+                    '<td><span style="display:inline-block;padding:5px 9px;border-radius:14px;background:'+st.bg+';color:'+st.color+';font-weight:600;white-space:nowrap;">'+st.text+'</span></td>' +
+                '</tr>';
+            }).join('');
+            if(!rows.length) body.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:28px;">ไม่พบ Mock Data</td></tr>';
+        }
+        function filterMockData(){ renderMockData(); }
+        function copyMockValue(value){
+            if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(value).catch(function(){}); }
+            if(typeof showDevToast==='function') showDevToast('คัดลอก '+value+' แล้ว');
+        }
+
+        var currentTransferRecord = null;
+        var currentRefundRecord = null;
+        var pendingLimitTransferRecord = null;
+        var selectedTransferSearchCC = '';
+
+        function getClaimSearchResults(searchValue) {
+            var val=(searchValue||'').trim().toUpperCase();
+            if (/^CL/.test(val)) return claimSearchData.filter(function(x){return x.cl===val;});
+            if (/^CC/.test(val)) return claimSearchData.filter(function(x){return x.cc===val;});
+            return [];
+        }
+        function getClaimRecordByCC(cc) {
+            return claimSearchData.find(function(x){ return x.cc === (cc||'').trim().toUpperCase(); }) || null;
+        }
+        function getClaimFunctionEligibility(record) {
+            if (!record) return { ok:false, message:'ไม่พบข้อมูลของรายการเคลมนี้' };
+            if (record.claimStatus !== 'normal') {
+                if (record.claimStatus === 'transferring') return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเคลมอยู่ระหว่างการโอนเงิน' };
+                if (record.claimStatus === 'cancelled') return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเคลมถูกยกเลิก' };
+                return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเคลมอยู่ระหว่างรออนุมัติ' };
+            }
+            if (!record.isFirstClaim) return { ok:false, message:'ฟังก์ชันนี้ใช้ได้เฉพาะการแจ้งเคลมครั้งแรกเท่านั้น' };
+            if (!record.firstTransferSuccess) return { ok:false, message:'ฟังก์ชันนี้ใช้ได้เมื่อการโอนเงินของเคลมครั้งแรกสำเร็จแล้วเท่านั้น' };
+            if ((record.daysSinceFirstClaim || 0) > 7) return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเกิน 7 วันหลังจากการแจ้งเคลมครั้งแรก' };
+            return { ok:true, message:'' };
+        }
+        function formatMoney(value) {
+            return (parseFloat(value)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+        }
+        function syncClaimAmount(record) {
+            if (!record) return;
+            record.amount = formatMoney(record.transferred || 0);
+        }
         function openTransferDetail(searchValue) {
-            var record = findMockClaim(searchValue);
+            var rows=getClaimSearchResults(searchValue);
+            var record=rows.length?rows[0]:null;
             switchPage('transferAddPage');
             applyTransferDetailData(searchValue, record);
         }
-
         function applyTransferDetailData(searchValue, record) {
-            var isCL = /^CL/i.test((searchValue || '').trim());
-            var displayId = record ? (isCL ? record.cl : record.cpg) : (isCL ? 'CL690400193' : 'CPG690412538');
-
-            // Breadcrumb: ค้นหาด้วย CPG หรือ CL จะขึ้นเลขที่นั้นต่อท้าย
-            document.getElementById('breadcrumbArea').innerHTML = 'จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'transferListPage\'); return false;">เมนูโอนเพิ่ม</a> &gt; ' + displayId;
-
-            if (record) {
-                document.getElementById('transferDetailCPG').innerText = record.cpg;
-                document.getElementById('transferDetailName').innerText = record.school;
-                document.getElementById('claimCountText').innerText = record.claimCount;
-                document.getElementById('claimTotalAmountText').innerText = record.totalAmount;
-            } else {
-                // ไม่พบข้อมูลใน Mock: แสดงค่าว่าง/ไม่พบข้อมูล แทนข้อมูลตัวอย่าง
-                document.getElementById('transferDetailCPG').innerText = displayId;
-                document.getElementById('transferDetailName').innerText = 'ไม่พบข้อมูล';
-                document.getElementById('claimCountText').innerText = '0';
-                document.getElementById('claimTotalAmountText').innerText = '0.00';
+            var value=(searchValue||'').trim().toUpperCase();
+            var displayId=record ? record.cl : value;
+            currentTransferRecord = record || null;
+            document.getElementById('breadcrumbArea').innerHTML='จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'transferListPage\'); return false;">เมนูโอนเพิ่ม</a> &gt; '+displayId;
+            document.getElementById('transferDetailCPG').innerText=displayId;
+            document.getElementById('transferDetailName').innerText=record?record.school:'ไม่พบข้อมูล';
+            document.getElementById('claimCountText').innerText=record?'1':'0';
+            var transferred=record ? (record.transferred || 0) : 0;
+            document.getElementById('claimTotalAmountText').innerText=formatMoney(transferred);
+            if(record){
+                syncClaimAmount(record);
+                document.getElementById('selectedClaimName').innerText=record.name||'-';
+                document.getElementById('selectedClaimCoverage').innerText=record.coverage||'-';
+                document.getElementById('selectedClaimCC').innerText=record.cc||'-';
+                document.getElementById('selectedClaimTransferred').innerText=formatMoney(transferred);
+                var amountInput=document.getElementById('amount1');
+                if(amountInput){
+                    amountInput.value='';
+                    amountInput.dataset.base=String(transferred);
+                    amountInput.dataset.limit=String(record.coverageLimit || 0);
+                }
             }
-
-            // ค้นหาด้วยเลขที่ CL ได้แค่รายการเดียวรายการนั้น / ค้นหาด้วยเลขที่ CPG ขึ้นได้หลายรายการ
-            var row2 = document.getElementById('claimRow2');
-            if (row2) {
-                row2.style.display = isCL ? 'none' : '';
-            }
-
             calculateTotal();
         }
-
-        function openSearchTransferModal() {
-            var input = document.getElementById('searchCpgInput');
-            input.value = '';
-            setFieldError(input, document.getElementById('searchErrorText'), false);
-            updateFieldHasValue(input);
-            document.getElementById('searchTransferModal').classList.add('active');
+        function resetTransferSearchResult(){
+            selectedTransferSearchCC='';
+            var result=document.getElementById('transferSearchResult'); if(result) result.style.display='none';
+            var btn=document.getElementById('transferSearchActionBtn'); if(btn) btn.disabled=true;
         }
-
+        function openSearchTransferModal() {
+            var input=document.getElementById('searchCpgInput'); input.value='';
+            setFieldError(input,document.getElementById('searchErrorText'),false); updateFieldHasValue(input);
+            resetTransferSearchResult(); document.getElementById('searchTransferModal').classList.add('active');
+        }
+        function renderTransferSearchResults(rows){
+            var body=document.getElementById('transferSearchResultBody'); body.innerHTML=''; selectedTransferSearchCC='';
+            rows.forEach(function(r){
+                var tr=document.createElement('tr'); tr.dataset.cc=r.cc;
+                tr.innerHTML='<td><button type="button" class="select-result-btn" onclick="selectTransferSearchRow(\''+r.cc+'\', this)">เลือก</button></td>'+
+                    '<td>'+r.cc+'</td><td>'+r.coverage+'</td><td>'+r.createdAt+'</td><td style="text-align:right;">'+r.amount+'</td>';
+                body.appendChild(tr);
+            });
+            document.getElementById('transferSearchPaginationText').innerText='1-'+rows.length+' จาก '+rows.length;
+            document.getElementById('transferSearchResult').style.display='block';
+            document.getElementById('transferSearchActionBtn').disabled=true;
+        }
+        function selectTransferSearchRow(cc,btn){
+            selectedTransferSearchCC=cc;
+            document.querySelectorAll('#transferSearchResultBody tr').forEach(function(tr){tr.classList.toggle('selected',tr.dataset.cc===cc);});
+            document.querySelectorAll('#transferSearchResultBody .select-result-btn').forEach(function(b){b.textContent='เลือก';}); btn.textContent='เลือก';
+            document.getElementById('transferSearchActionBtn').disabled=false;
+        }
         function submitSearchTransfer() {
-            var input = document.getElementById('searchCpgInput');
-            var val = input.value.trim();
-            var errorText = document.getElementById('searchErrorText');
-
-            // 1) ต้องกรอกข้อมูล
-            if (!val) {
-                errorText.innerText = 'กรุณากรอกข้อมูลให้ครบถ้วน';
-                setFieldError(input, errorText, true);
-                return;
+            var input=document.getElementById('searchCpgInput'), val=input.value.trim().toUpperCase(), errorText=document.getElementById('searchErrorText');
+            if(!val){errorText.innerText='กรุณากรอกเลขที่ CL / CC';setFieldError(input,errorText,true);return;}
+            if(!/^(CL|CC)[A-Z0-9]+$/.test(val)){errorText.innerText='กรุณากรอกเลขที่ CL หรือ CC ให้ถูกต้อง';setFieldError(input,errorText,true);return;}
+            var rows=getClaimSearchResults(val);
+            if(!rows.length){errorText.innerText='ไม่พบข้อมูลของรายการเคลมนี้';setFieldError(input,errorText,true);resetTransferSearchResult();return;}
+            var invalid=rows.find(function(r){return r.claimStatus!=='normal';});
+            if(invalid){
+                var msg=invalid.claimStatus==='transferring'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
+                errorText.innerText=msg;setFieldError(input,errorText,true);resetTransferSearchResult();return;
             }
-
-            // 2) ห้ามมีตัวอักษรพิเศษหรือภาษาไทย (กันกรณี paste ที่ไม่ผ่าน oninput filter)
-            if (/[^a-zA-Z0-9]/.test(val)) {
-                errorText.innerText = 'ไม่สามารถพิมพ์ตัวอักษรพิเศษหรือตัวอักษรไทยได้';
-                setFieldError(input, errorText, true);
-                return;
+            setFieldError(input,errorText,false); renderTransferSearchResults(rows);
+        }
+        function confirmTransferSearchSelection(){
+            if(!selectedTransferSearchCC)return;
+            var record=getClaimRecordByCC(selectedTransferSearchCC);
+            var eligibility=getClaimFunctionEligibility(record);
+            if(!eligibility.ok){
+                var input=document.getElementById('searchCpgInput'), errorText=document.getElementById('searchErrorText');
+                errorText.innerText=eligibility.message; setFieldError(input,errorText,true); return;
             }
-
-            var record = findMockClaim(val);
-
-            // 3) ไม่พบข้อมูลในระบบ
-            if (!record) {
-                errorText.innerText = 'ไม่พบข้อมูลของรายการเคลมนี้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            // 4) สถานะ "อยู่ระหว่างการโอนเงิน"
-            if (record.claimStatus === 'transferring') {
-                errorText.innerText = 'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            // 5) สถานะ "ยกเลิก"
-            if (record.claimStatus === 'cancelled') {
-                errorText.innerText = 'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            // 6) สถานะ "รออนุมัติ"
-            if (record.claimStatus === 'pending_approval') {
-                errorText.innerText = 'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            setFieldError(input, errorText, false);
-            closeModal('searchTransferModal');
-            openTransferDetail(val);
+            closeModal('searchTransferModal'); openTransferDetail(selectedTransferSearchCC);
         }
 
         function switchDetailTab(tabName) {
@@ -6225,10 +6577,7 @@
 
         function calculateTotal() {
             var val1 = parseFloat(document.getElementById('amount1').value) || 0;
-            var row2 = document.getElementById('claimRow2');
-            var row2Visible = row2 && row2.style.display !== 'none';
-            var val2 = row2Visible ? (parseFloat(document.getElementById('amount2').value) || 0) : 0;
-            var total = val1 + val2;
+            var total = val1;
 
             document.getElementById('totalAmountText').innerText = total.toFixed(2);
         }
@@ -6292,7 +6641,14 @@
         }
 
         function handleSubmitTransfer() {
-            // Validate สาเหตุการโอนเพิ่ม (required)
+            var eligibility=getClaimFunctionEligibility(currentTransferRecord);
+            if(!eligibility.ok){
+                document.getElementById('failTransferModalTitle').innerText='ไม่สามารถทำรายการได้';
+                document.getElementById('failTransferModalSubtitle').innerText=eligibility.message;
+                document.getElementById('failTransferModal').classList.add('active');
+                return;
+            }
+
             var reasonSelect = document.getElementById('reasonSelect');
             var reasonError = document.getElementById('reasonErrorText');
             if (!reasonSelect.value) {
@@ -6302,43 +6658,39 @@
             }
             setFieldError(reasonSelect, reasonError, false);
 
-            // Validate ยอดเงินโอนเพิ่ม เทียบกับวงเงินความคุ้มครองรายรายการ
             var amountInputs = document.querySelectorAll('#detailTabContent .input-table-amount');
             var exceedsCoverage = false;
             var hasAmount = false;
-            var grandTotal = 0;
+            var addTotal = 0;
 
             amountInputs.forEach(function (input) {
                 var row = input.closest('tr');
                 if (row && row.style.display === 'none') { return; }
-
                 var base = parseFloat(input.dataset.base) || 0;
-                var limit = parseFloat(input.dataset.limit) || Infinity;
+                var limit = parseFloat(input.dataset.limit) || 0;
                 var addAmount = parseFloat(input.value) || 0;
-
                 if (addAmount > 0) { hasAmount = true; }
-                if (base + addAmount > limit) {
-                    exceedsCoverage = true;
-                }
-                grandTotal += base + addAmount;
+                if (addAmount < 0 || (limit > 0 && base + addAmount > limit)) { exceedsCoverage = true; }
+                addTotal += addAmount;
             });
 
             if (exceedsCoverage) {
                 document.getElementById('failTransferModalTitle').innerText = 'บันทึกไม่สำเร็จ!';
-                document.getElementById('failTransferModalSubtitle').innerText = 'โปรดตรวจสอบจำนวนเงิน กับความคุ้มครอง';
+                document.getElementById('failTransferModalSubtitle').innerText = 'ยอดโอนเพิ่มรวมต้องไม่เกินจำนวนความคุ้มครองของเคส';
                 document.getElementById('failTransferModal').classList.add('active');
                 return;
             }
-
-            if (!hasAmount) {
+            if (!hasAmount || addTotal <= 0) {
                 document.getElementById('failTransferModalTitle').innerText = 'บันทึกไม่สำเร็จ';
                 document.getElementById('failTransferModalSubtitle').innerText = 'กรุณาตรวจสอบยอดเงิน';
                 document.getElementById('failTransferModal').classList.add('active');
                 return;
             }
 
-            // เกินยอดวงเงินคีย์เคลม 30,000 บาท => บันทึกสำเร็จ รอขยายวงเงินจากเคลมออนไลน์
-            if (grandTotal > 30000) {
+            // วงเงินสูงสุดต่อคน/ต่อวัน 30,000 บาท: หากรายการนี้ทำให้ยอดใช้ต่อวันเกินวงเงิน ให้ส่งเข้าหน้าขยายวงเงินก่อน
+            var dailyAfter = (currentTransferRecord.dailyUsed || 0) + addTotal;
+            if (dailyAfter > 30000) {
+                queueLimitRequest(currentTransferRecord, addTotal);
                 document.getElementById('warningTransferModal').classList.add('active');
                 return;
             }
@@ -6361,8 +6713,14 @@
         function proceedToSuccessModal() {
             closeModal('confirmModal');
 
-            // แสดงจำนวนเงิน Recheck ในหน้าสำเร็จ โดยอ้างอิงข้อมูลชุดเดียวกับ Modal ยืนยันการทำรายการ
-            renderAmountRecheck('modal');
+            var transferData = renderAmountRecheck('modal');
+            if(currentTransferRecord && transferData.total > 0){
+                currentTransferRecord.transferred = (currentTransferRecord.transferred || 0) + transferData.total;
+                currentTransferRecord.dailyUsed = (currentTransferRecord.dailyUsed || 0) + transferData.total;
+                syncClaimAmount(currentTransferRecord);
+                document.getElementById('claimTotalAmountText').innerText=formatMoney(currentTransferRecord.transferred);
+                document.getElementById('selectedClaimTransferred').innerText=formatMoney(currentTransferRecord.transferred);
+            }
 
             var currentRelation = document.getElementById('displayRelation').innerText;
             var currentAccountNo = document.getElementById('displayAccountNo').innerText;
@@ -6594,124 +6952,84 @@
         /* ================= REFUND (คืนเงิน) LOGIC - Spec22 / Spec23 ================= */
 
         function openSearchRefundModal() {
-            var input = document.getElementById('searchRefundCpgInput');
-            input.value = '';
-            setFieldError(input, document.getElementById('searchRefundErrorText'), false);
-            updateFieldHasValue(input);
-            document.getElementById('searchRefundModal').classList.add('active');
+            var input=document.getElementById('searchRefundCpgInput'); input.value='';
+            setFieldError(input,document.getElementById('searchRefundErrorText'),false); updateFieldHasValue(input);
+            resetRefundSearchResult(); document.getElementById('searchRefundModal').classList.add('active');
         }
-
-        // ข้อมูล Mock สำหรับตรวจสอบตอนค้นหา "โอนคืน" (Monitor คืนเงิน)
-        var refundSearchMockData = [
-            { cpg: 'CPG690467210', cl: 'CL6904000193', claimStatus: 'normal' },
-            { cpg: 'CPG690499001', cl: 'CL690499001', claimStatus: 'transferring' }, // อยู่ระหว่างการโอนเงิน
-            { cpg: 'CPG690488305', cl: 'CL690488305', claimStatus: 'cancelled' },    // ถูกยกเลิก
-        ];
-
-        function findRefundSearchClaim(searchValue) {
-            var val = (searchValue || '').trim().toUpperCase();
-            for (var i = 0; i < refundSearchMockData.length; i++) {
-                if (refundSearchMockData[i].cpg.toUpperCase() === val || refundSearchMockData[i].cl.toUpperCase() === val) {
-                    return refundSearchMockData[i];
-                }
-            }
-            return null;
+        var selectedRefundSearchCC='';
+        function resetRefundSearchResult(){
+            selectedRefundSearchCC='';
+            var result=document.getElementById('refundSearchResult'); if(result) result.style.display='none';
+            var btn=document.getElementById('refundSearchActionBtn'); if(btn) btn.disabled=true;
         }
-
+        function renderRefundSearchResults(rows){
+            var body=document.getElementById('refundSearchResultBody'); body.innerHTML=''; selectedRefundSearchCC='';
+            rows.forEach(function(r){
+                var tr=document.createElement('tr'); tr.dataset.cc=r.cc;
+                tr.innerHTML='<td><button type="button" class="select-result-btn" onclick="selectRefundSearchRow(\''+r.cc+'\', this)">เลือก</button></td>'+
+                    '<td>'+r.cc+'</td><td>'+r.coverage+'</td><td>'+r.createdAt+'</td><td style="text-align:right;">'+r.amount+'</td>';
+                body.appendChild(tr);
+            });
+            document.getElementById('refundSearchPaginationText').innerText='1-'+rows.length+' จาก '+rows.length;
+            document.getElementById('refundSearchResult').style.display='block'; document.getElementById('refundSearchActionBtn').disabled=true;
+        }
+        function selectRefundSearchRow(cc,btn){
+            selectedRefundSearchCC=cc;
+            document.querySelectorAll('#refundSearchResultBody tr').forEach(function(tr){tr.classList.toggle('selected',tr.dataset.cc===cc);});
+            document.querySelectorAll('#refundSearchResultBody .select-result-btn').forEach(function(b){b.textContent='เลือก';}); btn.textContent='เลือก';
+            document.getElementById('refundSearchActionBtn').disabled=false;
+        }
         function submitSearchRefund() {
-            var input = document.getElementById('searchRefundCpgInput');
-            var val = input.value.trim();
-            var errorText = document.getElementById('searchRefundErrorText');
-
-            // 1) ต้องกรอกข้อมูล
-            if (!val) {
-                errorText.innerText = 'กรุณากรอกข้อมูลให้ครบถ้วน';
-                setFieldError(input, errorText, true);
-                return;
+            var input=document.getElementById('searchRefundCpgInput'), val=input.value.trim().toUpperCase(), errorText=document.getElementById('searchRefundErrorText');
+            if(!val){errorText.innerText='กรุณากรอกเลขที่ CL / CC';setFieldError(input,errorText,true);return;}
+            if(!/^(CL|CC)[A-Z0-9]+$/.test(val)){errorText.innerText='กรุณากรอกเลขที่ CL หรือ CC ให้ถูกต้อง';setFieldError(input,errorText,true);return;}
+            var rows=getClaimSearchResults(val);
+            if(!rows.length){errorText.innerText='ไม่พบข้อมูลของรายการเคลมนี้';setFieldError(input,errorText,true);resetRefundSearchResult();return;}
+            var invalid=rows.find(function(r){return r.claimStatus!=='normal';});
+            if(invalid){
+                var msg=invalid.claimStatus==='transferring'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
+                errorText.innerText=msg;setFieldError(input,errorText,true);resetRefundSearchResult();return;
             }
-
-            // 2) ห้ามมีตัวอักษรพิเศษหรือภาษาไทย (กันกรณี paste ที่ไม่ผ่าน oninput filter)
-            if (/[^a-zA-Z0-9]/.test(val)) {
-                errorText.innerText = 'ไม่สามารถพิมพ์ตัวอักษรพิเศษหรือตัวอักษรไทยได้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            var record = findRefundSearchClaim(val);
-
-            // 3) ไม่พบข้อมูลในระบบ
-            if (!record) {
-                errorText.innerText = 'ไม่พบข้อมูลของรายการเคลมนี้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            // 4) สถานะ "อยู่ระหว่างการโอนเงิน"
-            if (record.claimStatus === 'transferring') {
-                errorText.innerText = 'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            // 5) สถานะ "ยกเลิก"
-            if (record.claimStatus === 'cancelled') {
-                errorText.innerText = 'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้';
-                setFieldError(input, errorText, true);
-                return;
-            }
-
-            setFieldError(input, errorText, false);
-            closeModal('searchRefundModal');
-            openRefundDetail(val);
+            setFieldError(input,errorText,false); renderRefundSearchResults(rows);
         }
-
-        function openRefundDetail(searchValue) {
-            switchPage('refundAddPage');
-            applyRefundDetailData(searchValue);
+        function confirmRefundSearchSelection(){
+            if(!selectedRefundSearchCC)return;
+            var record=getClaimRecordByCC(selectedRefundSearchCC);
+            var eligibility=getClaimFunctionEligibility(record);
+            if(!eligibility.ok){
+                var input=document.getElementById('searchRefundCpgInput'), errorText=document.getElementById('searchRefundErrorText');
+                errorText.innerText=eligibility.message; setFieldError(input,errorText,true); return;
+            }
+            closeModal('searchRefundModal'); openRefundDetail(selectedRefundSearchCC);
         }
-
+        function openRefundDetail(searchValue) { switchPage('refundAddPage'); applyRefundDetailData(searchValue); }
         function applyRefundDetailData(searchValue) {
-            // กรณีค้นหาด้วยเลขที่ CPG : แสดงทุกรายการ CL ตามเลขที่ CPG
-            // กรณีค้นหาด้วยเลขที่ CL : แสดงรายการเฉพาะของ CL นั้น
-            var isCL = /^CL/i.test((searchValue || '').trim());
-            var displayId = isCL ? 'CL6904000193' : 'CPG690467210';
-
-            document.getElementById('refundCpgText').innerText = displayId;
-            document.getElementById('breadcrumbArea').innerHTML = 'จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'refundListPage\'); return false;">เมนูคืนเงิน</a> &gt; ' + displayId;
-
-            document.getElementById('refundClaimCountText').innerText = isCL ? '1' : '2';
-            document.getElementById('refundClaimTotalAmountText').innerText = isCL ? '600.00' : '2,500.00';
-
-            var row2 = document.getElementById('refundClaimRow2');
-            if (row2) {
-                row2.style.display = isCL ? 'none' : '';
+            var value=(searchValue||'').trim().toUpperCase();
+            var rows=getClaimSearchResults(value), record=rows[0]||null;
+            currentRefundRecord = record || null;
+            var displayId=record?record.cl:value;
+            document.getElementById('refundCpgText').innerText=displayId;
+            document.getElementById('breadcrumbArea').innerHTML='จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'refundListPage\'); return false;">เมนูคืนเงิน</a> &gt; '+displayId;
+            document.getElementById('refundDetailName').innerText=record?record.school:'ไม่พบข้อมูล';
+            document.getElementById('refundClaimCountText').innerText=record?'1':'0';
+            var transferred=record ? (record.transferred || 0) : 0;
+            document.getElementById('refundClaimTotalAmountText').innerText=formatMoney(transferred);
+            if(record){
+                document.getElementById('selectedRefundClaimName').innerText=record.name||'-';
+                document.getElementById('selectedRefundClaimCoverage').innerText=record.coverage||'-';
+                document.getElementById('selectedRefundClaimCC').innerText=record.cc||'-';
+                document.getElementById('selectedRefundClaimTransferred').innerText=formatMoney(transferred);
+                var refundInput=document.getElementById('refundAmount1');
+                if(refundInput){ refundInput.value=''; refundInput.dataset.base=String(transferred); refundInput.dataset.initial=String(record.initialTransfer || 0); refundInput.dataset.maxRefund=String(Math.max(0, transferred - (record.initialTransfer || 0))); }
             }
-
-            // รายการ > 1 จึงจะเลือก "ตัวแทนโอนคืนส่วนกลาง" ได้ (Spec23 1.3)
-            var agentOption = document.getElementById('refundAgentOption');
-            if (agentOption) {
-                agentOption.disabled = isCL;
-            }
-            document.getElementById('refundTransferTypeSelect').value = 'ลูกค้าโอนคืนส่วนกลาง';
-
-            // ล้างค่าฟอร์มบันทึกรายการทุกครั้งที่เปิดหน้ารายละเอียดใหม่
-            document.getElementById('refundAmount1').value = '';
-            document.getElementById('refundAmount2').value = '';
-            document.getElementById('refundSlipDateInput').value = '';
-            document.getElementById('refundReasonSelect').value = '';
-            document.getElementById('refundNoteInput').value = '';
-            document.getElementById('refundSlipFileInput').value = '';
-            document.getElementById('refundSlipFileName').innerText = 'ยังไม่ได้เลือกไฟล์';
-            ['refundDateErrorText', 'refundReasonErrorText', 'refundNoteErrorText', 'refundSlipErrorText'].forEach(function (id) {
-                document.getElementById(id).style.display = 'none';
-            });
-            ['refundSlipDateInput', 'refundReasonSelect', 'refundNoteInput'].forEach(function (id) {
-                var wrapper = document.getElementById(id).closest('.form-group');
-                if (wrapper) { wrapper.classList.remove('has-error'); }
-            });
-            refreshAllFloatingLabels();
-
-            calculateRefundTotal();
+            var row2=document.getElementById('refundClaimRow2'); if(row2) row2.style.display='none';
+            var agentOption=document.getElementById('refundAgentOption'); if(agentOption) agentOption.disabled=true;
+            document.getElementById('refundTransferTypeSelect').value='ลูกค้าโอนคืนส่วนกลาง';
+            document.getElementById('refundAmount1').value=''; document.getElementById('refundAmount2').value=''; document.getElementById('refundSlipDateInput').value='';
+            document.getElementById('refundReasonSelect').value=''; document.getElementById('refundNoteInput').value=''; document.getElementById('refundSlipFileInput').value=''; document.getElementById('refundSlipFileName').innerText='ยังไม่ได้เลือกไฟล์';
+            ['refundDateErrorText','refundReasonErrorText','refundNoteErrorText','refundSlipErrorText'].forEach(function(id){document.getElementById(id).style.display='none';});
+            ['refundSlipDateInput','refundReasonSelect','refundNoteInput'].forEach(function(id){var wrapper=document.getElementById(id).closest('.form-group');if(wrapper)wrapper.classList.remove('has-error');});
+            refreshAllFloatingLabels(); calculateRefundTotal();
         }
 
         function switchRefundDetailTab(tabName) {
@@ -7021,7 +7339,9 @@
         }
 
         function handleSubmitRefund() {
-            // 1-3) Validate วันที่/เวลาโอนคืน Slip, สาเหตุที่โอนคืน, หมายเหตุ พร้อมกันทีเดียว
+            var eligibility=getClaimFunctionEligibility(currentRefundRecord);
+            if(!eligibility.ok){ showCannotSubmitModal(eligibility.message); return; }
+
             var dateInput = document.getElementById('refundSlipDateInput');
             var dateError = document.getElementById('refundDateErrorText');
             var dateInvalid = !dateInput.value;
@@ -7044,7 +7364,6 @@
                 return;
             }
 
-            // 4) Validate Slip การโอนคืน (required) -> Popup
             var slipInput = document.getElementById('refundSlipFileInput');
             var slipError = document.getElementById('refundSlipErrorText');
             if (!slipInput.files || slipInput.files.length === 0) {
@@ -7054,42 +7373,31 @@
             }
             slipError.style.display = 'none';
 
-            // 5) Validate ยอดเงินโอนคืน: ต้องกรอกอย่างน้อย 1 รายการ, ต้องไม่เกินยอดเคลมแต่ละรายการ, และรวมแล้วต้องไม่เกินยอด COLPH ตั้งต้น -> Popup
             var amountInputs = document.querySelectorAll('#refundDetailTabContent .input-table-amount');
-            var exceedsPerClaim = false;
+            var invalidAmount = false;
             var hasAmount = false;
             var totalEntered = 0;
-
             amountInputs.forEach(function (input) {
                 var row = input.closest('tr');
                 if (row && row.style.display === 'none') { return; }
-
-                var base = parseFloat(input.dataset.base) || 0;
                 var refundAmount = parseFloat(input.value) || 0;
-
+                var maxRefund = parseFloat(input.dataset.maxRefund) || 0;
                 if (refundAmount > 0) { hasAmount = true; }
-                if (refundAmount > base) { exceedsPerClaim = true; }
+                // คืนได้เฉพาะส่วนที่เกินจากยอดโอนครั้งแรก เพื่อให้ยอดคงเหลือไม่ต่ำกว่ายอดโอนครั้งแรก
+                if (refundAmount < 0 || refundAmount > maxRefund) { invalidAmount = true; }
                 totalEntered += refundAmount;
             });
 
-            if (!hasAmount) {
+            if (!hasAmount) { showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง'); return; }
+            if (invalidAmount) {
+                var minRemain = currentRefundRecord ? formatMoney(currentRefundRecord.initialTransfer || 0) : '0.00';
+                showCannotSubmitModal('ยอดหลังคืนเงินต้องไม่ต่ำกว่ายอดโอนครั้งแรก ' + minRemain + ' บาท');
+                return;
+            }
+            if (currentRefundRecord && totalEntered > Math.max(0,(currentRefundRecord.transferred||0)-(currentRefundRecord.initialTransfer||0))) {
                 showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง');
                 return;
             }
-
-            if (exceedsPerClaim) {
-                showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง');
-                return;
-            }
-
-            // ยอดโอนคืนรวมต้องไม่เกินยอด COLPH ตั้งต้น (จำนวนเงินที่โอนแล้วของรายการนี้)
-            var colphBaseText = (document.getElementById('refundClaimTotalAmountText').innerText || '0').replace(/,/g, '');
-            var colphBase = parseFloat(colphBaseText) || 0;
-            if (totalEntered > colphBase) {
-                showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง');
-                return;
-            }
-
             openConfirmRefundModal();
         }
 
@@ -7100,8 +7408,10 @@
 
         function proceedToRefundSuccessModal() {
             closeModal('confirmRefundModal');
-            renderRefundAmountRecheck('modal');
-
+            var refundData=renderRefundAmountRecheck('modal');
+            if(currentRefundRecord && refundData.total>0){
+                createPendingRefundRequest(currentRefundRecord, refundData.total);
+            }
             setTimeout(function () {
                 document.getElementById('successRefundModal').classList.add('active');
             }, 100);
@@ -7142,6 +7452,104 @@
         calculateTotal();
         calculateRefundTotal();
 
+        // สร้างรายการคืนเงินสถานะ "รอดำเนินการ" และส่งเข้าหน้าอนุมัติคืนเงิน
+        function createPendingRefundRequest(record, refundAmount) {
+            if (!record || refundAmount <= 0) return;
+            var rt = 'RT' + String(Date.now()).slice(-9);
+            var rowId = 'monitorDynamic_' + String(Date.now());
+            var reasonEl = document.getElementById('refundReasonSelect');
+            var reasonText = reasonEl && reasonEl.options[reasonEl.selectedIndex] ? reasonEl.options[reasonEl.selectedIndex].text : 'คืนเงิน';
+            var remain = Math.max(0, (record.transferred || 0) - refundAmount);
+
+            var refundBody = document.getElementById('refundTableBody');
+            if (refundBody) {
+                var tr = document.createElement('tr');
+                tr.setAttribute('data-rt', rt);
+                tr.setAttribute('data-branch', record.branch || 'สำนักงานใหญ่');
+                tr.setAttribute('data-status', 'pending');
+                tr.setAttribute('data-cl', record.cl);
+                tr.setAttribute('data-cc', record.cc);
+                tr.innerHTML = '<td>'+rt+'</td>'+
+                    '<td style="color:var(--primary-blue);">'+record.cl+'</td>'+
+                    '<td>'+record.cc+'</td>'+
+                    '<td>'+record.createdAt+'</td>'+
+                    '<td>'+record.name+'</td>'+
+                    '<td style="text-align:right;">'+formatMoney(record.transferred)+'</td>'+
+                    '<td style="text-align:right;">'+formatMoney(refundAmount)+'</td>'+
+                    '<td style="text-align:center;" class="refund-status-cell"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td>'+
+                    '<td>'+reasonText+'</td>'+
+                    '<td style="text-align:center;" class="refund-action-cell"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button></td>';
+                refundBody.insertBefore(tr, refundBody.firstChild);
+            }
+
+            monitorRowDataMap[rowId] = {
+                rt: rt,
+                cpg: record.cl,
+                branch: record.branch || 'สำนักงานใหญ่',
+                name: record.name,
+                agent: '00054 - สุวัฒนา อินทะปัญญา',
+                caseCount: '1',
+                notifyAmount: formatMoney(record.transferred),
+                refundAmount: formatMoney(refundAmount),
+                remainAmount: formatMoney(remain),
+                cl: record.cl,
+                cc: record.cc,
+                date: record.createdAt,
+                recordCC: record.cc,
+                refundAmountValue: refundAmount
+            };
+            var monitorBody = document.getElementById('monitorTableBody');
+            if (monitorBody) {
+                var mr = document.createElement('tr');
+                mr.id = rowId;
+                mr.setAttribute('data-rt',rt);
+                mr.setAttribute('data-cpg',record.cl);
+                mr.setAttribute('data-cl',record.cl);
+                mr.setAttribute('data-cc',record.cc);
+                mr.setAttribute('data-branch',record.branch || 'สำนักงานใหญ่');
+                mr.setAttribute('data-status','pending');
+                mr.innerHTML = '<td>'+rt+'</td><td>'+record.cl+'</td><td>'+record.cc+'</td><td>'+record.createdAt+'</td><td>'+record.name+'</td><td>'+(record.branch||'สำนักงานใหญ่')+'</td>'+
+                    '<td style="text-align:right;">'+formatMoney(record.transferred)+'</td><td style="text-align:right;">'+formatMoney(refundAmount)+'</td>'+
+                    '<td style="text-align:center;" id="'+rowId+'Status"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td>'+
+                    '<td>'+reasonText+'</td><td style="text-align:center;" id="'+rowId+'Action"><button class="icon-action-btn" title="ตรวจสอบ" onclick="openApproveModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button></td>';
+                monitorBody.insertBefore(mr, monitorBody.firstChild);
+            }
+            record.refundPending = true;
+            filterRefundTable();
+        }
+
+        // ส่งรายการโอนเพิ่มที่ทำให้ยอดใช้ต่อวันเกิน 30,000 บาท ไปยังหน้าขยายวงเงิน
+        function queueLimitRequest(record, addAmount) {
+            if (!record || addAmount <= 0) return;
+            var rowId='limitDynamic_'+String(Date.now());
+            var current=30000;
+            var used=record.dailyUsed||0;
+            var remain=Math.max(0,current-used);
+            var request=Math.max(0,(used+addAmount)-current);
+            var newRemain=remain+request;
+            limitRowDataMap[rowId]={
+                cpg:record.cl, cl:record.cl, cc:record.cc, name:record.name,
+                amount:formatMoney(addAmount), current:formatMoney(current), used:formatMoney(used),
+                remain:formatMoney(remain), request:formatMoney(request), newRemain:formatMoney(newRemain),
+                recordCC:record.cc, addAmountValue:addAmount
+            };
+            var body=document.getElementById('limitTableBody');
+            if(body){
+                var tr=document.createElement('tr'); tr.id=rowId;
+                tr.setAttribute('data-cpg',record.cl); tr.setAttribute('data-cl',record.cl); tr.setAttribute('data-cc',record.cc);
+                tr.setAttribute('data-branch',record.branch||'สำนักงานใหญ่'); tr.setAttribute('data-status','review');
+                tr.innerHTML='<td style="color:var(--primary-blue);">'+record.cl+'</td><td>'+record.cc+'</td><td>'+record.createdAt+'</td><td>'+(record.branch||'สำนักงานใหญ่')+'</td>'+
+                    '<td style="text-align:right;">'+formatMoney(addAmount)+'</td><td>5281137123</td><td>โอนเงินเพิ่ม</td>'+
+                    '<td style="text-align:center;" id="'+rowId+'Status"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span></td>'+
+                    '<td id="'+rowId+'Reason">เกินวงเงินสูงสุดต่อวัน 30,000 บาท · รออนุมัติ</td>'+
+                    '<td style="text-align:center;" id="'+rowId+'Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button><button class="icon-action-btn" style="color:var(--warning-color);" title="ขยายวงเงิน" onclick="openLimitModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button></td>';
+                body.insertBefore(tr,body.firstChild);
+            }
+            record.limitPending=true;
+            pendingLimitTransferRecord={recordCC:record.cc,addAmount:addAmount,rowId:rowId};
+            updateLimitPaginationText();
+        }
+
         // ================= Monitor - อนุมัติคืนเงิน (Spec24) =================
         var monitorRowDataMap = {
             'monitorRow1': {
@@ -7178,20 +7586,13 @@
         function filterTransferTable() {
             var branch = document.getElementById('branchFilterSelect').value;
             var status = document.getElementById('transferStatusFilterSelect').value;
-            var searchType = document.getElementById('transferSearchTypeSelect').value;
-            var searchTerm = document.getElementById('transferSearchInput').value.trim().toUpperCase();
             var rows = document.querySelectorAll('#transferTableBody tr');
             var visibleCount = 0;
 
             rows.forEach(function (row) {
                 var matchBranch = !branch || row.getAttribute('data-branch') === branch;
                 var matchStatus = !status || row.getAttribute('data-status') === status;
-                var matchSearch = true;
-                if (searchTerm) {
-                    var fieldValue = (searchType === 'CC' ? row.getAttribute('data-cc') : row.getAttribute('data-cl')) || '';
-                    matchSearch = fieldValue.toUpperCase().indexOf(searchTerm) !== -1;
-                }
-                var show = matchBranch && matchStatus && matchSearch;
+                var show = matchBranch && matchStatus;
                 row.style.display = show ? '' : 'none';
                 if (show) { visibleCount++; }
             });
@@ -7204,20 +7605,13 @@
         function filterRefundTable() {
             var branch = document.getElementById('refundBranchFilterSelect').value;
             var status = document.getElementById('refundStatusFilterSelect').value;
-            var searchType = document.getElementById('refundSearchTypeSelect').value;
-            var searchTerm = document.getElementById('refundSearchInput').value.trim().toUpperCase();
             var rows = document.querySelectorAll('#refundTableBody tr');
             var visibleCount = 0;
 
             rows.forEach(function (row) {
                 var matchBranch = !branch || row.getAttribute('data-branch') === branch;
                 var matchStatus = !status || row.getAttribute('data-status') === status;
-                var matchSearch = true;
-                if (searchTerm) {
-                    var fieldValue = (searchType === 'CC' ? row.getAttribute('data-cc') : row.getAttribute('data-cl')) || '';
-                    matchSearch = fieldValue.toUpperCase().indexOf(searchTerm) !== -1;
-                }
-                var show = matchBranch && matchStatus && matchSearch;
+                var show = matchBranch && matchStatus;
                 row.style.display = show ? '' : 'none';
                 if (show) { visibleCount++; }
             });
@@ -7363,6 +7757,7 @@
         function finalizeReject() {
             if (!pendingMonitorRowId) { return; }
             var data = monitorRowDataMap[pendingMonitorRowId] || monitorRowDataMap['monitorRow1'];
+            if(data.recordCC){ var rr=getClaimRecordByCC(data.recordCC); if(rr) rr.refundPending=false; }
             var row = document.getElementById(pendingMonitorRowId);
             var statusCell = document.getElementById(pendingMonitorRowId + 'Status');
             var actionCell = document.getElementById(pendingMonitorRowId + 'Action');
@@ -7392,6 +7787,14 @@
         function finalizeApprove() {
             if (!pendingMonitorRowId) { return; }
             var data = monitorRowDataMap[pendingMonitorRowId] || monitorRowDataMap['monitorRow1'];
+            if(data.recordCC){
+                var claimRecord=getClaimRecordByCC(data.recordCC);
+                if(claimRecord){
+                    claimRecord.transferred=Math.max(claimRecord.initialTransfer||0,(claimRecord.transferred||0)-(data.refundAmountValue||0));
+                    claimRecord.refundPending=false;
+                    syncClaimAmount(claimRecord);
+                }
+            }
             var row = document.getElementById(pendingMonitorRowId);
             var statusCell = document.getElementById(pendingMonitorRowId + 'Status');
             var actionCell = document.getElementById(pendingMonitorRowId + 'Action');
@@ -7521,9 +7924,19 @@
             document.getElementById('addLimitSuccessModal').classList.add('active');
         }
 
-        // หลังเพิ่มวงเงินสำเร็จ ตัดรายการออกจากตาราง Monitor (รายการที่เกินวงเงินได้รับการแก้ไขแล้ว)
+        // Flow ขยายวงเงิน: อนุมัติ -> เพิ่มวงเงิน -> โอนเงินทันที -> จบรายการ และตัดออกจาก Monitor
         function finalizeAddLimit() {
             if (!pendingLimitRowId) { return; }
+            var limitData=limitRowDataMap[pendingLimitRowId];
+            if(limitData && limitData.recordCC){
+                var claimRecord=getClaimRecordByCC(limitData.recordCC);
+                if(claimRecord){
+                    claimRecord.transferred=(claimRecord.transferred||0)+(limitData.addAmountValue||0);
+                    claimRecord.dailyUsed=(claimRecord.dailyUsed||0)+(limitData.addAmountValue||0);
+                    claimRecord.limitPending=false;
+                    syncClaimAmount(claimRecord);
+                }
+            }
             var row = document.getElementById(pendingLimitRowId);
             if (row) { row.remove(); }
             updateLimitPaginationText();
@@ -7536,9 +7949,11 @@
             document.getElementById('rejectLimitSuccessModal').classList.add('active');
         }
 
-        // หลังปฏิเสธการขยายวงเงินสำเร็จ ปรับสถานะแถวนั้นเป็น "ปฏิเสธขยายวงเงิน" (ไม่ตัดออกจากตาราง)
+        // Flow ขยายวงเงิน: ไม่อนุมัติ -> ปฏิเสธการขยายวงเงิน -> จบรายการ (เก็บไว้เป็นประวัติใน Monitor)
         function finalizeRejectLimit() {
             if (!pendingLimitRowId) { return; }
+            var rejectedLimitData=limitRowDataMap[pendingLimitRowId];
+            if(rejectedLimitData && rejectedLimitData.recordCC){ var cr=getClaimRecordByCC(rejectedLimitData.recordCC); if(cr) cr.limitPending=false; }
             var row = document.getElementById(pendingLimitRowId);
             if (row) {
                 row.setAttribute('data-status', 'rejected');
