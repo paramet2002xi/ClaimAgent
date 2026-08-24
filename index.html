@@ -5333,7 +5333,7 @@
                         </div>
                         <div class="field-error-text" id="searchRefundErrorText" style="margin-top:4px;">กรุณากรอกเลขที่ CL / CC</div>
                     </div>
-                    <button class="btn-modal-confirm search-submit-btn" onclick="submitSearchRefund()">โอนคืน</button>
+                    <button class="btn-modal-confirm search-submit-btn" onclick="submitSearchRefund()">บันทึก</button>
                 </div>
 
                 <div class="search-result-section" id="refundSearchResult" style="display:none;">
@@ -6505,7 +6505,27 @@
                 var msg=invalid.claimStatus==='transferring'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
                 errorText.innerText=msg;setFieldError(input,errorText,true);resetTransferSearchResult();return;
             }
-            setFieldError(input,errorText,false); renderTransferSearchResults(rows);
+
+            setFieldError(input,errorText,false);
+
+            // ค้นหาด้วยเลขที่เคส (CC): 1 CC มีได้เพียง 1 เคส จึงเข้าหน้าโอนเพิ่มได้ทันที
+            if(/^CC/.test(val)){
+                var record=rows[0];
+                var eligibility=getClaimFunctionEligibility(record);
+                if(!eligibility.ok){
+                    errorText.innerText=eligibility.message;
+                    setFieldError(input,errorText,true);
+                    resetTransferSearchResult();
+                    return;
+                }
+                resetTransferSearchResult();
+                closeModal('searchTransferModal');
+                openTransferDetail(record.cc);
+                return;
+            }
+
+            // ค้นหาด้วยเลขที่เคลม (CL): 1 CL อาจมีหลาย CC จึงแสดงรายการให้เลือกก่อน
+            renderTransferSearchResults(rows);
         }
         function confirmTransferSearchSelection(){
             if(!selectedTransferSearchCC)return;
@@ -6981,7 +7001,27 @@
                 var msg=invalid.claimStatus==='transferring'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
                 errorText.innerText=msg;setFieldError(input,errorText,true);resetRefundSearchResult();return;
             }
-            setFieldError(input,errorText,false); renderRefundSearchResults(rows);
+
+            setFieldError(input,errorText,false);
+
+            // ค้นหาด้วยเลขที่เคส (CC): 1 CC มีได้เพียง 1 เคส จึงเข้าหน้าคืนเงินได้ทันที
+            if(/^CC/.test(val)){
+                var record=rows[0];
+                var eligibility=getClaimFunctionEligibility(record);
+                if(!eligibility.ok){
+                    errorText.innerText=eligibility.message;
+                    setFieldError(input,errorText,true);
+                    resetRefundSearchResult();
+                    return;
+                }
+                resetRefundSearchResult();
+                closeModal('searchRefundModal');
+                openRefundDetail(record.cc);
+                return;
+            }
+
+            // ค้นหาด้วยเลขที่เคลม (CL): 1 CL อาจมีหลาย CC จึงแสดงรายการให้เลือกก่อน
+            renderRefundSearchResults(rows);
         }
         function confirmRefundSearchSelection(){
             if(!selectedRefundSearchCC)return;
