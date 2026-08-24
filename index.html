@@ -1042,73 +1042,63 @@
             initial-value: 0%;
         }
 
-        /* Modal 2: บันทึกโอนเพิ่มสำเร็จ */
+        /* Modal Success Icon — เรียบง่ายตาม UI เดิม ไม่มีกรอบวงนอก */
         .success-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            background-color: var(--success-bg);
+            width: 86px;
+            height: 86px;
+            background: #E8F6EE;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             position: relative;
-            animation: successBgFadeIn 0.3s ease both;
+            animation: successIconEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
-        @keyframes successBgFadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* วงแหวนรอบไอคอน ค่อยๆ "วาด" ตัวเองเป็นรูปวงกลม เหมือนไฟล์ตัวอย่างที่แนบมา */
         .success-icon-wrapper::before {
             content: '';
             position: absolute;
-            inset: -14px;
+            inset: 8px;
             border-radius: 50%;
-            background: conic-gradient(var(--success-icon) var(--ring-progress), transparent var(--ring-progress));
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
-            mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
-            opacity: 0.3;
-            animation: ringDraw 0.6s ease-out both;
+            background: rgba(56, 161, 105, 0.10);
+            animation: successSoftPulse 1.5s ease-out 0.35s both;
         }
 
-        @keyframes ringDraw {
-            from {
-                --ring-progress: 0%;
-            }
-
-            to {
-                --ring-progress: 100%;
-            }
-        }
-
+        .success-icon-wrapper .material-icons,
         .success-icon-wrapper .mi {
-            font-size: 45px;
-            color: var(--success-icon);
-            animation: checkPopIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+            position: relative;
+            z-index: 1;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--success-icon);
+            color: #fff !important;
+            font-size: 32px !important;
+            line-height: 1;
+            box-shadow: 0 4px 10px rgba(56, 161, 105, 0.22);
+            animation: successCheckPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.16s both;
         }
 
-        @keyframes checkPopIn {
-            0% {
-                transform: scale(0.2);
-                opacity: 0;
-            }
+        @keyframes successIconEnter {
+            0% { opacity: 0; transform: scale(0.72); }
+            65% { opacity: 1; transform: scale(1.06); }
+            100% { opacity: 1; transform: scale(1); }
+        }
 
-            60% {
-                transform: scale(1.18);
-                opacity: 1;
-            }
+        @keyframes successCheckPop {
+            0% { opacity: 0; transform: scale(0.25) rotate(-12deg); }
+            70% { opacity: 1; transform: scale(1.12) rotate(2deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0); }
+        }
 
-            100% {
-                transform: scale(1);
-            }
+        @keyframes successSoftPulse {
+            0% { transform: scale(0.72); opacity: 0; }
+            55% { transform: scale(1.06); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .success-account-card {
@@ -5083,7 +5073,7 @@
     <div class="modal-overlay" id="successModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกโอนเพิ่มสำเร็จ</div>
             <div class="modal-subtitle">ทั้งหมด <span id="successCount">2</span> รายการ</div>
@@ -5207,7 +5197,7 @@
     <div class="modal-overlay" id="reTransferSuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกโอนเพิ่มอีกครั้งสำเร็จ</div>
             <div class="modal-subtitle">ทั้งหมด <span id="reTransferSuccessCount">1</span> รายการ</div>
@@ -5396,7 +5386,7 @@
     <div class="modal-overlay" id="successRefundModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกคำขอคืนเงินสำเร็จ</div>
             <div class="modal-subtitle">สถานะรอดำเนินการ เพื่อรออนุมัติคืนเงิน (ทั้งหมด <span id="successRefundCount">2</span> รายการ)</div>
@@ -5636,7 +5626,7 @@
     <div class="modal-overlay" id="rejectSuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">ปฏิเสธการโอนคืนสำเร็จ</div>
             <button class="btn-modal-close" onclick="closeModal('rejectSuccessModal'); finalizeReject();">ตกลง</button>
@@ -5663,7 +5653,7 @@
     <div class="modal-overlay" id="approveSuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">อนุมัติโอนคืนสำเร็จ</div>
             <div class="modal-subtitle">ทั้งหมด <span id="approveSuccessCount">1</span> รายการ</div>
@@ -5904,7 +5894,7 @@
     <div class="modal-overlay" id="addLimitSuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">อนุมัติขยายวงเงินและโอนเงินสำเร็จ</div>
             <div class="modal-subtitle">ระบบดำเนินการโอนเงินเรียบร้อยแล้ว · เลข CL <span id="addLimitSuccessCL">CL6904000962</span></div>
@@ -5938,7 +5928,7 @@
     <div class="modal-overlay" id="rejectLimitSuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">ปฏิเสธการขยายวงเงินสำเร็จ</div>
             <div class="modal-subtitle">รายการสิ้นสุดและจะไม่มีการโอนเงิน</div>
@@ -5966,7 +5956,7 @@
     <div class="modal-overlay" id="bankInquirySuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกการสอบถามธนาคารสำเร็จ</div>
             <div class="modal-subtitle">
@@ -5999,7 +5989,7 @@
     <div class="modal-overlay" id="editSuccessModal">
         <div class="modal-content-box">
             <div class="success-icon-wrapper">
-                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check_circle</span>
+                <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกโอนอีกครั้งสำเร็จ</div>
             <button class="btn-modal-close"
@@ -6357,6 +6347,7 @@
         // การค้นหาด้วย CL/CLPA จะแสดงทุก CC ภายใต้เคลมนั้น ส่วนการค้นหาด้วย CC จะแสดงเฉพาะเคสนั้น
         // ฟังก์ชันโอนเพิ่ม/โอนคืนใช้ได้เฉพาะเคลมครั้งแรกที่โอนครั้งแรกสำเร็จ และไม่เกิน 7 วันจากเคลมครั้งแรก
         var claimSearchData = [
+            { product:'PH', cl:'CL690800125', cc:'CC6908000125', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'25/08/2569 09:30:00', amount:'4,000.00', initialTransfer:4000, transferred:4000, coverageLimit:10000, dailyUsed:30000, daysSinceFirstClaim:1, isFirstClaim:true, firstTransferSuccess:true, name:'นายทดสอบ ขยายวงเงิน', school:'โรงเรียนทดสอบขยายวงเงิน', branch:'สำนักงานใหญ่', claimStatus:'normal' },
             { product:'PH', cl:'CL690400010', cc:'CC6904000048', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 12:24:23', amount:'4,000.00', initialTransfer:3000, transferred:4000, coverageLimit:10000, dailyUsed:29500, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:true, name:'นายกรภัทร วรวงศ์ศุภากร', school:'โรงเรียนบ้านท่ามะกา', branch:'กาญจนบุรี', claimStatus:'normal' },
             { product:'PA', cl:'CLPA690400020', cc:'CC6904000036', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 12:20:10', amount:'1,700.00', initialTransfer:1700, transferred:1700, coverageLimit:8000, dailyUsed:8500, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:true, name:'นางสาวชลธิชา รัตนมณี', school:'โรงเรียนบ้านท่ามะกา', branch:'กาญจนบุรี', claimStatus:'normal' },
             { product:'PA', cl:'CLPA690400020', cc:'CC6904000010', coverage:'อุบัติเหตุ/ค่ารักษา/OPD', createdAt:'20/10/2569 12:18:05', amount:'1,000.00', initialTransfer:1000, transferred:1000, coverageLimit:6000, dailyUsed:8500, daysSinceFirstClaim:2, isFirstClaim:true, firstTransferSuccess:true, name:'นายกิตติ วงศ์สุวรรณ', school:'โรงเรียนบ้านท่ามะกา', branch:'กาญจนบุรี', claimStatus:'normal' },
