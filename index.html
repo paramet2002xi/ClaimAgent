@@ -2379,6 +2379,93 @@
             cursor: pointer;
         }
 
+
+        /* Date-only picker: floating dropdown (ไม่เปิดเป็น Modal) */
+        #dtPickerModal.dt-dropdown-mode {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            display: block;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        #dtPickerModal.dt-dropdown-mode.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-box {
+            position: fixed;
+            width: 240px;
+            max-width: 240px;
+            border-radius: 9px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+            overflow: visible;
+            pointer-events: auto;
+            transform-origin: top center;
+            animation: dtDropdownIn .16s ease-out;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-header,
+        #dtPickerModal.dt-dropdown-mode .dt-picker-time,
+        #dtPickerModal.dt-dropdown-mode .dt-picker-footer {
+            display: none !important;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-body {
+            display: block;
+            padding: 10px;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-nav {
+            margin-bottom: 8px;
+            gap: 6px;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-nav-arrow {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #20242A;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-nav select {
+            height: 32px;
+            border-radius: 7px;
+            padding: 0 8px;
+            font-size: 13px;
+            border-color: #E2E8F0;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-weekdays {
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-picker-days {
+            gap: 1px;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-day-cell {
+            height: 31px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-day-cell.dt-today {
+            border: none;
+            background: #F1F3F5;
+            color: #20242A;
+        }
+        #dtPickerModal.dt-dropdown-mode .dt-day-cell.dt-selected {
+            background: #17191C;
+            color: #fff;
+        }
+        @keyframes dtDropdownIn {
+            from { opacity: 0; transform: translateY(-5px) scale(.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         /* --- Slip อัปโหลดไฟล์ (เช่น Slip การโอนคืน / โอนเพิ่ม) --- */
         .file-upload-group {
             position: relative;
@@ -2540,6 +2627,130 @@
         .search-result-footer .btn { min-width:120px; justify-content:center; text-align:center; }
         .search-result-footer .btn:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
 </style>
+
+<style id="claimagent-calendar-theme">
+/* ===== ClaimAgent Calendar Theme ===== */
+.ca-calendar{
+    width: 282px !important;
+    background:#fff !important;
+    border:1px solid var(--border-color,#E2E8F0) !important;
+    border-radius:10px !important;
+    box-shadow:0 10px 28px rgba(16,24,40,.14) !important;
+    padding:12px !important;
+    font-family:'Sarabun',sans-serif !important;
+}
+
+.ca-cal-head{
+    display:grid !important;
+    grid-template-columns:32px 1fr 1fr 32px !important;
+    gap:8px !important;
+    align-items:center !important;
+    margin-bottom:10px !important;
+}
+
+.ca-cal-nav{
+    width:32px !important;
+    height:32px !important;
+    border:none !important;
+    border-radius:6px !important;
+    background:transparent !important;
+    color:var(--primary-blue,#00569d) !important;
+    font-size:20px !important;
+    font-weight:600 !important;
+    cursor:pointer !important;
+    transition:.15s ease !important;
+}
+.ca-cal-nav:hover{
+    background:var(--info-bg,#EAF2FB) !important;
+}
+
+.ca-cal-select{
+    height:34px !important;
+    border:1px solid var(--border-color,#E2E8F0) !important;
+    border-radius:6px !important;
+    background:#fff !important;
+    color:var(--text-dark,#333333) !important;
+    padding:0 28px 0 10px !important;
+    font-size:13px !important;
+    font-family:'Sarabun',sans-serif !important;
+    outline:none !important;
+    cursor:pointer !important;
+}
+.ca-cal-select:hover{
+    border-color:#B8C4D6 !important;
+}
+.ca-cal-select:focus{
+    border-color:var(--primary-blue,#00569d) !important;
+    box-shadow:0 0 0 3px rgba(0,86,157,.10) !important;
+}
+
+.ca-cal-week{
+    margin-bottom:4px !important;
+}
+.ca-cal-week span{
+    color:var(--text-muted,#666666) !important;
+    font-size:11px !important;
+    font-weight:500 !important;
+    padding:5px 0 !important;
+}
+
+.ca-cal-grid{
+    gap:3px !important;
+}
+
+.ca-day{
+    height:32px !important;
+    border:none !important;
+    border-radius:50% !important;
+    background:transparent !important;
+    color:var(--text-dark,#333333) !important;
+    font-size:12px !important;
+    font-family:'Sarabun',sans-serif !important;
+    cursor:pointer !important;
+    transition:background .15s ease,color .15s ease,transform .12s ease !important;
+}
+.ca-day:hover{
+    background:var(--info-bg,#EAF2FB) !important;
+    color:var(--primary-blue,#00569d) !important;
+}
+.ca-day.muted{
+    color:#C7CED8 !important;
+}
+.ca-day.today{
+    background:#F1F5F9 !important;
+    color:var(--primary-blue,#00569d) !important;
+    font-weight:600 !important;
+}
+.ca-day.selected{
+    background:var(--primary-blue,#00569d) !important;
+    color:#fff !important;
+    font-weight:600 !important;
+    box-shadow:0 3px 8px rgba(0,86,157,.22) !important;
+}
+.ca-day.selected:hover{
+    background:var(--dark-blue,#004580) !important;
+    color:#fff !important;
+    transform:scale(1.04) !important;
+}
+
+.ca-date-trigger{
+    color:var(--primary-blue,#00569d) !important;
+}
+.ca-date-trigger:hover{
+    background:var(--info-bg,#EAF2FB) !important;
+}
+
+/* animation ตอนเปิด */
+.ca-calendar.open{
+    transform-origin:top left !important;
+    animation:claimAgentCalendarOpen .16s ease-out !important;
+}
+@keyframes claimAgentCalendarOpen{
+    from{opacity:0;transform:translateY(-4px) scale(.985);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+}
+</style>
+
 </head>
 
 <body>
@@ -4302,7 +4513,7 @@
                         <div class="form-group"
                             style="max-width:520px; margin-bottom:0; height:46px; box-sizing:border-box;">
                             <input type="text" class="form-control" id="bankSearchInput"
-                                placeholder="กรุณากรอกเลขที่ CPG / CL*" style="height:100%;"
+                                placeholder="กรุณากรอกเลขที่ CL / CC*" style="height:100%;"
                                 oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')"
                                 onkeydown="if(event.key==='Enter'){ event.preventDefault(); submitBankSearch(); }">
                         </div>
@@ -4319,7 +4530,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:36px;"></th>
-                                    <th>เลขที่ CL</th>
+                                    <th>เลขที่ CL</th><th>เลขที่ CC</th>
                                     <th>วันที่สร้างเคลม</th>
                                     <th>เลขที่บัญชี</th>
                                     <th>ชื่อบัญชี</th>
@@ -4330,14 +4541,14 @@
                                 </tr>
                             </thead>
                             <tbody id="bankTableBody">
-                                <tr id="bankRow1" data-cl="CL690400115" data-cpg="CPG690400115">
+                                <tr id="bankRow1" data-cl="CL690400115" data-cpg="CPG690400115" data-cc="CC690400115">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow1')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="bankRow1ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL690400115</td>
+                                    <td>CL690400115</td><td>CC690400115</td>
                                     <td>20/07/2569 13:10:39</td>
                                     <td>9037696176</td>
                                     <td>นางสาวสุนิสา สุวรรณโชค</td>
@@ -4354,7 +4565,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="bankRow1Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -4380,14 +4591,14 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr id="bankRow2" data-cl="CL6904000194" data-cpg="CPG690400194">
+                                <tr id="bankRow2" data-cl="CL6904000194" data-cpg="CPG690400194" data-cc="CC6904000194">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow2')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="bankRow2ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL6904000194</td>
+                                    <td>CL6904000194</td><td>CC6904000194</td>
                                     <td>11/10/2569 12:24:23</td>
                                     <td>1821000325</td>
                                     <td>นางสุคิดา พ่วงกระแสร์</td>
@@ -4404,7 +4615,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="bankRow2Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -4430,14 +4641,14 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr id="bankRow3" data-cl="CL6904000193" data-cpg="CPG690400193">
+                                <tr id="bankRow3" data-cl="CL6904000193" data-cpg="CPG690400193" data-cc="CC6904000193">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow3')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="bankRow3ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL6904000193</td>
+                                    <td>CL6904000193</td><td>CC6904000193</td>
                                     <td>10/10/2569 11:24:23</td>
                                     <td>1812000591</td>
                                     <td>นายปารเมศ คำภาพันธ์</td>
@@ -4454,7 +4665,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="bankRow3Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -4480,15 +4691,15 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr id="bankRow4" data-cl="CL6904000192" data-cpg="CPG690400192">
+                                <tr id="bankRow4" data-cl="CL6904000192" data-cpg="CPG690400192" data-cc="CC6904000192">
                                     <td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow4')"><span class="material-icons expand-arrow-icon" id="bankRow4ArrowIcon">chevron_right</span></button></td>
-                                    <td>CL6904000192</td><td>09/10/2569 10:18:42</td><td>1812000714</td>
+                                    <td>CL6904000192</td><td>CC6904000192</td><td>09/10/2569 10:18:42</td><td>1812000714</td>
                                     <td>นางสาวกมลชนก ศรีสุข</td><td>กสิกรไทย</td><td style="text-align:right;">2,500.00</td>
                                     <td style="text-align:center;" id="bankRow4Status"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
                                     <td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openBankConfirmModal('bankRow4')"><span class="material-icons">send</span></button></td>
                                 </tr>
                                 <tr class="bank-detail-row" id="bankRow4Detail" style="display:none;">
-                                    <td colspan="9"><div class="bank-detail-label">รายละเอียด</div>
+                                    <td colspan="10"><div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table"><thead><tr>
                                             <th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th>
                                         </tr></thead><tbody><tr>
@@ -4496,15 +4707,15 @@
                                         </tr></tbody></table>
                                     </td>
                                 </tr>
-                                <tr id="bankRow5" data-cl="CL6904000191" data-cpg="CPG690400191">
+                                <tr id="bankRow5" data-cl="CL6904000191" data-cpg="CPG690400191" data-cc="CC6904000191">
                                     <td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow5')"><span class="material-icons expand-arrow-icon" id="bankRow5ArrowIcon">chevron_right</span></button></td>
-                                    <td>CL6904000191</td><td>08/10/2569 16:05:11</td><td>1821000842</td>
+                                    <td>CL6904000191</td><td>CC6904000191</td><td>08/10/2569 16:05:11</td><td>1821000842</td>
                                     <td>นายธนภัทร วงศ์สวัสดิ์</td><td>กรุงศรี</td><td style="text-align:right;">750.00</td>
                                     <td style="text-align:center;" id="bankRow5Status"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
                                     <td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openBankConfirmModal('bankRow5')"><span class="material-icons">send</span></button></td>
                                 </tr>
                                 <tr class="bank-detail-row" id="bankRow5Detail" style="display:none;">
-                                    <td colspan="9"><div class="bank-detail-label">รายละเอียด</div>
+                                    <td colspan="10"><div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table"><thead><tr>
                                             <th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th>
                                         </tr></thead><tbody><tr>
@@ -4543,7 +4754,7 @@
                             <div class="form-group"
                                 style="max-width:520px; margin-bottom:0; height:46px; box-sizing:border-box;">
                                 <input type="text" class="form-control" id="editSearchInput"
-                                    placeholder="กรุณากรอกเลขที่ CPG / CL*" style="height:100%;"
+                                    placeholder="กรุณากรอกเลขที่ CL / CC*" style="height:100%;"
                                     oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')"
                                     onkeydown="if(event.key==='Enter'){ event.preventDefault(); submitEditSearch(); }">
                             </div>
@@ -4563,7 +4774,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:36px;"></th>
-                                    <th>เลขที่ CL</th>
+                                    <th>เลขที่ CL</th><th>เลขที่ CC</th>
                                     <th>วันที่สร้างเคลม</th>
                                     <th>เลขที่บัญชี</th>
                                     <th>ชื่อบัญชี</th>
@@ -4574,14 +4785,14 @@
                                 </tr>
                             </thead>
                             <tbody id="editTableBody">
-                                <tr id="editRow1" data-cl="CL6904000195" data-cpg="CPG690400195" data-status="fail">
+                                <tr id="editRow1" data-cl="CL6904000195" data-cpg="CPG690400195" data-status="fail" data-cc="CC6904000195">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleEditDetail('editRow1')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="editRow1ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL6904000195</td>
+                                    <td>CL6904000195</td><td>CC6904000195</td>
                                     <td>11/10/2569 13:24:23</td>
                                     <td>1812000152</td>
                                     <td>นางสาวณัฐกานต์ ภูเจดีย์</td>
@@ -4598,7 +4809,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="editRow1Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -4624,14 +4835,14 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr id="editRow2" data-cl="CL6904000194" data-cpg="CPG690400194" data-status="fail">
+                                <tr id="editRow2" data-cl="CL6904000194" data-cpg="CPG690400194" data-status="fail" data-cc="CC6904000194">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleEditDetail('editRow2')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="editRow2ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL6904000194</td>
+                                    <td>CL6904000194</td><td>CC6904000194</td>
                                     <td>11/10/2569 12:24:23</td>
                                     <td>1821000325</td>
                                     <td>นางสุคิดา พ่วงกระแสร์</td>
@@ -4648,7 +4859,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="editRow2Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -4674,14 +4885,14 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr id="editRow3" data-cl="CL6904000193" data-cpg="CPG690400193" data-status="fail">
+                                <tr id="editRow3" data-cl="CL6904000193" data-cpg="CPG690400193" data-status="fail" data-cc="CC6904000193">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleEditDetail('editRow3')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="editRow3ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL6904000193</td>
+                                    <td>CL6904000193</td><td>CC6904000193</td>
                                     <td>10/10/2569 11:24:23</td>
                                     <td>1812000591</td>
                                     <td>นายปารเมศ คำภาพันธ์</td>
@@ -4698,7 +4909,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="editRow3Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -4725,14 +4936,14 @@
                                     </td>
                                 </tr>
                                 <tr id="editRow4" data-cl="CL6904000210" data-cpg="CPG690400210"
-                                    data-status="transferring">
+                                    data-status="transferring" data-cc="CC6904000210">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleEditDetail('editRow4')">
                                             <span class="material-icons expand-arrow-icon"
                                                 id="editRow4ArrowIcon">chevron_right</span>
                                         </button>
                                     </td>
-                                    <td>CL6904000210</td>
+                                    <td>CL6904000210</td><td>CC6904000210</td>
                                     <td>21/07/2569 09:12:05</td>
                                     <td>1812000733</td>
                                     <td>นางสาวกมลชนก ศรีสุข</td>
@@ -4749,7 +4960,7 @@
                                     </td>
                                 </tr>
                                 <tr class="bank-detail-row" id="editRow4Detail" style="display:none;">
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="bank-detail-label">รายละเอียด</div>
                                         <table class="bank-detail-table">
                                             <thead>
@@ -7125,11 +7336,40 @@
             var timeSection = document.querySelector('.dt-picker-time');
             if (timeSection) { timeSection.style.display = isDateOnly ? 'none' : ''; }
 
-            document.getElementById('dtPickerModal').classList.add('active');
+            var pickerModal = document.getElementById('dtPickerModal');
+            var pickerBox = pickerModal.querySelector('.dt-picker-box');
+            pickerModal.classList.toggle('dt-dropdown-mode', isDateOnly);
+
+            if (isDateOnly && inputEl && pickerBox) {
+                // แสดงเป็น Dropdown ใต้ Field ตามตำแหน่งจริงของ Input
+                var rect = inputEl.getBoundingClientRect();
+                var popupWidth = 240;
+                var left = rect.left;
+                if (left + popupWidth > window.innerWidth - 12) left = window.innerWidth - popupWidth - 12;
+                if (left < 12) left = 12;
+
+                var top = rect.bottom + 6;
+                // ถ้าพื้นที่ด้านล่างไม่พอ ให้เปิดขึ้นด้านบน
+                var estimatedHeight = 300;
+                if (top + estimatedHeight > window.innerHeight - 12) {
+                    top = Math.max(12, rect.top - estimatedHeight - 6);
+                }
+                pickerBox.style.left = left + 'px';
+                pickerBox.style.top = top + 'px';
+            } else if (pickerBox) {
+                pickerBox.style.left = '';
+                pickerBox.style.top = '';
+            }
+
+            pickerModal.classList.add('active');
         }
 
         function dtClosePicker() {
+            var pickerModal = document.getElementById('dtPickerModal');
+            var pickerBox = pickerModal ? pickerModal.querySelector('.dt-picker-box') : null;
             closeModal('dtPickerModal');
+            if (pickerModal) pickerModal.classList.remove('dt-dropdown-mode');
+            if (pickerBox) { pickerBox.style.left = ''; pickerBox.style.top = ''; }
         }
 
         function dtBuildMonthYearSelects() {
@@ -7216,6 +7456,9 @@
                         dtBuildMonthYearSelects();
                     }
                     dtRenderCalendar();
+                    if (dtDateOnlyFields.indexOf(dtState.targetInputId) !== -1) {
+                        dtConfirmSelection();
+                    }
                 };
                 grid.appendChild(el);
             });
@@ -8171,6 +8414,9 @@
         }
 
     </script>
+
+
+
 
 </body>
 
