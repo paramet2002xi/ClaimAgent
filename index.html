@@ -5557,7 +5557,7 @@
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกโอนเพิ่มสำเร็จ</div>
-            <div class="modal-subtitle">ทั้งหมด <span id="successCount">2</span> รายการ</div>
+            <div class="modal-subtitle">ทั้งหมด <span id="successCount">1</span> รายการ</div>
 
             <div class="success-account-card">
                 <div class="ktb-mini-logo" id="successBankLogo" style="background-color: var(--bank-logo-blue);">KTB
@@ -5870,7 +5870,7 @@
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกคำขอคืนเงินสำเร็จ</div>
-            <div class="modal-subtitle">สถานะรอดำเนินการ เพื่อรออนุมัติคืนเงิน (ทั้งหมด <span id="successRefundCount">2</span> รายการ)</div>
+            <div class="modal-subtitle">สถานะรอดำเนินการ เพื่อรออนุมัติคืนเงิน (ทั้งหมด <span id="successRefundCount">1</span> รายการ)</div>
 
             <div class="success-account-card">
                 <div class="ktb-mini-logo" style="background-color:var(--primary-blue);">RT</div>
@@ -7158,6 +7158,21 @@ document.getElementById('transferDetailName').innerText=record?((getProductFromC
             document.getElementById('totalAmountText').innerText = total.toFixed(2);
         }
 
+        if (!window.__claimAgentSingleItemBound) {
+            window.__claimAgentSingleItemBound = true;
+            document.addEventListener('input', function (event) {
+                if (!event.target.matches('.input-table-amount')) return;
+                if ((parseFloat(event.target.value) || 0) <= 0) return;
+                var scope = event.target.closest('#detailTabContent, #refundDetailTabContent');
+                if (!scope) return;
+                scope.querySelectorAll('.input-table-amount').forEach(function (input) {
+                    if (input !== event.target) input.value = '';
+                });
+                if (scope.id === 'detailTabContent') calculateTotal();
+                if (scope.id === 'refundDetailTabContent') calculateRefundTotal();
+            });
+        }
+
         // อ้างอิงข้อมูลจำนวนเงินจากคอลัมน์ "ยอดเงินโอนเพิ่ม" ในตารางรายการ (แถวที่ถูกซ่อนไว้จะไม่ถูกนับ)
         function getTransferAmountData() {
             var data = { items: [], total: 0 };
@@ -7171,8 +7186,10 @@ document.getElementById('transferDetailName').innerText=record?((getProductFromC
                 var name = cells.length > 1 ? cells[1].innerText.trim() : '';
                 var amt = parseFloat(input.value) || 0;
 
-                data.items.push({ name: name, amount: amt });
-                data.total += amt;
+                if (amt > 0 && data.items.length === 0) {
+                    data.items.push({ name: name, amount: amt });
+                    data.total = amt;
+                }
             });
 
             return data;
@@ -7921,8 +7938,10 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
                 var name = cells.length > 1 ? cells[1].innerText.trim() : '';
                 var amt = parseFloat(input.value) || 0;
 
-                data.items.push({ name: name, amount: amt });
-                data.total += amt;
+                if (amt > 0 && data.items.length === 0) {
+                    data.items.push({ name: name, amount: amt });
+                    data.total = amt;
+                }
             });
 
             return data;
@@ -11397,7 +11416,7 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกโอนเพิ่มสำเร็จ</div>
-            <div class="modal-subtitle">ทั้งหมด <span id="successCount">2</span> รายการ</div>
+            <div class="modal-subtitle">ทั้งหมด <span id="successCount">1</span> รายการ</div>
 
             <div class="success-account-card">
                 <div class="ktb-mini-logo" id="successBankLogo" style="background-color: var(--bank-logo-blue);">KTB
@@ -11710,7 +11729,7 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
                 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">บันทึกคำขอคืนเงินสำเร็จ</div>
-            <div class="modal-subtitle">สถานะรอดำเนินการ เพื่อรออนุมัติคืนเงิน (ทั้งหมด <span id="successRefundCount">2</span> รายการ)</div>
+            <div class="modal-subtitle">สถานะรอดำเนินการ เพื่อรออนุมัติคืนเงิน (ทั้งหมด <span id="successRefundCount">1</span> รายการ)</div>
 
             <div class="success-account-card">
                 <div class="ktb-mini-logo" style="background-color:var(--primary-blue);">RT</div>
@@ -12998,6 +13017,21 @@ document.getElementById('transferDetailName').innerText=record?((getProductFromC
             document.getElementById('totalAmountText').innerText = total.toFixed(2);
         }
 
+        if (!window.__claimAgentSingleItemBound) {
+            window.__claimAgentSingleItemBound = true;
+            document.addEventListener('input', function (event) {
+                if (!event.target.matches('.input-table-amount')) return;
+                if ((parseFloat(event.target.value) || 0) <= 0) return;
+                var scope = event.target.closest('#detailTabContent, #refundDetailTabContent');
+                if (!scope) return;
+                scope.querySelectorAll('.input-table-amount').forEach(function (input) {
+                    if (input !== event.target) input.value = '';
+                });
+                if (scope.id === 'detailTabContent') calculateTotal();
+                if (scope.id === 'refundDetailTabContent') calculateRefundTotal();
+            });
+        }
+
         // อ้างอิงข้อมูลจำนวนเงินจากคอลัมน์ "ยอดเงินโอนเพิ่ม" ในตารางรายการ (แถวที่ถูกซ่อนไว้จะไม่ถูกนับ)
         function getTransferAmountData() {
             var data = { items: [], total: 0 };
@@ -13011,8 +13045,10 @@ document.getElementById('transferDetailName').innerText=record?((getProductFromC
                 var name = cells.length > 1 ? cells[1].innerText.trim() : '';
                 var amt = parseFloat(input.value) || 0;
 
-                data.items.push({ name: name, amount: amt });
-                data.total += amt;
+                if (amt > 0 && data.items.length === 0) {
+                    data.items.push({ name: name, amount: amt });
+                    data.total = amt;
+                }
             });
 
             return data;
@@ -13761,8 +13797,10 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
                 var name = cells.length > 1 ? cells[1].innerText.trim() : '';
                 var amt = parseFloat(input.value) || 0;
 
-                data.items.push({ name: name, amount: amt });
-                data.total += amt;
+                if (amt > 0 && data.items.length === 0) {
+                    data.items.push({ name: name, amount: amt });
+                    data.total = amt;
+                }
             });
 
             return data;
