@@ -1938,14 +1938,17 @@
         }
 
         .icon-action-btn {
-            background: none;
+            width: 32px;
+            height: 32px;
+            background-color: var(--info-bg);
             border: none;
             cursor: pointer;
             color: var(--primary-blue);
-            padding: 4px;
-            border-radius: 4px;
+            padding: 0;
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             transition: background-color 0.15s ease, transform 0.15s ease;
         }
 
@@ -1960,6 +1963,33 @@
 
         .icon-action-btn.orange {
             color: var(--warning-color);
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            justify-content: center;
+            background-color: var(--warning-bg);
+            border-radius: 50%;
+        }
+
+        .icon-action-btn.orange:hover {
+            background-color: #FCECCB;
+        }
+
+        /* พื้นหลังอ่อนตามสีของปุ่ม Action แต่ละประเภท */
+        .icon-action-btn[style*="warning-color"] {
+            background-color: var(--warning-bg);
+        }
+
+        .icon-action-btn[style*="warning-color"]:hover {
+            background-color: #FCECCB;
+        }
+
+        .icon-action-btn[style*="red-text"] {
+            background-color: var(--red-light);
+        }
+
+        .icon-action-btn[style*="red-text"]:hover {
+            background-color: #F8D8D5;
         }
 
         /* สถานะการสอบถามธนาคาร */
@@ -4177,13 +4207,14 @@
                                 </tr>
                             </thead>
                             <tbody id="monitorTableBody">
+                                <tr data-rt="RT690500012" data-cpg="CPG690400220" data-cl="CLPA690400220" data-cc="CC6904000220" data-branch="สำนักงานใหญ่" data-status="success"><td>RT690500012</td><td>CLPA690400220</td><td>CC6904000220</td><td>24/08/2569 10:15:00</td><td>เด็กหญิงพิมพ์ชนก แก้วดี</td><td>สำนักงานใหญ่</td><td style="text-align:right;">3,000.00</td><td style="text-align:right;">500.00</td><td style="text-align:center;"><span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span></td><td>จ่ายเงินเกินสิทธิ</td><td style="text-align:center;"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal('RT690500012','CPG690400220','สำนักงานใหญ่','เด็กหญิงพิมพ์ชนก แก้วดี','500.00')"><span class="material-icons">visibility</span></button></td></tr>
                                 <tr id="monitorRow1" data-rt="RT681200011" data-cpg="CPG690467210"
                                     data-cl="CL6904000193" data-cc="CC6904000193" data-branch="กรุงเทพมหานคร" data-status="pending">
                                     <td>RT681200011</td>
                                     <td>CL6904000193</td>
                                     <td>CC6904000193</td>
                                     <td>22/05/2569 06:10:11</td>
-                                    <td>โรงเรียนบ้านนาแหม</td>
+                                    <td>นายกรภัทร วรวงศ์ศุภากร</td>
                                     <td>กรุงเทพมหานคร</td>
                                     <td style="text-align:right;">4,000.00</td>
                                     <td style="text-align:right;">600.00</td>
@@ -4385,6 +4416,7 @@
                                 </tr>
                             </thead>
                             <tbody id="limitTableBody">
+                                <tr id="limitRowPA1" data-cpg="CPG690400221" data-cl="CLPA690400221" data-cc="CC6904000221" data-branch="สำนักงานใหญ่" data-status="review"><td style="color:var(--primary-blue);">CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>สำนักงานใหญ่</td><td style="text-align:right;">8,500.00</td><td>5281137999</td><td>โอนเงินครั้งแรก</td><td id="limitRowPA1Status" style="text-align:center;"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span></td><td id="limitRowPA1Reason">เกินวงเงินสูงสุดต่อวัน 30,000 บาท · รออนุมัติ</td><td id="limitRowPA1Action" style="text-align:center;"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button><button class="icon-action-btn" style="color:var(--warning-color);" title="ขยายวงเงิน" onclick="openLimitModal('limitRowPA1')"><span class="material-icons">fact_check</span></button></td></tr>
                                 <tr id="limitRow1" data-cpg="CPG690600047" data-cl="CL6904000962"
                                     data-cc="CC6904000962" data-branch="กรุงเทพมหานคร" data-status="review">
                                     <td style="color:var(--primary-blue);">CL6904000962</td>
@@ -4544,6 +4576,8 @@
                                 </tr>
                             </thead>
                             <tbody id="bankTableBody">
+                                <tr id="bankRowPA1" data-cl="CLPA690400221" data-cpg="CPG690400221" data-cc="CC6904000221"><td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleBankDetail('bankRowPA1')"><span class="material-icons expand-arrow-icon" id="bankRowPA1ArrowIcon">chevron_right</span></button></td><td>CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>5281137999</td><td>ครูสมชาย ใจดี</td><td>กสิกรไทย</td><td style="text-align:right;">8,500.00</td><td id="bankRowPA1Status" style="text-align:center;"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td><td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openBankConfirmModal('bankRowPA1')"><span class="material-icons">send</span></button></td></tr>
+                                <tr class="bank-detail-row" id="bankRowPA1Detail" style="display:none;"><td colspan="10"><div class="bank-detail-label">รายละเอียด</div><table class="bank-detail-table"><thead><tr><th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th></tr></thead><tbody><tr><td>RT690500221</td><td>24/08/2569 10:30:00</td><td>KBANK</td><td>Fail</td><td>w001</td><td>บัญชีปลายทางปิด</td></tr></tbody></table></td></tr>
                                 <tr id="bankRow1" data-cl="CL690400115" data-cpg="CPG690400115" data-cc="CC690400115">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow1')">
@@ -4788,6 +4822,8 @@
                                 </tr>
                             </thead>
                             <tbody id="editTableBody">
+                                <tr id="editRowPA1" data-cl="CLPA690400221" data-cpg="CPG690400221" data-status="fail" data-cc="CC6904000221"><td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleEditDetail('editRowPA1')"><span class="material-icons expand-arrow-icon" id="editRowPA1ArrowIcon">chevron_right</span></button></td><td>CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>5281137999</td><td>ครูสมชาย ใจดี</td><td>กสิกรไทย</td><td style="text-align:right;">8,500.00</td><td id="editRowPA1Status" style="text-align:center;"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td><td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openEditConfirmModal('editRowPA1')"><span class="material-icons">refresh</span></button></td></tr>
+                                <tr class="bank-detail-row" id="editRowPA1Detail" style="display:none;"><td colspan="10"><div class="bank-detail-label">รายละเอียด</div><table class="bank-detail-table"><thead><tr><th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th></tr></thead><tbody><tr><td>RT690500221</td><td>24/08/2569 10:30:00</td><td>KBANK</td><td>Fail</td><td>w001</td><td>บัญชีปลายทางปิด</td></tr></tbody></table></td></tr>
                                 <tr id="editRow1" data-cl="CL6904000195" data-cpg="CPG690400195" data-status="fail" data-cc="CC6904000195">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleEditDetail('editRow1')">
@@ -5930,7 +5966,7 @@
                     <div class="info-item">
                         <span class="info-label">ชื่อ - สกุล ผู้เอาประกัน :</span><br>
                         <span class="info-value" id="approveDetailName"
-                            style="display:inline-block; margin-top:4px; color:var(--primary-blue);">โรงเรียนบ้านนาแหม</span>
+                            style="display:inline-block; margin-top:4px; color:var(--primary-blue);">นายกรภัทร วรวงศ์ศุภากร</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">ผู้ทำรายการ :</span><br>
@@ -5963,8 +5999,8 @@
                 <table class="data-table" style="margin:20px 0 0;">
                     <thead>
                         <tr>
-                            <th>รหัสรายการ</th>
                             <th>เลขที่ CL</th>
+                            <th>เลขที่ CC</th>
                             <th>ชื่อ - สกุล ผู้เอาประกัน</th>
                             <th style="text-align:right;">แจ้งโอน</th>
                             <th style="text-align:right;">โอนคืน</th>
@@ -5974,9 +6010,9 @@
                     </thead>
                     <tbody id="approveDetailTableBody">
                         <tr>
-                            <td>RT681200011</td>
                             <td>CL6904000193</td>
-                            <td>โรงเรียนบ้านนาแหม</td>
+                            <td>CC6904000193</td>
+                            <td>นายกรภัทร วรวงศ์ศุภากร</td>
                             <td style="text-align:right;">4,000.00</td>
                             <td style="text-align:right;">600.00</td>
                             <td style="text-align:right;">3,400.00</td>
@@ -6130,18 +6166,42 @@
         </div>
     </div>
 
+    <style>
+        #approveHistoryModal .modal-box-edit-v2{max-width:900px!important}
+        #approveHistoryModal .modal-edit-header-v2 .title-group{color:var(--text-dark);font-weight:600}
+        #approveHistoryModal .modal-edit-header-v2 .title-group>.material-icons{display:inline-flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;background:var(--info-bg);color:var(--primary-blue);font-size:18px}
+        #approveHistoryModal .history-detail-heading{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;color:var(--primary-blue);font-weight:600}
+        #approveHistoryModal .old-account-card{background:#fff;border:0;box-shadow:none;padding:18px 28px 4px;width:auto;box-sizing:border-box}
+        #approveHistoryModal .old-account-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:64px;row-gap:18px;line-height:1.45!important;width:100%;max-width:none;flex:1;box-sizing:border-box}
+        #approveHistoryModal .old-account-details>div{display:flex;flex-direction:column;gap:4px}
+        #approveHistoryModal .old-account-details>div:nth-child(1){grid-column:1;grid-row:1}
+        #approveHistoryModal .old-account-details>div:nth-child(2){grid-column:2;grid-row:1}
+        #approveHistoryModal .old-account-details>div:nth-child(3){grid-column:3;grid-row:1}
+        #approveHistoryModal .old-account-details>div:nth-child(4){grid-column:1;grid-row:2}
+        #approveHistoryModal .old-account-details>div:nth-child(5){grid-column:2;grid-row:2}
+        #approveHistoryModal .old-account-details>div:nth-child(6){grid-column:3;grid-row:2}
+        #approveHistoryModal .old-account-details>div:nth-child(7){grid-column:2;grid-row:3}
+        #approveHistoryModal .old-account-details .value{color:var(--primary-blue);font-weight:600}
+        #approveHistoryModal .old-account-details>div:nth-child(1) .value{display:inline-flex;width:max-content;background:var(--info-bg);border:1px solid var(--info-border);border-radius:6px;padding:5px 12px}
+        #approveHistoryModal .old-account-details>div:nth-child(2) .value{text-decoration:underline}
+        #approveHistoryModal .history-slip-btn{width:auto!important;margin:0!important;background:var(--primary-blue);color:#fff;border:0;border-radius:4px;padding:9px 22px}
+        #approveHistoryModal .data-table{clear:both;margin-bottom:0!important}
+        #approveHistoryModal .history-footer{display:flex;justify-content:flex-end;gap:28px;align-items:center;padding:14px 4px;color:var(--text-muted);font-size:13px}
+        #approveHistoryModal .history-ok-btn{width:128px!important;margin:14px auto 20px!important;display:flex}
+    </style>
     <!-- MODAL 17: ประวัติรายการโอนคืนสำเร็จ (Spec24 3.0) -->
     <div class="modal-overlay" id="approveHistoryModal">
-        <div class="modal-box-edit-v2" style="max-width:520px;">
+        <div class="modal-content-box" style="max-width:900px; padding:0; overflow:hidden;">
             <div class="modal-edit-header-v2">
                 <div class="title-group">
-                    <span class="material-icons">history</span> ประวัติรายการโอนคืนสำเร็จ
+                    <span class="material-icons">sync_alt</span> ประวัติรายการโอนคืนสำเร็จ
                 </div>
                 <button class="modal-close-btn" onclick="closeModal('approveHistoryModal')">
                     <span class="material-icons" style="font-size:16px;">close</span>
                 </button>
             </div>
 
+            <div class="history-detail-heading"><span>ข้อมูลรายละเอียด</span><button type="button" class="btn-default history-slip-btn" onclick="openSlipPreviewModal()">คลิกดูภาพ Slip การโอนเงิน</button></div>
             <div class="old-account-card" style="margin-bottom:0;">
                 <div class="old-account-details" style="line-height:2;">
                     <div><span class="label">รหัสรายการ (RT) :</span> <span class="value"
@@ -6150,7 +6210,7 @@
                             id="historyDetailCPG">CPG690455197</span></div>
                     <div><span class="label">สาขา :</span> <span class="value"
                             id="historyDetailBranch">กรุงเทพมหานคร</span></div>
-                    <div><span class="label">ชื่อผู้เอาประกัน :</span> <span class="value"
+                    <div><span class="label">ชื่อ - สกุล ผู้เอาประกัน :</span> <span class="value"
                             id="historyDetailName">นางสาวรัชชนก สุวรรณโชค</span></div>
                     <div><span class="label">ผู้ทำรายการ :</span> <span class="value" id="historyDetailAgent">นายปารเมศ
                             คำภาพันธ์</span></div>
@@ -6162,11 +6222,6 @@
             </div>
 
             <div style="padding:0 20px;">
-                <button type="button" class="btn-default" style="width:100%; justify-content:center; margin:14px 0;"
-                    onclick="openSlipPreviewModal()">
-                    <span class="material-icons" style="font-size:18px;">image</span> ดูภาพ Slip การโอนเงิน
-                </button>
-
                 <table class="data-table" style="margin-bottom:20px;">
                     <thead>
                         <tr>
@@ -6178,15 +6233,17 @@
                     </thead>
                     <tbody id="historyDetailTableBody">
                         <tr>
-                            <td id="historyDetailCLRow">CL690500010XX</td>
+                            <td id="historyDetailCLRow">CL690500010</td>
                             <td id="historyDetailNameRow">นางสาวรัชชนก สุวรรณโชค</td>
                             <td style="text-align:right;" id="historyDetailAmountRow">300.00</td>
                             <td id="historyDetailDateRow">11/10/2569 12:24:23</td>
                         </tr>
+                        <tr><td></td><td style="text-align:right;color:var(--primary-blue);font-weight:600;">รวม :</td><td id="historyDetailTotalAmount" style="text-align:right;color:var(--primary-blue);font-weight:600;">300.00</td><td></td></tr>
                     </tbody>
                 </table>
+                <div class="history-footer"><span>หน้า&nbsp;&nbsp; 1</span><span>ข้อมูลต่อหน้า&nbsp;&nbsp; 10</span><span>1-1 จาก 1</span><span>‹ &nbsp;&nbsp; ›</span></div>
 
-                <button class="btn-modal-close" style="width:100%; margin-bottom:20px;"
+                <button class="btn-modal-close history-ok-btn"
                     onclick="closeModal('approveHistoryModal')">ตกลง</button>
             </div>
         </div>
@@ -6883,6 +6940,12 @@
         function formatMoney(value) {
             return (parseFloat(value)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
         }
+        function getProductFromClaimNo(clNo) {
+            var claimNo=(clNo||'').trim().toUpperCase();
+            if (claimNo.indexOf('CLPA')===0) return 'PA';
+            if (claimNo.indexOf('CL')===0) return 'PH';
+            return '';
+        }
         function syncClaimAmount(record) {
             if (!record) return;
             record.amount = formatMoney(record.transferred || 0);
@@ -6899,7 +6962,8 @@
             currentTransferRecord = record || null;
             document.getElementById('breadcrumbArea').innerHTML='จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'transferListPage\'); return false;">เมนูโอนเพิ่ม</a> &gt; '+displayId;
             document.getElementById('transferDetailCPG').innerText=displayId;
-            document.getElementById('transferDetailName').innerText=record?record.school:'ไม่พบข้อมูล';
+document.getElementById('transferDetailName').innerText=record?((getProductFromClaimNo(record.cl)==='PH'||value.indexOf('CC')===0)?record.name:record.school):'ไม่พบข้อมูล';
+            document.getElementById('displayRelation').innerText=record&&getProductFromClaimNo(record.cl)==='PA'?'ครูผู้ประสานงาน':'ผู้เอาประกัน';
             document.getElementById('claimCountText').innerText=record?'1':'0';
             var transferred=record ? (record.transferred || 0) : 0;
             document.getElementById('claimTotalAmountText').innerText=formatMoney(transferred);
@@ -7003,8 +7067,56 @@
             document.getElementById(contents[tabName]).style.display = 'block';
         }
 
+        var pendingAutoTransferState = null;
+
+        function ensureAutoTransferConfirmModal() {
+            var modal = document.getElementById('autoTransferConfirmModal');
+            if (modal) return modal;
+            modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.id = 'autoTransferConfirmModal';
+            modal.innerHTML = '<div class="modal-content-box" style="max-width:440px;"><div class="confirm-icon-wrapper"><span class="material-icons mi">help_outline</span></div><div class="modal-title" id="autoTransferConfirmTitle">ยืนยันการทำรายการ</div><div class="modal-subtitle" id="autoTransferConfirmText">คุณต้องการเปลี่ยนสถานะระบบโอนเงินอัตโนมัติหรือไม่</div><div class="modal-buttons"><button class="btn-modal-cancel" onclick="cancelAutoTransferChange()">ยกเลิก</button><button class="btn-modal-confirm" onclick="confirmAutoTransferChange()">ยืนยัน</button></div></div>';
+            document.body.appendChild(modal);
+            return modal;
+        }
+
         function handleToggleChange() {
             var toggleInput = document.getElementById('autoTransferToggle');
+            pendingAutoTransferState = toggleInput.checked;
+            toggleInput.checked = !pendingAutoTransferState;
+            var modal = ensureAutoTransferConfirmModal();
+            document.getElementById('autoTransferConfirmText').innerText = pendingAutoTransferState ? 'ยืนยันการเปิดระบบโอนเงินอัตโนมัติ' : 'ยืนยันการปิดระบบโอนเงินอัตโนมัติ รายการที่รอดำเนินการจะเปลี่ยนเป็น Sleep โอนเงิน';
+            modal.classList.add('active');
+        }
+
+        function cancelAutoTransferChange() {
+            pendingAutoTransferState = null;
+            closeModal('autoTransferConfirmModal');
+        }
+
+        function confirmAutoTransferChange() {
+            var nextState = pendingAutoTransferState;
+            pendingAutoTransferState = null;
+            closeModal('autoTransferConfirmModal');
+            document.getElementById('autoTransferToggle').checked = nextState;
+            applyAutoTransferState(nextState);
+        }
+
+        function updateTransferSleepStatuses(isEnabled) {
+            document.querySelectorAll('.badge-status.badge-pending').forEach(function (badge) {
+                if (badge.closest('#monitorApprovePage, #approveRefundModal, #approveHistoryModal')) return;
+                var text = badge.textContent.trim();
+                if (!isEnabled && text.indexOf('รอดำเนินการ') !== -1) {
+                    badge.dataset.autoTransferSleep = 'true';
+                    badge.innerHTML = '<span class="badge-dot"></span> Sleep โอนเงิน';
+                } else if (isEnabled && badge.dataset.autoTransferSleep === 'true') {
+                    badge.innerHTML = '<span class="badge-dot"></span> รอดำเนินการ';
+                    delete badge.dataset.autoTransferSleep;
+                }
+            });
+        }
+
+        function applyAutoTransferState(isEnabled) {
             var alertBox = document.getElementById('statusAlertBox');
             var alertIcon = document.getElementById('statusAlertIcon');
             var alertText = document.getElementById('statusAlertText');
@@ -7022,7 +7134,7 @@
                 dateCell.innerText = thaiDateStr;
             }
 
-            if (toggleInput.checked) {
+            if (isEnabled) {
                 alertBox.className = "status-alert-box status-on";
                 alertIcon.innerText = "check_circle_outline";
                 alertText.innerText = "ระบบโอนเงินอัตโนมัติกำลังทำงานอยู่";
@@ -7031,6 +7143,7 @@
                 alertIcon.innerText = "highlight_off";
                 alertText.innerText = "ระบบโอนเงินอัตโนมัติปิดการทำงาน";
             }
+            updateTransferSleepStatuses(isEnabled);
 
             // สั่งให้ Animation เล่นใหม่ทุกครั้งที่สถานะเปลี่ยน (force reflow)
             void alertBox.offsetWidth;
@@ -7493,7 +7606,7 @@
             var displayId=record?record.cl:value;
             document.getElementById('refundCpgText').innerText=displayId;
             document.getElementById('breadcrumbArea').innerHTML='จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'refundListPage\'); return false;">เมนูคืนเงิน</a> &gt; '+displayId;
-            document.getElementById('refundDetailName').innerText=record?record.school:'ไม่พบข้อมูล';
+document.getElementById('refundDetailName').innerText=record?((getProductFromClaimNo(record.cl)==='PH'||value.indexOf('CC')===0)?record.name:record.school):'ไม่พบข้อมูล';
             document.getElementById('refundClaimCountText').innerText=record?'1':'0';
             var transferred=record ? (record.transferred || 0) : 0;
             document.getElementById('refundClaimTotalAmountText').innerText=formatMoney(transferred);
@@ -8071,13 +8184,14 @@
                 rt: 'RT681200011',
                 cpg: 'CPG690467210',
                 branch: 'กรุงเทพมหานคร',
-                name: 'โรงเรียนบ้านนาแหม',
+                name: 'นายกรภัทร วรวงศ์ศุภากร',
                 agent: '00054 - สุวัฒนา อินทะปัญญา',
                 caseCount: '1',
                 notifyAmount: '4,000.00',
                 refundAmount: '600.00',
                 remainAmount: '3,400.00',
                 cl: 'CL6904000193',
+                cc: 'CC6904000193',
                 date: '22/05/2569 06:10:11'
             }
         };
@@ -8186,8 +8300,8 @@
 
             document.getElementById('approveDetailTableBody').innerHTML =
                 '<tr>' +
-                '<td>' + data.rt + '</td>' +
                 '<td>' + data.cl + '</td>' +
+                '<td>' + data.cc + '</td>' +
                 '<td>' + data.name + '</td>' +
                 '<td style="text-align:right;">' + data.notifyAmount + '</td>' +
                 '<td style="text-align:right;">' + data.refundAmount + '</td>' +
@@ -8326,19 +8440,39 @@
         }
 
         function openApproveHistoryModal(rt, cpg, branch, name, amount) {
-            document.getElementById('historyDetailRT').innerText = rt;
-            document.getElementById('historyDetailCPG').innerText = cpg;
-            document.getElementById('historyDetailBranch').innerText = branch;
-            document.getElementById('historyDetailName').innerText = name;
-            document.getElementById('historyDetailAgent').innerText = 'นายปารเมศ คำภาพันธ์';
-            document.getElementById('historyDetailCaseCount').innerText = '1 รายการ';
-            document.getElementById('historyDetailAmount').innerText = amount + ' บาท';
-            document.getElementById('historyDetailCLRow').innerText = cpg.replace('CPG', 'CL') + 'XX';
-            document.getElementById('historyDetailNameRow').innerText = name;
-            document.getElementById('historyDetailAmountRow').innerText = amount;
-            document.getElementById('historyDetailDateRow').innerText = '11/10/2569 12:24:23';
-
-            document.getElementById('approveHistoryModal').classList.add('active');
+            var sourceModal = document.getElementById('approveRefundModal');
+            var historyModal = document.getElementById('approveHistoryModal');
+            historyModal.innerHTML = sourceModal.innerHTML;
+            var titleGroup = historyModal.querySelector('.title-group');
+            if (titleGroup) titleGroup.innerHTML = '<span class="material-icons" style="font-size:18px;">sync_alt</span> ประวัติรายการโอนคืนสำเร็จ';
+            var closeButton = historyModal.querySelector('.modal-close-btn');
+            if (closeButton) closeButton.setAttribute('onclick', "closeModal('approveHistoryModal')");
+            var findHistory = function(selector){ return historyModal.querySelector(selector); };
+            var setHistoryValue = function(selector,value){ var el=findHistory(selector); if(el) el.innerText=value; };
+            setHistoryValue('#approveDetailRT',rt);
+            setHistoryValue('#approveDetailCPG',cpg);
+            setHistoryValue('#approveDetailBranch',branch);
+            setHistoryValue('#approveDetailName',name);
+            setHistoryValue('#approveDetailAgent','00054 - สุวัฒนา อินทะปัญญา');
+            setHistoryValue('#approveDetailCaseCount','1');
+            setHistoryValue('#approveDetailRefundAmount',amount);
+            var cpgLabel=findHistory('#approveDetailCPG'); if(cpgLabel) cpgLabel.closest('.info-item').querySelector('.info-label').innerText='เลขที่ COL :';
+            var nameLabel=findHistory('#approveDetailName'); if(nameLabel) nameLabel.closest('.info-item').querySelector('.info-label').innerText='ชื่อผู้เอาประกัน :';
+            var agentLabel=findHistory('#approveDetailAgent'); if(agentLabel) agentLabel.closest('.info-item').querySelector('.info-label').innerText='ผู้ที่ทำรายการ :';
+            var countLabel=findHistory('#approveDetailCaseCount'); if(countLabel) countLabel.closest('.info-item').querySelector('.info-label').innerText='จำนวนเคลมคืนเงิน :';
+            var notifyItem=findHistory('#approveDetailNotifyAmount'); if(notifyItem) notifyItem.closest('.info-item').remove();
+            var remainItem=findHistory('#approveDetailRemainAmount'); if(remainItem) remainItem.closest('.info-item').remove();
+            var sourceHistoryRow=document.querySelector('#monitorTableBody tr[data-rt="'+rt+'"]');
+            var claimNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cl'):cpg.replace(/^CPG/,'CL');
+            var ccNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cc'):cpg.replace(/^CPG(?:PA)?/,'CC');
+            var historyBody=findHistory('#approveDetailTableBody');
+            if(historyBody) historyBody.innerHTML='<tr><td>'+claimNo+'</td><td>'+ccNo+'</td><td>'+name+'</td><td style="text-align:right;">'+amount+'</td><td>11/10/2569 12:24:23</td></tr><tr><td></td><td></td><td style="text-align:right;color:var(--primary-blue);font-weight:600;">รวม :</td><td style="text-align:right;color:var(--primary-blue);font-weight:600;">'+amount+'</td><td></td></tr>';
+            var historyHead=historyModal.querySelector('.data-table thead tr');
+            if(historyHead) historyHead.innerHTML='<th>เลขที่ CL</th><th>เลขที่ CC</th><th>ชื่อ-นามสกุล(ผู้เอาประกัน)</th><th style="text-align:right;">โอนคืน</th><th>วัน/เวลา ที่โอนเงินคืน</th>';
+            var rejectSelect=findHistory('#approveRejectReasonSelect'); if(rejectSelect){ var rejectArea=rejectSelect.closest('div[style*="display:flex"]'); if(rejectArea) rejectArea.remove(); }
+            var historyActions=historyModal.querySelector('.modal-buttons');
+            if(historyActions) historyActions.innerHTML='<button class="btn-modal-confirm" onclick="closeModal(\'approveHistoryModal\')">ตกลง</button>';
+            historyModal.classList.add('active');
         }
 
         // ปรับแก้: เปลี่ยนให้เปิดมาหน้าแรกเป็นหน้า Default
@@ -8348,7 +8482,8 @@
         var limitRowDataMap = {
             'limitRow1': { cpg: 'CPG690600047', cl: 'CL6904000962', name: 'นาย แดนชัย จันทร์ทรง', amount: '7,000.00', current: '30,000.00', used: '29,000.00', remain: '1,000.00', request: '6,000.00', newRemain: '7,000.00' },
             'limitRow2': { cpg: 'CPG690600648', cl: 'CL6904000784', name: 'นางสาวรัชชนก สุวรรณโชค', amount: '1,700.00', current: '30,000.00', used: '29,300.00', remain: '700.00', request: '1,000.00', newRemain: '1,700.00' },
-            'limitRow3': { cpg: 'CPG690600784', cl: 'CL6904000318', name: 'นายปารเมศ คำภาพันธ์', amount: '1,000.00', current: '30,000.00', used: '29,800.00', remain: '200.00', request: '800.00', newRemain: '1,000.00' }
+            'limitRow3': { cpg: 'CPG690600784', cl: 'CL6904000318', name: 'นายปารเมศ คำภาพันธ์', amount: '1,000.00', current: '30,000.00', used: '29,800.00', remain: '200.00', request: '800.00', newRemain: '1,000.00' },
+            'limitRowPA1': { cpg: 'CPG690400221', cl: 'CLPA690400221', name: 'ครูสมชาย ใจดี', amount: '8,500.00', current: '30,000.00', used: '29,500.00', remain: '500.00', request: '8,000.00', newRemain: '8,500.00' }
         };
         var pendingLimitRowId = null;
         var pendingLimitRejectReason = '';
@@ -9912,13 +10047,14 @@
                                 </tr>
                             </thead>
                             <tbody id="monitorTableBody">
+                                <tr data-rt="RT690500012" data-cpg="CPG690400220" data-cl="CLPA690400220" data-cc="CC6904000220" data-branch="สำนักงานใหญ่" data-status="success"><td>RT690500012</td><td>CLPA690400220</td><td>CC6904000220</td><td>24/08/2569 10:15:00</td><td>เด็กหญิงพิมพ์ชนก แก้วดี</td><td>สำนักงานใหญ่</td><td style="text-align:right;">3,000.00</td><td style="text-align:right;">500.00</td><td style="text-align:center;"><span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span></td><td>จ่ายเงินเกินสิทธิ</td><td style="text-align:center;"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal('RT690500012','CPG690400220','สำนักงานใหญ่','เด็กหญิงพิมพ์ชนก แก้วดี','500.00')"><span class="material-icons">visibility</span></button></td></tr>
                                 <tr id="monitorRow1" data-rt="RT681200011" data-cpg="CPG690467210"
                                     data-cl="CL6904000193" data-cc="CC6904000193" data-branch="กรุงเทพมหานคร" data-status="pending">
                                     <td>RT681200011</td>
                                     <td>CL6904000193</td>
                                     <td>CC6904000193</td>
                                     <td>22/05/2569 06:10:11</td>
-                                    <td>โรงเรียนบ้านนาแหม</td>
+                                    <td>นายกรภัทร วรวงศ์ศุภากร</td>
                                     <td>กรุงเทพมหานคร</td>
                                     <td style="text-align:right;">4,000.00</td>
                                     <td style="text-align:right;">600.00</td>
@@ -10120,6 +10256,7 @@
                                 </tr>
                             </thead>
                             <tbody id="limitTableBody">
+                                <tr id="limitRowPA1" data-cpg="CPG690400221" data-cl="CLPA690400221" data-cc="CC6904000221" data-branch="สำนักงานใหญ่" data-status="review"><td style="color:var(--primary-blue);">CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>สำนักงานใหญ่</td><td style="text-align:right;">8,500.00</td><td>5281137999</td><td>โอนเงินครั้งแรก</td><td id="limitRowPA1Status" style="text-align:center;"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span></td><td id="limitRowPA1Reason">เกินวงเงินสูงสุดต่อวัน 30,000 บาท · รออนุมัติ</td><td id="limitRowPA1Action" style="text-align:center;"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button><button class="icon-action-btn" style="color:var(--warning-color);" title="ขยายวงเงิน" onclick="openLimitModal('limitRowPA1')"><span class="material-icons">fact_check</span></button></td></tr>
                                 <tr id="limitRow1" data-cpg="CPG690600047" data-cl="CL6904000962"
                                     data-cc="CC6904000962" data-branch="กรุงเทพมหานคร" data-status="review">
                                     <td style="color:var(--primary-blue);">CL6904000962</td>
@@ -10279,6 +10416,8 @@
                                 </tr>
                             </thead>
                             <tbody id="bankTableBody">
+                                <tr id="bankRowPA1" data-cl="CLPA690400221" data-cpg="CPG690400221" data-cc="CC6904000221"><td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleBankDetail('bankRowPA1')"><span class="material-icons expand-arrow-icon" id="bankRowPA1ArrowIcon">chevron_right</span></button></td><td>CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>5281137999</td><td>ครูสมชาย ใจดี</td><td>กสิกรไทย</td><td style="text-align:right;">8,500.00</td><td id="bankRowPA1Status" style="text-align:center;"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td><td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openBankConfirmModal('bankRowPA1')"><span class="material-icons">send</span></button></td></tr>
+                                <tr class="bank-detail-row" id="bankRowPA1Detail" style="display:none;"><td colspan="10"><div class="bank-detail-label">รายละเอียด</div><table class="bank-detail-table"><thead><tr><th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th></tr></thead><tbody><tr><td>RT690500221</td><td>24/08/2569 10:30:00</td><td>KBANK</td><td>Fail</td><td>w001</td><td>บัญชีปลายทางปิด</td></tr></tbody></table></td></tr>
                                 <tr id="bankRow1" data-cl="CL690400115" data-cpg="CPG690400115" data-cc="CC690400115">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleBankDetail('bankRow1')">
@@ -10523,6 +10662,8 @@
                                 </tr>
                             </thead>
                             <tbody id="editTableBody">
+                                <tr id="editRowPA1" data-cl="CLPA690400221" data-cpg="CPG690400221" data-status="fail" data-cc="CC6904000221"><td style="text-align:center;"><button class="expand-arrow-btn" onclick="toggleEditDetail('editRowPA1')"><span class="material-icons expand-arrow-icon" id="editRowPA1ArrowIcon">chevron_right</span></button></td><td>CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>5281137999</td><td>ครูสมชาย ใจดี</td><td>กสิกรไทย</td><td style="text-align:right;">8,500.00</td><td id="editRowPA1Status" style="text-align:center;"><span class="badge-status badge-fail"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td><td style="text-align:center;"><button class="icon-action-btn-circle" title="โอนอีกครั้ง" onclick="openEditConfirmModal('editRowPA1')"><span class="material-icons">refresh</span></button></td></tr>
+                                <tr class="bank-detail-row" id="editRowPA1Detail" style="display:none;"><td colspan="10"><div class="bank-detail-label">รายละเอียด</div><table class="bank-detail-table"><thead><tr><th>ClaimPayTransactionCode</th><th>CreatedDate</th><th>BankService</th><th>Status</th><th>ResponseCode</th><th>ResponseMessage</th></tr></thead><tbody><tr><td>RT690500221</td><td>24/08/2569 10:30:00</td><td>KBANK</td><td>Fail</td><td>w001</td><td>บัญชีปลายทางปิด</td></tr></tbody></table></td></tr>
                                 <tr id="editRow1" data-cl="CL6904000195" data-cpg="CPG690400195" data-status="fail" data-cc="CC6904000195">
                                     <td style="text-align:center;">
                                         <button class="expand-arrow-btn" onclick="toggleEditDetail('editRow1')">
@@ -11665,7 +11806,7 @@
                     <div class="info-item">
                         <span class="info-label">ชื่อ - สกุล ผู้เอาประกัน :</span><br>
                         <span class="info-value" id="approveDetailName"
-                            style="display:inline-block; margin-top:4px; color:var(--primary-blue);">โรงเรียนบ้านนาแหม</span>
+                            style="display:inline-block; margin-top:4px; color:var(--primary-blue);">นายกรภัทร วรวงศ์ศุภากร</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">ผู้ทำรายการ :</span><br>
@@ -11698,8 +11839,8 @@
                 <table class="data-table" style="margin:20px 0 0;">
                     <thead>
                         <tr>
-                            <th>รหัสรายการ</th>
                             <th>เลขที่ CL</th>
+                            <th>เลขที่ CC</th>
                             <th>ชื่อ - สกุล ผู้เอาประกัน</th>
                             <th style="text-align:right;">แจ้งโอน</th>
                             <th style="text-align:right;">โอนคืน</th>
@@ -11709,9 +11850,9 @@
                     </thead>
                     <tbody id="approveDetailTableBody">
                         <tr>
-                            <td>RT681200011</td>
                             <td>CL6904000193</td>
-                            <td>โรงเรียนบ้านนาแหม</td>
+                            <td>CC6904000193</td>
+                            <td>นายกรภัทร วรวงศ์ศุภากร</td>
                             <td style="text-align:right;">4,000.00</td>
                             <td style="text-align:right;">600.00</td>
                             <td style="text-align:right;">3,400.00</td>
@@ -11865,18 +12006,42 @@
         </div>
     </div>
 
+    <style>
+        #approveHistoryModal .modal-box-edit-v2{max-width:900px!important}
+        #approveHistoryModal .modal-edit-header-v2 .title-group{color:var(--text-dark);font-weight:600}
+        #approveHistoryModal .modal-edit-header-v2 .title-group>.material-icons{display:inline-flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;background:var(--info-bg);color:var(--primary-blue);font-size:18px}
+        #approveHistoryModal .history-detail-heading{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;color:var(--primary-blue);font-weight:600}
+        #approveHistoryModal .old-account-card{background:#fff;border:0;box-shadow:none;padding:18px 28px 4px;width:auto;box-sizing:border-box}
+        #approveHistoryModal .old-account-details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:64px;row-gap:18px;line-height:1.45!important;width:100%;max-width:none;flex:1;box-sizing:border-box}
+        #approveHistoryModal .old-account-details>div{display:flex;flex-direction:column;gap:4px}
+        #approveHistoryModal .old-account-details>div:nth-child(1){grid-column:1;grid-row:1}
+        #approveHistoryModal .old-account-details>div:nth-child(2){grid-column:2;grid-row:1}
+        #approveHistoryModal .old-account-details>div:nth-child(3){grid-column:3;grid-row:1}
+        #approveHistoryModal .old-account-details>div:nth-child(4){grid-column:1;grid-row:2}
+        #approveHistoryModal .old-account-details>div:nth-child(5){grid-column:2;grid-row:2}
+        #approveHistoryModal .old-account-details>div:nth-child(6){grid-column:3;grid-row:2}
+        #approveHistoryModal .old-account-details>div:nth-child(7){grid-column:2;grid-row:3}
+        #approveHistoryModal .old-account-details .value{color:var(--primary-blue);font-weight:600}
+        #approveHistoryModal .old-account-details>div:nth-child(1) .value{display:inline-flex;width:max-content;background:var(--info-bg);border:1px solid var(--info-border);border-radius:6px;padding:5px 12px}
+        #approveHistoryModal .old-account-details>div:nth-child(2) .value{text-decoration:underline}
+        #approveHistoryModal .history-slip-btn{width:auto!important;margin:0!important;background:var(--primary-blue);color:#fff;border:0;border-radius:4px;padding:9px 22px}
+        #approveHistoryModal .data-table{clear:both;margin-bottom:0!important}
+        #approveHistoryModal .history-footer{display:flex;justify-content:flex-end;gap:28px;align-items:center;padding:14px 4px;color:var(--text-muted);font-size:13px}
+        #approveHistoryModal .history-ok-btn{width:128px!important;margin:14px auto 20px!important;display:flex}
+    </style>
     <!-- MODAL 17: ประวัติรายการโอนคืนสำเร็จ (Spec24 3.0) -->
     <div class="modal-overlay" id="approveHistoryModal">
-        <div class="modal-box-edit-v2" style="max-width:520px;">
+        <div class="modal-content-box" style="max-width:900px; padding:0; overflow:hidden;">
             <div class="modal-edit-header-v2">
                 <div class="title-group">
-                    <span class="material-icons">history</span> ประวัติรายการโอนคืนสำเร็จ
+                    <span class="material-icons">sync_alt</span> ประวัติรายการโอนคืนสำเร็จ
                 </div>
                 <button class="modal-close-btn" onclick="closeModal('approveHistoryModal')">
                     <span class="material-icons" style="font-size:16px;">close</span>
                 </button>
             </div>
 
+            <div class="history-detail-heading"><span>ข้อมูลรายละเอียด</span><button type="button" class="btn-default history-slip-btn" onclick="openSlipPreviewModal()">คลิกดูภาพ Slip การโอนเงิน</button></div>
             <div class="old-account-card" style="margin-bottom:0;">
                 <div class="old-account-details" style="line-height:2;">
                     <div><span class="label">รหัสรายการ (RT) :</span> <span class="value"
@@ -11885,7 +12050,7 @@
                             id="historyDetailCPG">CPG690455197</span></div>
                     <div><span class="label">สาขา :</span> <span class="value"
                             id="historyDetailBranch">กรุงเทพมหานคร</span></div>
-                    <div><span class="label">ชื่อผู้เอาประกัน :</span> <span class="value"
+                    <div><span class="label">ชื่อ - สกุล ผู้เอาประกัน :</span> <span class="value"
                             id="historyDetailName">นางสาวรัชชนก สุวรรณโชค</span></div>
                     <div><span class="label">ผู้ทำรายการ :</span> <span class="value" id="historyDetailAgent">นายปารเมศ
                             คำภาพันธ์</span></div>
@@ -11897,11 +12062,6 @@
             </div>
 
             <div style="padding:0 20px;">
-                <button type="button" class="btn-default" style="width:100%; justify-content:center; margin:14px 0;"
-                    onclick="openSlipPreviewModal()">
-                    <span class="material-icons" style="font-size:18px;">image</span> ดูภาพ Slip การโอนเงิน
-                </button>
-
                 <table class="data-table" style="margin-bottom:20px;">
                     <thead>
                         <tr>
@@ -11913,15 +12073,17 @@
                     </thead>
                     <tbody id="historyDetailTableBody">
                         <tr>
-                            <td id="historyDetailCLRow">CL690500010XX</td>
+                            <td id="historyDetailCLRow">CL690500010</td>
                             <td id="historyDetailNameRow">นางสาวรัชชนก สุวรรณโชค</td>
                             <td style="text-align:right;" id="historyDetailAmountRow">300.00</td>
                             <td id="historyDetailDateRow">11/10/2569 12:24:23</td>
                         </tr>
+                        <tr><td></td><td style="text-align:right;color:var(--primary-blue);font-weight:600;">รวม :</td><td id="historyDetailTotalAmount" style="text-align:right;color:var(--primary-blue);font-weight:600;">300.00</td><td></td></tr>
                     </tbody>
                 </table>
+                <div class="history-footer"><span>หน้า&nbsp;&nbsp; 1</span><span>ข้อมูลต่อหน้า&nbsp;&nbsp; 10</span><span>1-1 จาก 1</span><span>‹ &nbsp;&nbsp; ›</span></div>
 
-                <button class="btn-modal-close" style="width:100%; margin-bottom:20px;"
+                <button class="btn-modal-close history-ok-btn"
                     onclick="closeModal('approveHistoryModal')">ตกลง</button>
             </div>
         </div>
@@ -12618,6 +12780,12 @@
         function formatMoney(value) {
             return (parseFloat(value)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
         }
+        function getProductFromClaimNo(clNo) {
+            var claimNo=(clNo||'').trim().toUpperCase();
+            if (claimNo.indexOf('CLPA')===0) return 'PA';
+            if (claimNo.indexOf('CL')===0) return 'PH';
+            return '';
+        }
         function syncClaimAmount(record) {
             if (!record) return;
             record.amount = formatMoney(record.transferred || 0);
@@ -12634,7 +12802,8 @@
             currentTransferRecord = record || null;
             document.getElementById('breadcrumbArea').innerHTML='จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'transferListPage\'); return false;">เมนูโอนเพิ่ม</a> &gt; '+displayId;
             document.getElementById('transferDetailCPG').innerText=displayId;
-            document.getElementById('transferDetailName').innerText=record?record.school:'ไม่พบข้อมูล';
+document.getElementById('transferDetailName').innerText=record?((getProductFromClaimNo(record.cl)==='PH'||value.indexOf('CC')===0)?record.name:record.school):'ไม่พบข้อมูล';
+            document.getElementById('displayRelation').innerText=record&&getProductFromClaimNo(record.cl)==='PA'?'ครูผู้ประสานงาน':'ผู้เอาประกัน';
             document.getElementById('claimCountText').innerText=record?'1':'0';
             var transferred=record ? (record.transferred || 0) : 0;
             document.getElementById('claimTotalAmountText').innerText=formatMoney(transferred);
@@ -12738,8 +12907,56 @@
             document.getElementById(contents[tabName]).style.display = 'block';
         }
 
+        var pendingAutoTransferState = null;
+
+        function ensureAutoTransferConfirmModal() {
+            var modal = document.getElementById('autoTransferConfirmModal');
+            if (modal) return modal;
+            modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.id = 'autoTransferConfirmModal';
+            modal.innerHTML = '<div class="modal-content-box" style="max-width:440px;"><div class="confirm-icon-wrapper"><span class="material-icons mi">help_outline</span></div><div class="modal-title" id="autoTransferConfirmTitle">ยืนยันการทำรายการ</div><div class="modal-subtitle" id="autoTransferConfirmText">คุณต้องการเปลี่ยนสถานะระบบโอนเงินอัตโนมัติหรือไม่</div><div class="modal-buttons"><button class="btn-modal-cancel" onclick="cancelAutoTransferChange()">ยกเลิก</button><button class="btn-modal-confirm" onclick="confirmAutoTransferChange()">ยืนยัน</button></div></div>';
+            document.body.appendChild(modal);
+            return modal;
+        }
+
         function handleToggleChange() {
             var toggleInput = document.getElementById('autoTransferToggle');
+            pendingAutoTransferState = toggleInput.checked;
+            toggleInput.checked = !pendingAutoTransferState;
+            var modal = ensureAutoTransferConfirmModal();
+            document.getElementById('autoTransferConfirmText').innerText = pendingAutoTransferState ? 'ยืนยันการเปิดระบบโอนเงินอัตโนมัติ' : 'ยืนยันการปิดระบบโอนเงินอัตโนมัติ รายการที่รอดำเนินการจะเปลี่ยนเป็น Sleep โอนเงิน';
+            modal.classList.add('active');
+        }
+
+        function cancelAutoTransferChange() {
+            pendingAutoTransferState = null;
+            closeModal('autoTransferConfirmModal');
+        }
+
+        function confirmAutoTransferChange() {
+            var nextState = pendingAutoTransferState;
+            pendingAutoTransferState = null;
+            closeModal('autoTransferConfirmModal');
+            document.getElementById('autoTransferToggle').checked = nextState;
+            applyAutoTransferState(nextState);
+        }
+
+        function updateTransferSleepStatuses(isEnabled) {
+            document.querySelectorAll('.badge-status.badge-pending').forEach(function (badge) {
+                if (badge.closest('#monitorApprovePage, #approveRefundModal, #approveHistoryModal')) return;
+                var text = badge.textContent.trim();
+                if (!isEnabled && text.indexOf('รอดำเนินการ') !== -1) {
+                    badge.dataset.autoTransferSleep = 'true';
+                    badge.innerHTML = '<span class="badge-dot"></span> Sleep โอนเงิน';
+                } else if (isEnabled && badge.dataset.autoTransferSleep === 'true') {
+                    badge.innerHTML = '<span class="badge-dot"></span> รอดำเนินการ';
+                    delete badge.dataset.autoTransferSleep;
+                }
+            });
+        }
+
+        function applyAutoTransferState(isEnabled) {
             var alertBox = document.getElementById('statusAlertBox');
             var alertIcon = document.getElementById('statusAlertIcon');
             var alertText = document.getElementById('statusAlertText');
@@ -12757,7 +12974,7 @@
                 dateCell.innerText = thaiDateStr;
             }
 
-            if (toggleInput.checked) {
+            if (isEnabled) {
                 alertBox.className = "status-alert-box status-on";
                 alertIcon.innerText = "check_circle_outline";
                 alertText.innerText = "ระบบโอนเงินอัตโนมัติกำลังทำงานอยู่";
@@ -12766,6 +12983,7 @@
                 alertIcon.innerText = "highlight_off";
                 alertText.innerText = "ระบบโอนเงินอัตโนมัติปิดการทำงาน";
             }
+            updateTransferSleepStatuses(isEnabled);
 
             // สั่งให้ Animation เล่นใหม่ทุกครั้งที่สถานะเปลี่ยน (force reflow)
             void alertBox.offsetWidth;
@@ -13228,7 +13446,7 @@
             var displayId=record?record.cl:value;
             document.getElementById('refundCpgText').innerText=displayId;
             document.getElementById('breadcrumbArea').innerHTML='จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'refundListPage\'); return false;">เมนูคืนเงิน</a> &gt; '+displayId;
-            document.getElementById('refundDetailName').innerText=record?record.school:'ไม่พบข้อมูล';
+document.getElementById('refundDetailName').innerText=record?((getProductFromClaimNo(record.cl)==='PH'||value.indexOf('CC')===0)?record.name:record.school):'ไม่พบข้อมูล';
             document.getElementById('refundClaimCountText').innerText=record?'1':'0';
             var transferred=record ? (record.transferred || 0) : 0;
             document.getElementById('refundClaimTotalAmountText').innerText=formatMoney(transferred);
@@ -13806,13 +14024,14 @@
                 rt: 'RT681200011',
                 cpg: 'CPG690467210',
                 branch: 'กรุงเทพมหานคร',
-                name: 'โรงเรียนบ้านนาแหม',
+                name: 'นายกรภัทร วรวงศ์ศุภากร',
                 agent: '00054 - สุวัฒนา อินทะปัญญา',
                 caseCount: '1',
                 notifyAmount: '4,000.00',
                 refundAmount: '600.00',
                 remainAmount: '3,400.00',
                 cl: 'CL6904000193',
+                cc: 'CC6904000193',
                 date: '22/05/2569 06:10:11'
             }
         };
@@ -13921,8 +14140,8 @@
 
             document.getElementById('approveDetailTableBody').innerHTML =
                 '<tr>' +
-                '<td>' + data.rt + '</td>' +
                 '<td>' + data.cl + '</td>' +
+                '<td>' + data.cc + '</td>' +
                 '<td>' + data.name + '</td>' +
                 '<td style="text-align:right;">' + data.notifyAmount + '</td>' +
                 '<td style="text-align:right;">' + data.refundAmount + '</td>' +
@@ -14061,19 +14280,39 @@
         }
 
         function openApproveHistoryModal(rt, cpg, branch, name, amount) {
-            document.getElementById('historyDetailRT').innerText = rt;
-            document.getElementById('historyDetailCPG').innerText = cpg;
-            document.getElementById('historyDetailBranch').innerText = branch;
-            document.getElementById('historyDetailName').innerText = name;
-            document.getElementById('historyDetailAgent').innerText = 'นายปารเมศ คำภาพันธ์';
-            document.getElementById('historyDetailCaseCount').innerText = '1 รายการ';
-            document.getElementById('historyDetailAmount').innerText = amount + ' บาท';
-            document.getElementById('historyDetailCLRow').innerText = cpg.replace('CPG', 'CL') + 'XX';
-            document.getElementById('historyDetailNameRow').innerText = name;
-            document.getElementById('historyDetailAmountRow').innerText = amount;
-            document.getElementById('historyDetailDateRow').innerText = '11/10/2569 12:24:23';
-
-            document.getElementById('approveHistoryModal').classList.add('active');
+            var sourceModal = document.getElementById('approveRefundModal');
+            var historyModal = document.getElementById('approveHistoryModal');
+            historyModal.innerHTML = sourceModal.innerHTML;
+            var titleGroup = historyModal.querySelector('.title-group');
+            if (titleGroup) titleGroup.innerHTML = '<span class="material-icons" style="font-size:18px;">sync_alt</span> ประวัติรายการโอนคืนสำเร็จ';
+            var closeButton = historyModal.querySelector('.modal-close-btn');
+            if (closeButton) closeButton.setAttribute('onclick', "closeModal('approveHistoryModal')");
+            var findHistory = function(selector){ return historyModal.querySelector(selector); };
+            var setHistoryValue = function(selector,value){ var el=findHistory(selector); if(el) el.innerText=value; };
+            setHistoryValue('#approveDetailRT',rt);
+            setHistoryValue('#approveDetailCPG',cpg);
+            setHistoryValue('#approveDetailBranch',branch);
+            setHistoryValue('#approveDetailName',name);
+            setHistoryValue('#approveDetailAgent','00054 - สุวัฒนา อินทะปัญญา');
+            setHistoryValue('#approveDetailCaseCount','1');
+            setHistoryValue('#approveDetailRefundAmount',amount);
+            var cpgLabel=findHistory('#approveDetailCPG'); if(cpgLabel) cpgLabel.closest('.info-item').querySelector('.info-label').innerText='เลขที่ COL :';
+            var nameLabel=findHistory('#approveDetailName'); if(nameLabel) nameLabel.closest('.info-item').querySelector('.info-label').innerText='ชื่อผู้เอาประกัน :';
+            var agentLabel=findHistory('#approveDetailAgent'); if(agentLabel) agentLabel.closest('.info-item').querySelector('.info-label').innerText='ผู้ที่ทำรายการ :';
+            var countLabel=findHistory('#approveDetailCaseCount'); if(countLabel) countLabel.closest('.info-item').querySelector('.info-label').innerText='จำนวนเคลมคืนเงิน :';
+            var notifyItem=findHistory('#approveDetailNotifyAmount'); if(notifyItem) notifyItem.closest('.info-item').remove();
+            var remainItem=findHistory('#approveDetailRemainAmount'); if(remainItem) remainItem.closest('.info-item').remove();
+            var sourceHistoryRow=document.querySelector('#monitorTableBody tr[data-rt="'+rt+'"]');
+            var claimNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cl'):cpg.replace(/^CPG/,'CL');
+            var ccNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cc'):cpg.replace(/^CPG(?:PA)?/,'CC');
+            var historyBody=findHistory('#approveDetailTableBody');
+            if(historyBody) historyBody.innerHTML='<tr><td>'+claimNo+'</td><td>'+ccNo+'</td><td>'+name+'</td><td style="text-align:right;">'+amount+'</td><td>11/10/2569 12:24:23</td></tr><tr><td></td><td></td><td style="text-align:right;color:var(--primary-blue);font-weight:600;">รวม :</td><td style="text-align:right;color:var(--primary-blue);font-weight:600;">'+amount+'</td><td></td></tr>';
+            var historyHead=historyModal.querySelector('.data-table thead tr');
+            if(historyHead) historyHead.innerHTML='<th>เลขที่ CL</th><th>เลขที่ CC</th><th>ชื่อ-นามสกุล(ผู้เอาประกัน)</th><th style="text-align:right;">โอนคืน</th><th>วัน/เวลา ที่โอนเงินคืน</th>';
+            var rejectSelect=findHistory('#approveRejectReasonSelect'); if(rejectSelect){ var rejectArea=rejectSelect.closest('div[style*="display:flex"]'); if(rejectArea) rejectArea.remove(); }
+            var historyActions=historyModal.querySelector('.modal-buttons');
+            if(historyActions) historyActions.innerHTML='<button class="btn-modal-confirm" onclick="closeModal(\'approveHistoryModal\')">ตกลง</button>';
+            historyModal.classList.add('active');
         }
 
         // ปรับแก้: เปลี่ยนให้เปิดมาหน้าแรกเป็นหน้า Default
@@ -14083,7 +14322,8 @@
         var limitRowDataMap = {
             'limitRow1': { cpg: 'CPG690600047', cl: 'CL6904000962', name: 'นาย แดนชัย จันทร์ทรง', amount: '7,000.00', current: '30,000.00', used: '29,000.00', remain: '1,000.00', request: '6,000.00', newRemain: '7,000.00' },
             'limitRow2': { cpg: 'CPG690600648', cl: 'CL6904000784', name: 'นางสาวรัชชนก สุวรรณโชค', amount: '1,700.00', current: '30,000.00', used: '29,300.00', remain: '700.00', request: '1,000.00', newRemain: '1,700.00' },
-            'limitRow3': { cpg: 'CPG690600784', cl: 'CL6904000318', name: 'นายปารเมศ คำภาพันธ์', amount: '1,000.00', current: '30,000.00', used: '29,800.00', remain: '200.00', request: '800.00', newRemain: '1,000.00' }
+            'limitRow3': { cpg: 'CPG690600784', cl: 'CL6904000318', name: 'นายปารเมศ คำภาพันธ์', amount: '1,000.00', current: '30,000.00', used: '29,800.00', remain: '200.00', request: '800.00', newRemain: '1,000.00' },
+            'limitRowPA1': { cpg: 'CPG690400221', cl: 'CLPA690400221', name: 'ครูสมชาย ใจดี', amount: '8,500.00', current: '30,000.00', used: '29,500.00', remain: '500.00', request: '8,000.00', newRemain: '8,500.00' }
         };
         var pendingLimitRowId = null;
         var pendingLimitRejectReason = '';
