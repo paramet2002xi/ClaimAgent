@@ -972,6 +972,98 @@
             color: #64748B;
         }
 
+        /* Unified minimal style for confirmation icons, including Transfer Settings */
+        .confirm-icon-wrapper:has(> .material-icons.mi) {
+            width: 72px;
+            height: 72px;
+            margin-bottom: 18px;
+            border: 2px solid #E2E8F0;
+            background: #FFFFFF;
+            box-shadow: none;
+            animation: minimalConfirmIconIn 0.24s ease-out;
+        }
+
+        .confirm-icon-wrapper > .material-icons.mi {
+            font-size: 0 !important;
+            font-family: Arial, sans-serif !important;
+            color: #64748B !important;
+        }
+
+        .confirm-icon-wrapper > .material-icons.mi::before {
+            content: "?";
+            font-family: Arial, sans-serif !important;
+            font-size: 36px;
+            line-height: 1;
+            font-weight: 400;
+            color: #64748B;
+        }
+
+        /* Refined minimal appearance */
+        .confirm-icon-wrapper:has(> .material-icons[style*="muted-icon"]),
+        .confirm-icon-wrapper:has(> .material-icons.mi) {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 18px;
+            border: 1.5px solid #BFDBFE;
+            background: linear-gradient(145deg, #F8FBFF 0%, #EFF6FF 100%);
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.08);
+        }
+
+        .confirm-icon-wrapper > .material-icons[style*="muted-icon"]::before,
+        .confirm-icon-wrapper > .material-icons.mi::before {
+            content: "help_outline";
+            font-family: "Material Icons" !important;
+            font-size: 64px;
+            font-weight: normal;
+            color: #8A8A8A;
+        }
+
+        .confirm-icon-wrapper:has(> .material-icons[style*="muted-icon"]),
+        .confirm-icon-wrapper:has(> .material-icons.mi) {
+            width: 86px;
+            height: 86px;
+            margin-bottom: 20px;
+            border: none;
+            background: #F1F5F9;
+            box-shadow: none;
+            animation: successIconEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .confirm-icon-wrapper:has(> .material-icons[style*="muted-icon"])::before,
+        .confirm-icon-wrapper:has(> .material-icons.mi)::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            background: rgba(100, 116, 139, 0.12);
+            animation: successSoftPulse 1.5s ease-out 0.35s both;
+        }
+
+        .confirm-icon-wrapper > .material-icons[style*="muted-icon"],
+        .confirm-icon-wrapper > .material-icons.mi {
+            position: relative;
+            z-index: 1;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #64748B;
+            box-shadow: 0 4px 12px rgba(71, 85, 105, 0.22);
+            animation: successCheckPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.16s both;
+        }
+
+        .confirm-icon-wrapper > .material-icons[style*="muted-icon"]::before,
+        .confirm-icon-wrapper > .material-icons.mi::before {
+            content: "?";
+            font-family: Arial, sans-serif !important;
+            font-size: 30px;
+            line-height: 1;
+            font-weight: 500;
+            color: #FFFFFF;
+        }
+
         @keyframes minimalConfirmIconIn {
             from {
                 transform: scale(0.92);
@@ -1174,6 +1266,89 @@
             0% { transform: scale(0.72); opacity: 0; }
             55% { transform: scale(1.06); opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Continuous, subtle success animation */
+        .success-icon-wrapper::before {
+            animation: successHaloLoop 2.2s ease-in-out 0.65s infinite;
+        }
+
+        .success-icon-wrapper .material-icons,
+        .success-icon-wrapper .mi {
+            animation:
+                successCheckPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.16s both,
+                successGlowLoop 2.2s ease-in-out 0.7s infinite;
+        }
+
+        @keyframes successHaloLoop {
+            0%, 100% { transform: scale(0.94); opacity: 0.45; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+
+        @keyframes successGlowLoop {
+            0%, 100% { box-shadow: 0 4px 10px rgba(56, 161, 105, 0.18); }
+            50% { box-shadow: 0 6px 18px rgba(56, 161, 105, 0.38); }
+        }
+
+        /* Error icon uses the same visual structure and motion as Success */
+        .confirm-icon-wrapper[style*="red-border"] {
+            width: 86px;
+            height: 86px;
+            margin: 0 auto 20px;
+            border: none !important;
+            background: #FDECEC;
+            box-shadow: none;
+            animation: successIconEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .confirm-icon-wrapper[style*="red-border"]::before {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(229, 62, 62, 0.10);
+            animation: successHaloLoop 2.2s ease-in-out 0.65s infinite;
+        }
+
+        .confirm-icon-wrapper[style*="red-border"]::after {
+            display: none;
+        }
+
+        .confirm-icon-wrapper[style*="red-border"] > .material-icons {
+            position: relative;
+            z-index: 1;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #E53E3E;
+            color: #FFFFFF !important;
+            font-size: 32px !important;
+            line-height: 1;
+            box-shadow: 0 4px 10px rgba(229, 62, 62, 0.22);
+            animation:
+                successCheckPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.16s both,
+                errorGlowLoop 2.2s ease-in-out 0.7s infinite;
+        }
+
+        @keyframes errorGlowLoop {
+            0%, 100% { box-shadow: 0 4px 10px rgba(229, 62, 62, 0.18); }
+            50% { box-shadow: 0 6px 18px rgba(229, 62, 62, 0.36); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .success-icon-wrapper,
+            .success-icon-wrapper::before,
+            .success-icon-wrapper .material-icons,
+            .success-icon-wrapper .mi,
+            .confirm-icon-wrapper[style*="red-border"],
+            .confirm-icon-wrapper[style*="red-border"]::before,
+            .confirm-icon-wrapper[style*="red-border"] > .material-icons {
+                animation: none !important;
+            }
         }
 
         .success-account-card {
@@ -2716,14 +2891,14 @@
         }
     
         /* ===== Search CL / CC result modal ===== */
-        .search-claim-modal { max-width: 1000px; width: 94%; transition: max-width .2s ease; }
-        .search-claim-body { padding: 28px 24px 24px; }
+        .search-claim-modal { max-width: 760px; width: calc(100% - 32px); transition: max-width .2s ease; }
+        .search-claim-body { padding: 24px; }
         .search-claim-row { display:flex; gap:16px; align-items:flex-start; }
         .search-submit-btn { height:36px; min-width:120px; margin-top:20px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; background-color:var(--primary-blue); }
         .search-title-icon { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background-color:var(--info-bg); flex-shrink:0; }
         .search-title-icon .material-icons { font-size:18px; color:var(--primary-blue); }
         .search-result-section { margin-top:16px; animation:pageFadeIn .25s ease; }
-        .search-result-table-wrap { border:1px solid var(--border-color); border-radius:4px; overflow:hidden; background:#fff; }
+        .search-result-table-wrap { border:1px solid var(--border-color); border-radius:4px; overflow-x:auto; overflow-y:hidden; background:#fff; }
         .search-result-table { border:none; border-radius:0; }
         .search-result-table th { padding:14px 16px; }
         .search-result-table td { padding:12px 16px; }
@@ -3066,6 +3241,14 @@
             color: #52525B !important;
         }
 
+        /* Clickable date fields use the same active fill/text style as dropdowns */
+        input.form-control[readonly][onclick*="dtOpenPicker"] {
+            background-color: #FFFFFF !important;
+            color: #27272A !important;
+            opacity: 1 !important;
+            cursor: pointer !important;
+        }
+
         /* Composite Field: ไอคอนและ Input อยู่ภายในกรอบเดียวกัน */
         .form-group > div:has(> .material-icons):has(> input.form-control),
         .modal-form-group-v2 > div:has(> .material-icons):has(> input.form-control),
@@ -3142,8 +3325,8 @@
 
         .list-toolbar > .btn {
             min-width: 108px;
-            height: 36px !important;
-            min-height: 36px !important;
+            height: 40px !important;
+            min-height: 40px !important;
             padding: 0 16px !important;
             border-radius: 6px !important;
             display: inline-flex;
@@ -3186,6 +3369,73 @@
             width: 100%;
             box-sizing: border-box;
         }
+
+        /* Unified 40px height for standard fields and buttons across all pages */
+        input[type="text"],
+        input[type="search"],
+        input[type="number"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        select,
+        .form-control:not(textarea) {
+            height: 40px !important;
+            min-height: 40px !important;
+            box-sizing: border-box;
+        }
+
+        .btn,
+        .btn-default,
+        .btn-modal-cancel,
+        .btn-modal-confirm,
+        .btn-modal-close,
+        .btn-confirm-blue,
+        .btn-full-green,
+        .btn-cancel-text,
+        .file-upload-btn,
+        .select-result-btn,
+        .search-submit-btn {
+            height: 40px !important;
+            min-height: 40px !important;
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-detail-list { margin-top:24px; display:flex; flex-direction:column; gap:16px; }
+        .flow-detail-heading { display:flex; align-items:center; gap:10px; margin-bottom:4px; color:var(--text-dark); }
+        .flow-detail-heading .material-icons { color:var(--primary-blue); }
+        .flow-findbar { padding:14px; border:1px solid var(--border-color); border-radius:10px; background:#F8FAFC; display:flex; flex-direction:column; gap:12px; }
+        .flow-findbar-top { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+        .flow-topic-filter { width:220px; min-width:220px; height:40px; }
+        .flow-search-input { flex:1; min-width:260px; height:40px; }
+        .flow-findbar .btn { height:40px; min-height:40px; }
+        .flow-result-count { margin-left:auto; font-size:12px; color:var(--text-muted); white-space:nowrap; }
+        .flow-quick-nav { display:flex; gap:8px; flex-wrap:wrap; }
+        .flow-quick-chip { border:1px solid #CBD5E1; border-radius:999px; padding:6px 11px; background:#fff; color:#475569; font:inherit; font-size:12px; cursor:pointer; transition:all .15s ease; }
+        .flow-quick-chip:hover, .flow-quick-chip.active { color:var(--primary-blue); border-color:var(--primary-blue); background:#EFF6FF; }
+        .flow-empty-state { display:none; padding:28px; text-align:center; color:var(--text-muted); border:1px dashed #CBD5E1; border-radius:10px; background:#fff; }
+        .flow-detail { border:1px solid var(--border-color); border-radius:10px; background:#fff; overflow:hidden; }
+        .flow-detail summary { padding:14px 18px; display:flex; align-items:center; gap:10px; cursor:default; pointer-events:none; font-weight:600; color:var(--text-dark); background:var(--panel-bg); border-bottom:1px solid var(--border-color); list-style:none; }
+        .flow-detail summary::-webkit-details-marker { display:none; }
+        .flow-detail summary::after { display:none; }
+        .flow-header-actions { margin-left:auto; display:flex; align-items:center; gap:8px; pointer-events:auto; }
+        .flow-header-actions .btn { padding:5px 10px; min-height:30px; display:inline-flex; align-items:center; gap:5px; font-size:12px; text-decoration:none; }
+        .flow-header-actions .material-icons { font-size:15px; }
+        .flow-detail[open] summary { background:var(--panel-bg); border-bottom:1px solid var(--border-color); }
+        .flow-detail-body { padding:16px 18px; display:flex; flex-direction:column; gap:18px; }
+        .flow-subsection + .flow-subsection { padding-top:18px; border-top:1px dashed var(--border-color); }
+        .flow-subsection-title { margin-bottom:12px; color:var(--primary-blue); font-size:14px; font-weight:700; }
+        .flow-rule-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+        .flow-rule-box { padding:14px 16px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0; }
+        .flow-rule-box.flow-result { grid-column:1/-1; background:#F0FDF4; border-color:#BBF7D0; }
+        .flow-rule-title { display:flex; align-items:center; gap:7px; margin-bottom:8px; font-size:13px; font-weight:700; }
+        .flow-rule-title .material-icons { font-size:17px; }
+        .flow-rule-box ul { margin:0; padding-left:20px; font-size:13px; line-height:1.75; color:var(--text-muted); }
+        .flow-rule-box li + li { margin-top:3px; }
+        @media (max-width:900px) { .flow-rule-grid { grid-template-columns:1fr; } .flow-rule-box.flow-result { grid-column:auto; } }
     </style>
 </head>
 
@@ -5498,7 +5748,7 @@
                         <span>System Flow</span>
                     </div>
                     <div class="card-body">
-                        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
+                        <div class="flow-overview-grid" style="display:none;">
                             <div style="border:1px solid var(--border-color);border-radius:10px;padding:18px;background:#fff;">
                                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
                                     <span class="material-icons" style="color:var(--primary-blue);">trending_up</span>
@@ -5623,6 +5873,142 @@
                                 </div>
                                 <div style="margin-top:8px;font-size:12px;color:var(--red-text);font-weight:600;">รายการหน้าอนุมัติคืนเงินไม่เปลี่ยนเป็น Sleep โอนเงิน</div>
                             </div>
+                        </div>
+
+                        <div class="flow-detail-list">
+                            <div class="flow-findbar">
+                                <div class="flow-findbar-top">
+                                    <select id="systemFlowTopicFilter" class="form-control flow-topic-filter"
+                                        aria-label="กรองหัวข้อ System Flow" onchange="filterSystemFlowDetails()">
+                                        <option value="">ทุกหัวข้อ</option>
+                                        <option value="โอนเพิ่ม">โอนเพิ่ม</option>
+                                        <option value="คืนเงิน">คืนเงิน</option>
+                                        <option value="อนุมัติคืนเงิน">อนุมัติคืนเงิน</option>
+                                        <option value="ขยายวงเงิน">ขยายวงเงิน</option>
+                                        <option value="แก้ไขการโอนเงิน">แก้ไขการโอนเงิน</option>
+                                        <option value="สอบถามธนาคาร">สอบถามธนาคาร</option>
+                                        <option value="ตั้งค่าการโอนเงิน">ตั้งค่าการโอนเงิน</option>
+                                    </select>
+                                    <input type="search" id="systemFlowSearch" class="form-control flow-search-input"
+                                        placeholder="ค้นหาเงื่อนไข เช่น Sleep, 30,000, Slip"
+                                        oninput="filterSystemFlowDetails()">
+                                    <button type="button" class="btn" onclick="clearSystemFlowSearch()">ล้าง</button>
+                                    <span class="flow-result-count" id="systemFlowResultCount">พบ 7 Flow</span>
+                                </div>
+                            </div>
+                            <div style="padding:10px 14px;border-radius:8px;background:#EFF6FF;border:1px solid #BFDBFE;color:#475569;font-size:12px;display:flex;align-items:center;gap:8px;">
+                                <span class="material-icons" style="font-size:17px;color:var(--primary-blue);">info</span>
+                                <strong>Remark:</strong> CL คือ เคลม&nbsp;&nbsp;•&nbsp;&nbsp;CC คือ เคส
+                            </div>
+                            <div class="flow-empty-state" id="systemFlowEmptyState">ไม่พบเงื่อนไขที่ค้นหา</div>
+
+                            <details class="flow-detail" data-flow-name="โอนเพิ่ม Monitor บันทึกโอนเพิ่ม" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">add_card</span>1. โอนเพิ่ม
+                                    <span class="flow-header-actions"><button type="button" class="btn btn-primary-blue" onclick="event.preventDefault();event.stopPropagation();document.getElementById('addSpecChoiceModal').style.display='flex'"><span class="material-icons">open_in_new</span>เปิด Spec</button></span>
+                                </summary>
+                                <div class="flow-detail-body">
+                                    <div class="flow-subsection">
+                                        <div class="flow-subsection-title">Monitor - โอนเพิ่ม</div>
+                                        <div class="flow-rule-grid">
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>การโอนครั้งแรกสำเร็จแล้ว</li><li>สถานะ CL/CC เป็น “ปกติ”</li><li>การโอนเงินสำเร็จผ่านมาไม่เกิน 7 วัน</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>ค้นหาด้วย CL เพื่อแสดง CC ทั้งหมด</li><li>ค้นหาด้วย CC เพื่อเข้า CC นั้นโดยตรง</li><li>เลือกได้ครั้งละ 1 CC</li><li>สามารถโอนเพิ่มได้หลายครั้ง โดยอิงตามการโอนเพิ่มล่าสุด</li><li>แก้ไขบัญชีได้เมื่อการโอนเพิ่มไม่สำเร็จ</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>โอนเพิ่มเมื่อ CL/CC อยู่ระหว่างการโอนเงิน</li><li>โอนเพิ่มเมื่อรออนุมัติ</li><li>โอนเพิ่มเมื่อเคลมถูกยกเลิก</li><li>โอนเพิ่มเมื่อพ้น 7 วันหลังโอนสำเร็จ</li><li>ดำเนินการโดยยังไม่ได้เลือก CC</li></ul></div>
+                                        </div>
+                                    </div>
+                                    <div class="flow-subsection">
+                                        <div class="flow-subsection-title">บันทึกโอนเพิ่ม</div>
+                                        <div class="flow-rule-grid">
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>เลือก CL/CC ที่ผ่านเงื่อนไขจาก Monitor - โอนเพิ่มแล้ว</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>โอนเพิ่มได้ไม่เกินวงเงินความคุ้มครองคงเหลือ</li><li>หากยอดรวมเกินวงเงินต่อวัน 30,000 บาท สามารถบันทึกคำขอเพื่อรอขยายวงเงินได้</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>โอนเพิ่มเกินวงเงินความคุ้มครอง</li><li>บันทึกโดยไม่กรอกยอดเงิน</li><li>บันทึกโดยไม่เลือกสาเหตุการโอนเพิ่ม</li><li>เปลี่ยนไปใช้บัญชีอื่นจากการโอนครั้งแรก</li></ul></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <details class="flow-detail" data-flow-name="คืนเงิน Monitor บันทึกคืนเงิน" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">currency_exchange</span>2. คืนเงิน
+                                    <span class="flow-header-actions"><button type="button" class="btn btn-primary-blue" onclick="event.preventDefault();event.stopPropagation();document.getElementById('refundSpecChoiceModal').style.display='flex'"><span class="material-icons">open_in_new</span>เปิด Spec</button></span>
+                                </summary>
+                                <div class="flow-detail-body">
+                                    <div class="flow-subsection">
+                                        <div class="flow-subsection-title">Monitor - คืนเงิน</div>
+                                        <div class="flow-rule-grid">
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>การโอนครั้งแรกหรือการโอนเพิ่มสำเร็จแล้ว</li><li>สถานะ CL/CC เป็น “ปกติ”</li><li>การโอนเงินสำเร็จผ่านมาไม่เกิน 7 วัน</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>คืนเงินจากยอดโอนครั้งแรกและยอดโอนเพิ่ม</li><li>เลือกได้ครั้งละ 1 CC</li><li>ยกเลิกรายการได้เมื่อสถานะเป็น “ปฏิเสธการคืนเงิน”</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>คืนเงินเมื่อ CL/CC อยู่ระหว่างการโอนเงิน</li><li>คืนเงินเมื่อเคลมถูกยกเลิก</li><li>คืนเงินเมื่อพ้น 7 วันหลังโอนสำเร็จ</li><li>ดำเนินการโดยยังไม่ได้เลือก CC</li><li>ยกเลิกรายการในสถานะอื่นนอกจาก “ปฏิเสธการคืนเงิน”</li></ul></div>
+                                        </div>
+                                    </div>
+                                    <div class="flow-subsection">
+                                        <div class="flow-subsection-title">บันทึกคืนเงิน</div>
+                                        <div class="flow-rule-grid">
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>เลือก CL/CC ที่สามารถคืนเงินได้จาก Monitor - คืนเงิน</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>คืนเงินได้ไม่เกินยอดของ CL/CC</li><li>แนบ Slip ประเภท JPG, PNG หรือ PDF</li></ul></div>
+                                            <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>คืนเงินเกินยอดของ CL/CC</li><li>คืนเงินสะสมเกินยอดเงินตั้งต้นของ CC</li><li>บันทึกโดยไม่กรอกยอดคืน</li><li>บันทึกโดยไม่เลือกประเภทการโอน</li><li>บันทึกโดยไม่เลือกวันที่/เวลาใน Slip</li><li>บันทึกโดยไม่เลือกสาเหตุ</li><li>บันทึกโดยไม่กรอกหมายเหตุ</li><li>บันทึกโดยไม่แนบ Slip</li><li>แนบไฟล์ประเภทอื่นนอกจาก JPG, PNG หรือ PDF</li></ul></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <details class="flow-detail" data-flow-name="อนุมัติคืนเงิน" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">assignment_turned_in</span>3. อนุมัติคืนเงิน
+                                    <span class="flow-header-actions"><a class="btn btn-primary-blue" href="https://docs.google.com/spreadsheets/d/168yBij8g2k5dLN_hj_8Op6marGiJ99cF_LOodcT4_7g/edit?gid=677593542#gid=677593542&amp;range=A1" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">open_in_new</span>เปิด Spec</a></span>
+                                </summary>
+                                <div class="flow-detail-body"><div class="flow-rule-grid">
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>มีรายการคืนเงินอยู่ในสถานะ “รอดำเนินการ”</li><li>ทำการบันทึกคืนเงินมา</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>อนุมัติโดยไม่ต้องเลือกสาเหตุการปฏิเสธ</li><li>ปฏิเสธเมื่อเลือกสาเหตุการปฏิเสธแล้ว</li><li>เปิดดู Slip จาก DocStorage</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>ปฏิเสธโดยไม่เลือกสาเหตุการปฏิเสธ</li><li>อนุมัติหรือปฏิเสธรายการที่ไม่ได้อยู่ในสถานะรอดำเนินการ</li></ul></div>
+                                    <div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>อนุมัติ → คืนเงินสำเร็จ</li><li>ปฏิเสธ → ไม่มีการคืนเงิน และอัปเดตเป็น “ปฏิเสธการคืนเงิน”</li></ul></div>
+                                </div></div>
+                            </details>
+
+                            <details class="flow-detail" data-flow-name="ขยายวงเงิน" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">trending_up</span>4. ขยายวงเงิน
+                                    <span class="flow-header-actions"><a class="btn btn-primary-blue" href="https://docs.google.com/spreadsheets/d/168yBij8g2k5dLN_hj_8Op6marGiJ99cF_LOodcT4_7g/edit?gid=414995110#gid=414995110&amp;range=A1" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">open_in_new</span>เปิด Spec</a></span>
+                                </summary>
+                                <div class="flow-detail-body"><div class="flow-rule-grid">
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>ยอดใช้ต่อวันต่อคนเกิน 30,000 บาท</li><li>วงเงินคงเหลือไม่เพียงพอจ่ายยอดเคลมหรือยอดโอนเพิ่ม</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>ขอเพิ่มเฉพาะส่วนต่างที่เกินวงเงินคงเหลือ</li><li>อนุมัติเพิ่มวงเงินโดยไม่ต้องเลือกสาเหตุการปฏิเสธ</li><li>ปฏิเสธเมื่อเลือกสาเหตุการปฏิเสธแล้ว</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>เข้า Flow หากยอดใช้ยังไม่เกิน 30,000 บาท</li><li>ขอเพิ่มเกินส่วนต่างที่จำเป็นต้องใช้</li><li>ปฏิเสธโดยไม่เลือกสาเหตุการปฏิเสธ</li></ul></div>
+                                    <div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>อนุมัติ → เพิ่มวงเงินและดำเนินการโอนต่อทันที</li><li>ปฏิเสธ → ไม่เพิ่มวงเงิน และส่งสถานะกลับไปหน้าแจ้งเคลมออนไลน์</li></ul></div>
+                                </div></div>
+                            </details>
+
+                            <details class="flow-detail" data-flow-name="แก้ไขการโอนเงิน" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">build_circle</span>5. แก้ไขการโอนเงิน
+                                    <span class="flow-header-actions"><a class="btn" style="background:#fff;color:var(--primary-blue);border:1px solid var(--primary-blue);" href="https://docs.google.com/spreadsheets/d/1YETiRFBuwrwg7J4Ef_dhpQgnhJJUH09vrUMcSXrSzfk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">account_tree</span>Mapping</a><a class="btn btn-primary-blue" href="https://docs.google.com/spreadsheets/d/168yBij8g2k5dLN_hj_8Op6marGiJ99cF_LOodcT4_7g/edit?gid=2017055071#gid=2017055071&amp;range=A1" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">open_in_new</span>เปิด Spec</a></span>
+                                </summary>
+                                <div class="flow-detail-body"><div class="flow-rule-grid">
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>การโอนเงินไม่สำเร็จจาก PayTransfer หรือปัญหาของระบบ</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>ตรวจสอบรายละเอียดผลตอบกลับจากธนาคาร</li><li>สั่งโอนอีกครั้งเมื่อรายการเดิมโอนไม่สำเร็จและไม่ได้กำลังประมวลผล</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>สั่งโอนซ้ำเมื่อ CL/CC อยู่ระหว่างการโอนเงิน</li><li>นำรายการที่โอนสำเร็จแล้วมาแก้ไขหรือโอนซ้ำ</li></ul></div>
+                                    <div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>โอนสำเร็จ → อัปเดตสถานะ CL/CC และสถานะการโอนเป็นสำเร็จ</li><li>โอนไม่สำเร็จ → คงสถานะไม่สำเร็จเพื่อดำเนินการต่อ</li></ul></div>
+                                </div></div>
+                            </details>
+
+                            <details class="flow-detail" data-flow-name="สอบถามธนาคาร" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">account_balance</span>6. สอบถามธนาคาร
+                                    <span class="flow-header-actions"><a class="btn" style="background:#fff;color:var(--primary-blue);border:1px solid var(--primary-blue);" href="https://docs.google.com/spreadsheets/d/1YETiRFBuwrwg7J4Ef_dhpQgnhJJUH09vrUMcSXrSzfk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">account_tree</span>Mapping</a><a class="btn btn-primary-blue" href="https://docs.google.com/spreadsheets/d/168yBij8g2k5dLN_hj_8Op6marGiJ99cF_LOodcT4_7g/edit?gid=1057563960#gid=1057563960&amp;range=A1" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">open_in_new</span>เปิด Spec</a></span>
+                                </summary>
+                                <div class="flow-detail-body"><div class="flow-rule-grid">
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>PayTransfer ไม่ตอบกลับ</li><li>ผลการโอนไม่ชัดเจนหรือต้องรอธนาคารยืนยัน</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>ส่งคำขอสอบถามธนาคารอีกครั้ง</li><li>อัปเดตสถานะตามผลตอบกลับจากธนาคาร</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>สอบถามรายการที่ยืนยันว่าโอนสำเร็จแล้ว</li><li>นำรายการสำเร็จกลับมาสอบถามซ้ำ</li></ul></div>
+                                    <div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>ธนาคารยืนยันสำเร็จ → รายการเปลี่ยนเป็นโอนสำเร็จและหายจากตาราง</li><li>ธนาคารยืนยันไม่สำเร็จ → รายการยังอยู่ในตารางเพื่อดำเนินการต่อ</li></ul></div>
+                                </div></div>
+                            </details>
+
+                            <details class="flow-detail" data-flow-name="ตั้งค่าการโอนเงิน Auto Transfer Payment" open>
+                                <summary><span class="material-icons" style="color:var(--primary-blue);">toggle_on</span>7. ตั้งค่าการโอนเงิน
+                                    <span class="flow-header-actions"><a class="btn btn-primary-blue" href="https://docs.google.com/spreadsheets/d/168yBij8g2k5dLN_hj_8Op6marGiJ99cF_LOodcT4_7g/edit?gid=406682775#gid=406682775&amp;range=A1" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"><span class="material-icons">open_in_new</span>เปิด Spec</a></span>
+                                </summary>
+                                <div class="flow-detail-body"><div class="flow-rule-grid">
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>ผู้มีสิทธิ์ต้องการเปิดหรือปิดระบบโอนเงินอัตโนมัติ</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>เปิดระบบเพื่อให้รายการโอนเงินดำเนินการ</li><li>ปิดระบบเพื่อหยุดการโอนเงินอัตโนมัติ</li><li>ตรวจสอบประวัติการเปิดและปิดระบบ</li></ul></div>
+                                    <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>ดำเนินการโอนเงินอัตโนมัติขณะที่สวิตช์ปิด</li><li>ประมวลผลรายการสถานะ Sleep จนกว่าจะเปิดระบบอีกครั้ง</li></ul></div>
+                                    <div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>เปิดระบบ → ระบบโอนเงินอัตโนมัติทำงาน และรายการ Sleep สามารถดำเนินการต่อ</li><li>ปิดระบบ → รายการที่ยังไม่โอนเข้าสถานะ Sleep การโอนเงิน</li></ul></div>
+                                </div></div>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -5985,7 +6371,7 @@
     <div class="modal-overlay" id="confirmModal">
         <div class="modal-content-box">
             <div class="confirm-icon-wrapper">
-                <span class="material-icons" style="font-size: 80px; color: var(--muted-icon);">question_mark</span>
+                <span class="material-icons mi">help_outline</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">ยืนยันการทำรายการ</div>
             <div class="modal-subtitle">ต้องการยืนยันการโอนเพิ่มใช่หรือไม่ (ทั้งหมด <span id="confirmCount">2</span>
@@ -6184,6 +6570,9 @@
                     </div>
                     <button class="btn-modal-confirm search-submit-btn" onclick="submitSearchTransfer()">บันทึก</button>
                 </div>
+                <div style="margin-top:8px; color:var(--text-muted); font-size:12px;">
+                    * โอนครั้งแรกต้องมีสถานะ “ปกติ” หากค้างอยู่ที่ “อยู่ระหว่างการโอนเงิน” จะไม่สามารถโอนเพิ่มได้
+                </div>
 
                 <div class="search-result-section" id="transferSearchResult" style="display:none;">
                     <div class="search-result-table-wrap">
@@ -6264,6 +6653,9 @@
                     </div>
                     <button class="btn-modal-confirm search-submit-btn" onclick="submitSearchRefund()">บันทึก</button>
                 </div>
+                <div style="margin-top:8px; color:var(--text-muted); font-size:12px;">
+                    * โอนครั้งแรกต้องมีสถานะ “ปกติ” หากค้างอยู่ที่ “อยู่ระหว่างการโอนเงิน” จะไม่สามารถคืนเงินได้
+                </div>
 
                 <div class="search-result-section" id="refundSearchResult" style="display:none;">
                     <div class="search-result-table-wrap">
@@ -6298,7 +6690,7 @@
     <div class="modal-overlay" id="confirmRefundModal">
         <div class="modal-content-box">
             <div class="confirm-icon-wrapper">
-                <span class="material-icons" style="font-size: 80px; color: var(--muted-icon);">question_mark</span>
+                <span class="material-icons mi">help_outline</span>
             </div>
             <div class="modal-title" style="font-weight: 500;">ยืนยันการทำรายการ</div>
             <div class="modal-subtitle">ต้องการยืนยันการคืนเงินใช่หรือไม่ (ทั้งหมด <span
@@ -7379,7 +7771,7 @@
         function getClaimFunctionEligibility(record) {
             if (!record) return { ok:false, message:'ไม่พบข้อมูลของรายการเคลมนี้' };
             if (record.claimStatus !== 'normal') {
-                if (record.claimStatus === 'transferring') return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเคลมอยู่ระหว่างการโอนเงิน' };
+                if (record.claimStatus === 'transferring') return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากโอนครั้งแรกยังค้างอยู่ที่ “อยู่ระหว่างการโอนเงิน” ต้องเป็นสถานะ “ปกติ”' };
                 if (record.claimStatus === 'cancelled') return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเคลมถูกยกเลิก' };
                 return { ok:false, message:'ไม่สามารถทำรายการได้ เนื่องจากเคลมอยู่ระหว่างรออนุมัติ' };
             }
@@ -7469,7 +7861,7 @@ document.getElementById('transferDetailName').innerText=record?((getProductFromC
             if(!rows.length){errorText.innerText='ไม่พบข้อมูลของรายการเคลมนี้';setFieldError(input,errorText,true);resetTransferSearchResult();return;}
             var invalid=rows.find(function(r){return r.claimStatus!=='normal';});
             if(invalid){
-                var msg=invalid.claimStatus==='transferring'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
+                var msg=invalid.claimStatus==='transferring'?'ไม่สามารถโอนเพิ่มได้ เนื่องจากโอนครั้งแรกยังค้างอยู่ที่ “อยู่ระหว่างการโอนเงิน” ต้องเป็นสถานะ “ปกติ”':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
                 errorText.innerText=msg;setFieldError(input,errorText,true);resetTransferSearchResult();return;
             }
 
@@ -8032,7 +8424,7 @@ document.getElementById('transferDetailName').innerText=record?((getProductFromC
             if(!rows.length){errorText.innerText='ไม่พบข้อมูลของรายการเคลมนี้';setFieldError(input,errorText,true);resetRefundSearchResult();return;}
             var invalid=rows.find(function(r){return r.claimStatus!=='normal';});
             if(invalid){
-                var msg=invalid.claimStatus==='transferring'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่อยู่ระหว่างการโอนเงินได้':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
+                var msg=invalid.claimStatus==='transferring'?'ไม่สามารถคืนเงินได้ เนื่องจากโอนครั้งแรกยังค้างอยู่ที่ “อยู่ระหว่างการโอนเงิน” ต้องเป็นสถานะ “ปกติ”':invalid.claimStatus==='cancelled'?'ไม่สามารถค้นหารายการเคลมออนไลน์ที่ถูกยกเลิกได้':'ไม่สามารถค้นหารายการเคลมออนไลน์ที่รออนุมัติได้';
                 errorText.innerText=msg;setFieldError(input,errorText,true);resetRefundSearchResult();return;
             }
 
@@ -8085,7 +8477,15 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
                 document.getElementById('selectedRefundClaimCC').innerText=record.cc||'-';
                 document.getElementById('selectedRefundClaimTransferred').innerText=formatMoney(transferred);
                 var refundInput=document.getElementById('refundAmount1');
-                if(refundInput){ refundInput.value=''; refundInput.dataset.base=String(transferred); refundInput.dataset.initial=String(record.initialTransfer || 0); refundInput.dataset.maxRefund=String(Math.max(0, transferred - (record.initialTransfer || 0))); }
+                if(refundInput){
+                    var initialTransfer = record.initialTransfer || 0;
+                    var maxRefund = Math.max(0, Math.min(transferred, initialTransfer));
+                    refundInput.value='';
+                    refundInput.dataset.base=String(transferred);
+                    refundInput.dataset.initial=String(initialTransfer);
+                    refundInput.dataset.maxRefund=String(maxRefund);
+                    refundInput.max=String(maxRefund);
+                }
             }
             var row2=document.getElementById('refundClaimRow2'); if(row2) row2.style.display='none';
             var agentOption=document.getElementById('refundAgentOption'); if(agentOption) agentOption.disabled=true;
@@ -8509,20 +8909,29 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
                 var refundAmount = parseFloat(input.value) || 0;
                 var maxRefund = parseFloat(input.dataset.maxRefund) || 0;
                 if (refundAmount > 0) { hasAmount = true; }
-                // คืนได้เฉพาะส่วนที่เกินจากยอดโอนครั้งแรก เพื่อให้ยอดคงเหลือไม่ต่ำกว่ายอดโอนครั้งแรก
+                // ยอดคืนสะสมต้องไม่เกินยอดโอนครั้งแรก และยอดหลังคืนต้องไม่สูงกว่ายอดโอนครั้งแรก
                 if (refundAmount < 0 || refundAmount > maxRefund) { invalidAmount = true; }
                 totalEntered += refundAmount;
             });
 
             if (!hasAmount) { showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง'); return; }
             if (invalidAmount) {
-                var minRemain = currentRefundRecord ? formatMoney(currentRefundRecord.initialTransfer || 0) : '0.00';
-                showCannotSubmitModal('ยอดหลังคืนเงินต้องไม่ต่ำกว่ายอดโอนครั้งแรก ' + minRemain + ' บาท');
+                var initialLimit = currentRefundRecord ? formatMoney(currentRefundRecord.initialTransfer || 0) : '0.00';
+                showCannotSubmitModal('ยอดคืนเงินสะสมต้องไม่เกินยอดโอนครั้งแรก ' + initialLimit + ' บาท');
                 return;
             }
-            if (currentRefundRecord && totalEntered > Math.max(0,(currentRefundRecord.transferred||0)-(currentRefundRecord.initialTransfer||0))) {
-                showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง');
-                return;
+            if (currentRefundRecord) {
+                var transferredTotal = currentRefundRecord.transferred || 0;
+                var initialTotal = currentRefundRecord.initialTransfer || 0;
+                var remainingAfterRefund = transferredTotal - totalEntered;
+                if (remainingAfterRefund > initialTotal) {
+                    showCannotSubmitModal('ยอดหลังคืนเงินต้องไม่สูงกว่ายอดโอนครั้งแรก ' + formatMoney(initialTotal) + ' บาท');
+                    return;
+                }
+                if (remainingAfterRefund < 0) {
+                    showCannotSubmitModal('กรุณาระบุยอดที่โอนคืนให้ถูกต้อง');
+                    return;
+                }
             }
             openConfirmRefundModal();
         }
@@ -8917,7 +9326,7 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
             if(data.recordCC){
                 var claimRecord=getClaimRecordByCC(data.recordCC);
                 if(claimRecord){
-                    claimRecord.transferred=Math.max(claimRecord.initialTransfer||0,(claimRecord.transferred||0)-(data.refundAmountValue||0));
+                    claimRecord.transferred=Math.max(0,(claimRecord.transferred||0)-(data.refundAmountValue||0));
                     claimRecord.refundPending=false;
                     syncClaimAmount(claimRecord);
                 }
@@ -9319,6 +9728,62 @@ document.getElementById('refundDetailName').innerText=record?((getProductFromCla
         </div>
     </div>
 </div>
+<script>
+    function filterSystemFlowDetails() {
+        var input = document.getElementById('systemFlowSearch');
+        var topicFilter = document.getElementById('systemFlowTopicFilter');
+        var query = input ? input.value.trim().toLowerCase() : '';
+        var topic = topicFilter ? topicFilter.value.trim().toLowerCase() : '';
+        var details = Array.from(document.querySelectorAll('#systemFlowPage .flow-detail'));
+        var found = 0;
+
+        details.forEach(function (detail) {
+            var searchableText = ((detail.dataset.flowName || '') + ' ' + detail.textContent).toLowerCase();
+            var topicMatched = !topic || (detail.dataset.flowName || '').toLowerCase().indexOf(topic) !== -1;
+            var queryMatched = !query || searchableText.indexOf(query) !== -1;
+            var matched = topicMatched && queryMatched;
+            detail.hidden = !matched;
+            if (matched) {
+                found += 1;
+                if (query) detail.open = true;
+            }
+        });
+
+        var count = document.getElementById('systemFlowResultCount');
+        if (count) count.textContent = 'พบ ' + found + ' Flow';
+        var empty = document.getElementById('systemFlowEmptyState');
+        if (empty) empty.style.display = found ? 'none' : 'block';
+
+        document.querySelectorAll('.flow-quick-chip').forEach(function (chip) {
+            chip.classList.toggle('active', (chip.dataset.flowFilter || '').toLowerCase() === topic);
+        });
+    }
+
+    function setSystemFlowFilter(value, button) {
+        var input = document.getElementById('systemFlowSearch');
+        var topicFilter = document.getElementById('systemFlowTopicFilter');
+        if (input) input.value = '';
+        if (topicFilter) topicFilter.value = value;
+        document.querySelectorAll('.flow-quick-chip').forEach(function (chip) { chip.classList.remove('active'); });
+        if (button) button.classList.add('active');
+        filterSystemFlowDetails();
+    }
+
+    function clearSystemFlowSearch() {
+        var input = document.getElementById('systemFlowSearch');
+        var topicFilter = document.getElementById('systemFlowTopicFilter');
+        if (input) input.value = '';
+        if (topicFilter) topicFilter.value = '';
+        filterSystemFlowDetails();
+        if (input) input.focus();
+    }
+
+    function toggleAllSystemFlows(openState) {
+        document.querySelectorAll('#systemFlowPage .flow-detail:not([hidden])').forEach(function (detail) {
+            detail.open = openState;
+        });
+    }
+</script>
 <script>
     // Keep the Shadcn chevron in sync with the native dropdown state.
     (function () {
