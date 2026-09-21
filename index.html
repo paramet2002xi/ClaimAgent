@@ -4606,16 +4606,19 @@ input[type="radio"]{ accent-color: var(--ca-primary); }
   transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease, transform .08s ease;
 }
 .btn-primary-blue,
-.btn-modal-confirm{
+.btn-modal-confirm,
+.btn-modal-close{
   background: var(--ca-primary) !important;
   border-color: var(--ca-primary) !important;
   color: #FFFFFF !important;
   box-shadow: none !important;
 }
 .btn-primary-blue:hover,
-.btn-modal-confirm:hover{
+.btn-modal-confirm:hover,
+.btn-modal-close:hover{
   background: var(--ca-primary-hover) !important;
   border-color: var(--ca-primary-hover) !important;
+  color: #FFFFFF !important;
 }
 .btn-success,
 .btn-full-green{
@@ -4625,7 +4628,6 @@ input[type="radio"]{ accent-color: var(--ca-primary); }
 }
 .btn-default,
 .btn-modal-cancel,
-.btn-modal-close,
 .icon-action-btn,
 .icon-action-btn-circle,
 .page-nav-btn,
@@ -4637,7 +4639,6 @@ input[type="radio"]{ accent-color: var(--ca-primary); }
 }
 .btn-default:hover,
 .btn-modal-cancel:hover,
-.btn-modal-close:hover,
 .icon-action-btn:hover,
 .icon-action-btn-circle:hover,
 .page-nav-btn:hover,
@@ -11078,6 +11079,7 @@ body.dark-mode #approveHistoryModal .modal-close-btn{
 #branchApproveRefundModal .branch-approve-refund-head .material-icons{font-size:18px!important;}
 #branchApproveRefundModal .branch-approve-info-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px 34px!important;}
 #branchApproveRefundModal .branch-approve-info-grid>div{display:flex!important;flex-direction:column!important;gap:5px!important;min-width:0!important;}
+#branchApproveRefundModal .branch-approve-school-item.is-hidden{display:none!important;}
 #branchApproveRefundModal .info-label{color:var(--ca-text-muted,#7A8796)!important;font-size:13px!important;line-height:18px!important;}
 #branchApproveRefundModal .info-value{color:var(--ca-text,#27313D)!important;font-size:14px!important;font-weight:500!important;line-height:20px!important;overflow-wrap:anywhere!important;}
 #branchApproveRefundModal .branch-approve-case{display:inline-flex!important;width:max-content!important;padding:5px 11px!important;border:1px solid #C8E2F4!important;border-radius:6px!important;background:#EDF6FC!important;color:var(--ca-primary,#00569D)!important;}
@@ -11185,6 +11187,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 #approveHistoryModal .refund-history-slip-btn .material-icons{font-size:18px!important;}
 #approveHistoryModal .refund-history-info-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px 32px!important;}
 #approveHistoryModal .refund-history-info-grid .info-item{display:flex!important;flex-direction:column!important;gap:5px!important;min-width:0!important;}
+#approveHistoryModal .refund-history-school-item.is-hidden{display:none!important;}
 #approveHistoryModal .refund-history-info-grid .info-label{color:var(--text-muted)!important;font-size:13px!important;line-height:18px!important;}
 #approveHistoryModal .refund-history-info-grid .info-value{display:block!important;margin:0!important;color:var(--text-dark)!important;font-size:14px!important;font-weight:500!important;line-height:20px!important;overflow-wrap:anywhere!important;}
 #approveHistoryModal .refund-history-info-grid .refund-history-case{width:max-content!important;max-width:100%!important;padding:5px 11px!important;border:1px solid var(--info-border)!important;border-radius:6px!important;background:var(--info-bg)!important;color:var(--primary-blue)!important;}
@@ -12751,7 +12754,6 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <option value="pending">รอดำเนินการ</option>
 <option value="success">คืนเงินสำเร็จ</option>
 <option value="reject">ปฏิเสธการคืนเงิน</option>
-<option value="cancel">ยกเลิกการคืนเงิน</option>
 </select>
 </div>
 <div class="form-group form-group-icon">
@@ -12788,7 +12790,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <tr>
 <th>เลขที่เคลม</th>
 <th>เลขที่เคส</th>
-<th>วันที่สร้างเคลม</th>
+<th id="monitorTransactionDateColumnLabel">วันที่สร้างเคลม</th>
 <th>ชื่อผู้เอาประกัน</th>
 <th id="monitorOwnerColumnLabel">สาขา</th>
 <th style="text-align:right;">จำนวนเงิน</th>
@@ -12799,7 +12801,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </tr>
 </thead>
 <tbody id="monitorTableBody">
-<tr data-branch="สำนักงานใหญ่" data-cc="CC6904000220" data-cl="CLPA690400220" data-cpg="CPG690400220" data-operation-id="REFUND-690500012" data-owner-type="branch" data-status="success"><td>CLPA690400220</td><td>CC6904000220</td><td>24/08/2569 10:15:00</td><td>เด็กหญิงพิมพ์ชนก แก้วดี</td><td>สำนักงานใหญ่</td><td style="text-align:right;">3,000.00</td><td style="text-align:right;">500.00</td><td style="text-align:center;"><span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span></td><td>จ่ายเงินเกินสิทธิ</td><td style="text-align:center;"><button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500012','CPG690400220','สำนักงานใหญ่','เด็กหญิงพิมพ์ชนก แก้วดี','500.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button></td></tr>
+<tr data-branch="สำนักงานใหญ่" data-cc="CC6904000220" data-cl="CLPA690400220" data-cpg="CPG690400220" data-operation-id="REFUND-690500012" data-owner-type="branch" data-product="PA" data-school="โรงเรียนบ้านสันติสุข" data-status="success"><td>CLPA690400220</td><td>CC6904000220</td><td>24/08/2569 10:15:00</td><td>เด็กหญิงพิมพ์ชนก แก้วดี</td><td>สำนักงานใหญ่</td><td style="text-align:right;">3,000.00</td><td style="text-align:right;">500.00</td><td style="text-align:center;"><span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span></td><td>จ่ายเงินเกินสิทธิ</td><td style="text-align:center;"><button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500012','CPG690400220','สำนักงานใหญ่','เด็กหญิงพิมพ์ชนก แก้วดี','500.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button></td></tr>
 <tr data-branch="กรุงเทพมหานคร" data-cc="CC6904000193" data-cl="CL6904000193" data-cpg="CPG690467210" data-operation-id="REFUND-681200011" data-owner-type="branch" data-status="pending" id="monitorRow1">
 <td>CL6904000193</td>
 <td>CC6904000193</td>
@@ -12834,21 +12836,6 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500010','CPG690455197','กรุงเทพมหานคร','นางสาวรัชชนก สุวรรณโชค','300.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
 </td>
 </tr>
-<tr data-branch="สำนักงานใหญ่" data-cc="CC690488305" data-cl="CL690488305" data-cpg="CPG690488305" data-operation-id="REFUND-690500009" data-owner-type="branch" data-status="cancel">
-<td>CL690488305</td>
-<td>CC690488305</td>
-<td>10/10/2569 11:24:23</td>
-<td>นางสาว ปวิตรา แผนสุวรรณ์</td>
-<td>สำนักงานใหญ่</td>
-<td style="text-align:right;">1,000.00</td>
-<td style="text-align:right;">100.00</td>
-<td style="text-align:center;">
-<span class="badge-status badge-cancel"><span class="badge-dot"></span>
-                                            ยกเลิกการคืนเงิน</span>
-</td>
-<td>เลขที่บัญชีปลายทางไม่ถูกต้อง</td>
-<td style="text-align:center;">-</td>
-</tr>
 <tr data-branch="สำนักงานใหญ่" data-cc="CC690417642" data-cl="CL690417642" data-cpg="CPG690417642" data-operation-id="REFUND-690500008" data-owner-type="branch" data-status="success">
 <td>CL690417642</td>
 <td>CC690417642</td>
@@ -12879,7 +12866,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
                                             ปฏิเสธการคืนเงิน</span>
 </td>
 <td>ปัญหาบัญชีผู้ใช้</td>
-<td style="text-align:center;">-</td>
+<td style="text-align:center;"><button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500007','CPG690459081','สำนักงานใหญ่','นายธนิก เงินลำยอง','100.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button></td>
 </tr>
 <tr data-branch="โรงพยาบาลกรุงเทพ" data-cc="CC6905000031" data-cl="CL6905000031" data-cpg="CPG690500031" data-operation-id="TMR-6909-000002" data-owner-type="hospital" data-status="pending" id="monitorHospitalRow1">
 <td>CL6905000031</td>
@@ -13560,7 +13547,10 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <span class="material-icons" style="color:var(--primary-blue);">person_search</span>
 <span>Mock Data สำหรับทดสอบแจ้งเคลม</span><span style="margin-left:auto;font-size:12px;color:var(--text-muted);font-weight:400;">ข้อมูลสำหรับทดสอบระบบ</span>
 </div>
+<div class="mock-data-header-actions">
 <span style="font-size:12px;color:var(--text-muted);font-weight:400;">กด Application ID เพื่อคัดลอกไปค้นหาในหน้าแจ้งเคลม</span>
+<button class="btn-modal-danger" onclick="openResetMockDataModal()" type="button"><span class="material-icons" aria-hidden="true">restart_alt</span> รีเซ็ตข้อมูล Mock</button>
+</div>
 </div>
 <div class="card-body">
 <div class="table-responsive">
@@ -14086,11 +14076,6 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <td><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span></td>
 <td>ผู้มีสิทธิ์ปฏิเสธรายการคืนเงิน</td>
 <td>ไม่มีการคืนเงิน และสิ้นสุดรายการอนุมัติคืนเงิน</td>
-</tr>
-<tr>
-<td><span class="badge-status" style="background:#EEF2F7;color:#4A5568;border:1px solid #CBD5E0;"><span class="badge-dot" style="background:#718096;"></span> ยกเลิกการคืนเงิน</span></td>
-<td>ยกเลิกรายการคืนเงินจากสาขาตาม Flow เดิม</td>
-<td>ยกเลิกรายการคืนเงิน และไม่มีการดำเนินการคืนเงินต่อ</td>
 </tr>
 </tbody>
 </table>
@@ -14754,7 +14739,8 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <div><span class="info-label">เลขที่เคลม :</span><span class="info-value" id="branchApproveDetailClaimNo">CL6904000193</span></div>
 <div><span class="info-label">เลขที่เคส :</span><span class="info-value branch-approve-case" id="branchApproveDetailCPG">CC6904000193</span></div>
 <div><span class="info-label">วัน/เวลาที่โอนเงินคืน :</span><span class="info-value" id="branchApproveDetailRefundDate">22/05/2569 06:10:11</span></div>
-<div><span class="info-label">ชื่อ - สกุล ผู้เอาประกัน :</span><span class="info-value" id="branchApproveDetailName">นายกรภัทร วรวงศ์ศุภากร</span></div>
+<div><span class="info-label">ชื่อผู้เอาประกัน :</span><span class="info-value" id="branchApproveDetailName">นายกรภัทร วรวงศ์ศุภากร</span></div>
+<div class="branch-approve-school-item is-hidden" id="branchApproveSchoolItem"><span class="info-label">สถานศึกษา :</span><span class="info-value" id="branchApproveDetailSchool">-</span></div>
 <div><span class="info-label">ผู้ทำรายการ :</span><span class="info-value" id="branchApproveDetailAgent">00054 - สุวัฒนา อินทะปัญญา</span></div>
 <div><span class="info-label">สาขา :</span><span class="info-value" id="branchApproveDetailBranch">กรุงเทพมหานคร</span></div>
 </div>
@@ -14912,8 +14898,12 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <span class="info-value" id="approveHistoryDetailRefundDate">22/05/2569 06:10:11</span>
 </div>
 <div class="info-item">
-<span class="info-label">ชื่อ - สกุล ผู้เอาประกัน :</span>
+<span class="info-label">ชื่อผู้เอาประกัน :</span>
 <span class="info-value" id="approveHistoryDetailName">นายกรภัทร วรวงศ์ศุภากร</span>
+</div>
+<div class="info-item refund-history-school-item is-hidden" id="approveHistorySchoolItem">
+<span class="info-label">สถานศึกษา :</span>
+<span class="info-value" id="approveHistoryDetailSchool">-</span>
 </div>
 <div class="info-item">
 <span class="info-label">ผู้ทำรายการ :</span>
@@ -14933,7 +14923,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <tr>
 <th>เลขที่เคลม</th>
 <th>เลขที่เคส</th>
-<th>ชื่อ - สกุล ผู้เอาประกัน</th>
+<th>ชื่อผู้เอาประกัน</th>
 <th style="text-align:right;">แจ้งโอน</th>
 <th style="text-align:right;">โอนคืน</th>
 <th style="text-align:right;">คงเหลือ</th>
@@ -15015,7 +15005,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <div class="old-account-details" style="line-height:2;">
 <div><span class="label">เลขที่ CPG :</span> <span class="value" id="historyDetailCPG">CPG690455197</span></div>
 <div><span class="label">สาขา :</span> <span class="value" id="historyDetailBranch">กรุงเทพมหานคร</span></div>
-<div><span class="label">ชื่อ - สกุล ผู้เอาประกัน :</span> <span class="value" id="historyDetailName">นางสาวรัชชนก สุวรรณโชค</span></div>
+<div><span class="label">ชื่อผู้เอาประกัน :</span> <span class="value" id="historyDetailName">นางสาวรัชชนก สุวรรณโชค</span></div>
 <div><span class="label">ผู้ทำรายการ :</span> <span class="value" id="historyDetailAgent">นายปารเมศ
                             คำภาพันธ์</span></div>
 <div><span class="label">จำนวนการเคลม :</span> <span class="value" id="historyDetailCaseCount">1
@@ -18346,6 +18336,8 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                 cpg: record.cl,
                 branch: record.branch || 'สำนักงานใหญ่',
                 name: record.name,
+                product: record.product || 'PH',
+                school: record.product === 'PA' ? (record.school || '-') : '-',
                 agent: '00054 - สุวัฒนา อินทะปัญญา',
                 notifyAmount: formatMoney(record.transferred),
                 refundAmount: formatMoney(refundAmount),
@@ -18478,9 +18470,11 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             var ownerLabel = isHospital ? 'โรงพยาบาล' : 'สาขา';
             var filterLabel = document.getElementById('monitorOwnerFilterLabel');
             var columnLabel = document.getElementById('monitorOwnerColumnLabel');
+            var transactionDateColumnLabel = document.getElementById('monitorTransactionDateColumnLabel');
             var description = document.getElementById('monitorOwnerTypeDescription');
             if (filterLabel) filterLabel.innerText = ownerLabel;
             if (columnLabel) columnLabel.innerText = ownerLabel;
+            if (transactionDateColumnLabel) transactionDateColumnLabel.innerText = isHospital ? 'วันที่ทำรายการ' : 'วันที่สร้างเคลม';
             if (description) description.innerText = 'แสดงรายการคืนเงินจาก' + ownerLabel;
 
             var ownerSelect = document.getElementById('monitorBranchFilterSelect');
@@ -18676,11 +18670,18 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
 
         function openBranchRefundApprovalModal(data) {
             pendingApprovalViewId = 'branchApproveRefundModal';
+            var sourceRecord = typeof getClaimRecordByCC === 'function' ? getClaimRecordByCC(data.recordCC || data.cc) : null;
+            var product = data.product || (sourceRecord && sourceRecord.product) || (/^CLPA/i.test(data.cl || '') ? 'PA' : 'PH');
+            var school = data.school || (sourceRecord && sourceRecord.school) || '-';
             document.getElementById('branchApproveDetailClaimNo').innerText = data.cl;
             document.getElementById('branchApproveDetailCPG').innerText = data.cc;
             document.getElementById('branchApproveDetailBranch').innerText = data.branch;
             document.getElementById('branchApproveDetailName').innerText = data.name;
             document.getElementById('branchApproveDetailAgent').innerText = data.agent;
+            var schoolItem = document.getElementById('branchApproveSchoolItem');
+            var schoolValue = document.getElementById('branchApproveDetailSchool');
+            if (schoolItem) schoolItem.classList.toggle('is-hidden', product !== 'PA');
+            if (schoolValue) schoolValue.innerText = product === 'PA' ? school : '-';
             document.getElementById('branchApproveDetailNotifyAmount').innerText = data.notifyAmount;
             document.getElementById('branchApproveDetailRefundAmount').innerText = data.refundAmount;
             document.getElementById('branchApproveDetailRemainAmount').innerText = data.remainAmount;
@@ -18905,7 +18906,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                 statusCell.innerHTML = '<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>';
             }
             if (actionCell) {
-                actionCell.innerHTML = '-';
+                actionCell.innerHTML = '<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\'' + data.operationId + '\',\'' + data.cpg + '\',\'' + data.branch + '\',\'' + data.name + '\',\'' + data.refundAmount + '\')"><span class="material-icons">visibility</span></button>';
             }
             syncRefundStatusToListPage(data.operationId, 'reject');
             filterMonitorTable();
@@ -19000,6 +19001,9 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             var claimNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cl'):cpg.replace(/^CPG/,'CL');
             var caseNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cc'):cpg.replace(/^CPG/,'CC');
             var historyIsHospital=sourceHistoryRow&&sourceHistoryRow.getAttribute('data-owner-type')==='hospital';
+            var historyRecord=typeof getClaimRecordByCC==='function'?getClaimRecordByCC(caseNo):null;
+            var historyProduct=(sourceHistoryRow&&sourceHistoryRow.getAttribute('data-product'))||(historyRecord&&historyRecord.product)||(/^CLPA/i.test(claimNo)?'PA':'PH');
+            var historySchool=(sourceHistoryRow&&sourceHistoryRow.getAttribute('data-school'))||(historyRecord&&historyRecord.school)||'-';
             var historyOwnerLabel=findHistory('#approveHistoryDetailOwnerLabel');
             if(historyOwnerLabel) historyOwnerLabel.innerText=(historyIsHospital?'โรงพยาบาล':'สาขา')+' :';
             var refundDate=sourceHistoryRow&&sourceHistoryRow.children[2]?sourceHistoryRow.children[2].innerText:'22/05/2569 06:10:11';
@@ -19007,6 +19011,9 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             setHistoryValue('#approveHistoryDetailCPG',caseNo);
             setHistoryValue('#approveHistoryDetailRefundDate',refundDate);
             setHistoryValue('#approveHistoryDetailName',name);
+            var historySchoolItem=findHistory('#approveHistorySchoolItem');
+            if(historySchoolItem) historySchoolItem.classList.toggle('is-hidden',historyIsHospital||historyProduct!=='PA');
+            setHistoryValue('#approveHistoryDetailSchool',historyIsHospital||historyProduct!=='PA'?'-':historySchool);
             setHistoryValue('#approveHistoryDetailAgent','00054 - สุวัฒนา อินทะปัญญา');
             setHistoryValue('#approveHistoryDetailOwner',branch);
             setHistoryValue('#approveHistoryDetailRefundAmount',amount);
@@ -21394,8 +21401,8 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
     var state=op.status, listStatus=state==='success'?'success':state==='rejected'?'reject':'pending';
     var rb=document.getElementById('refundTableBody'),rr=rb&&rb.querySelector('tr[data-operation-id="'+safeId(op.operationId)+'"]');
     if(rb&&!rr){rr=document.createElement('tr');rr.dataset.operationId=operationId;rb.insertBefore(rr,rb.firstChild);} if(rr){rr.dataset.operationId=operationId;rr.dataset.branch=record.branch||'สำนักงานใหญ่';rr.dataset.status=listStatus;rr.dataset.cl=record.cl||'';rr.dataset.cc=record.cc||'';var badge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';rr.innerHTML='<td style="color:var(--primary-blue);">'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" class="refund-status-cell">'+badge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" class="refund-action-cell">'+(state==='success'?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button>':'-')+'</td>';}
-    if(typeof monitorRowDataMap!=='undefined')monitorRowDataMap[rowId]={operationId:operationId,cpg:record.cl,branch:record.branch||'สำนักงานใหญ่',name:record.name,agent:'00054 - สุวัฒนา อินทะปัญญา',notifyAmount:money(record.transferred),refundAmount:money(amount),remainAmount:money(remain),cl:record.cl,cc:record.cc,date:record.createdAt,recordCC:record.cc,refundAmountValue:amount};
-    var mb=document.getElementById('monitorTableBody'),mr=document.getElementById(rowId);if(mb&&!mr){mr=document.createElement('tr');mr.id=rowId;mb.insertBefore(mr,mb.firstChild);}if(mr){mr.dataset.operationId=operationId;mr.dataset.cpg=record.cl;mr.dataset.cl=record.cl;mr.dataset.cc=record.cc;mr.dataset.branch=record.branch||'สำนักงานใหญ่';mr.dataset.status=state==='success'?'success':state==='rejected'?'reject':state==='transferring'?'pending-transfer':'pending';var mBadge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';var action=state==='pending_approval'?'<button class="icon-action-btn orange" title="ตรวจสอบ" onclick="openApproveModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button>':state==='success'?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\''+esc(operationId)+'\',\''+esc(record.cl)+'\',\''+esc(record.branch||'สำนักงานใหญ่')+'\',\''+esc(record.name)+'\',\''+money(amount)+'\')"><span class="material-icons">visibility</span></button>':'-';mr.innerHTML='<td>'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td>'+esc(record.branch||'สำนักงานใหญ่')+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" id="'+rowId+'Status">'+mBadge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" id="'+rowId+'Action">'+action+'</td>';}
+    if(typeof monitorRowDataMap!=='undefined')monitorRowDataMap[rowId]={operationId:operationId,cpg:record.cl,branch:record.branch||'สำนักงานใหญ่',name:record.name,product:record.product||'PH',school:record.product==='PA'?(record.school||'-'):'-',agent:'00054 - สุวัฒนา อินทะปัญญา',notifyAmount:money(record.transferred),refundAmount:money(amount),remainAmount:money(remain),cl:record.cl,cc:record.cc,date:record.createdAt,recordCC:record.cc,refundAmountValue:amount};
+    var mb=document.getElementById('monitorTableBody'),mr=document.getElementById(rowId);if(mb&&!mr){mr=document.createElement('tr');mr.id=rowId;mb.insertBefore(mr,mb.firstChild);}if(mr){mr.dataset.operationId=operationId;mr.dataset.cpg=record.cl;mr.dataset.cl=record.cl;mr.dataset.cc=record.cc;mr.dataset.branch=record.branch||'สำนักงานใหญ่';mr.dataset.product=record.product||'PH';mr.dataset.school=record.product==='PA'?(record.school||'-'):'-';mr.dataset.status=state==='success'?'success':state==='rejected'?'reject':state==='transferring'?'pending-transfer':'pending';var mBadge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';var action=state==='pending_approval'?'<button class="icon-action-btn orange" title="ตรวจสอบ" onclick="openApproveModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button>':(state==='success'||state==='rejected')?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\''+esc(operationId)+'\',\''+esc(record.cl)+'\',\''+esc(record.branch||'สำนักงานใหญ่')+'\',\''+esc(record.name)+'\',\''+money(amount)+'\')"><span class="material-icons">visibility</span></button>':'-';mr.innerHTML='<td>'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td>'+esc(record.branch||'สำนักงานใหญ่')+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" id="'+rowId+'Status">'+mBadge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" id="'+rowId+'Action">'+action+'</td>';}
     updateOp(op,{queueType:'refund_monitor',queueState:(state==='pending_approval'?'awaiting_approval':state==='transferring'?'waiting_bank':state),queueRowId:rowId});try{filterRefundTable();filterMonitorTable();}catch(e){}
   }
   function ensureLimitRow(record,op){
@@ -25642,6 +25649,76 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
   font-weight:500;
 }
 </style>
+<style id="claimagent-v473-reset-mock-data-style">
+.mock-data-header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:12px;
+  flex-wrap:wrap;
+}
+#resetMockDataModal .modal-content-box{width:min(420px,calc(100vw - 32px));}
+#resetMockDataModal .confirm-icon-wrapper{
+  border-color:var(--ca-danger-border,var(--red-border));
+  background:var(--ca-danger-bg,var(--red-light));
+  color:var(--ca-danger,var(--red-text));
+}
+#resetMockDataModal .confirm-icon-wrapper .material-icons{color:var(--ca-danger,var(--red-text)) !important;}
+@media(max-width:720px){
+  #mockDataPage .card-header{align-items:flex-start !important;flex-direction:column;}
+  .mock-data-header-actions{align-items:flex-start;justify-content:flex-start;width:100%;}
+  .mock-data-header-actions .btn-modal-danger{width:100%;}
+}
+</style>
+<div aria-hidden="true" aria-labelledby="resetMockDataTitle" aria-modal="true" class="modal-overlay" id="resetMockDataModal" onclick="closeResetMockDataModal(event)" role="dialog">
+<div class="modal-content-box" onclick="event.stopPropagation()">
+<div class="confirm-icon-wrapper"><span class="material-icons mi" aria-hidden="true">restart_alt</span></div>
+<div class="modal-title" id="resetMockDataTitle">ยืนยันการรีเซ็ตข้อมูล Mock</div>
+<div class="modal-subtitle">ข้อมูลธุรกรรมและประวัติที่ทดลองเล่นจะถูกล้าง และกลับเป็นข้อมูลตั้งต้น โดยไม่กระทบ Role การเข้าสู่ระบบ และโหมดสี</div>
+<div class="modal-buttons"><button class="btn-modal-cancel" onclick="closeResetMockDataModal()" type="button">ยกเลิก</button><button class="btn-modal-danger" onclick="confirmResetMockData()" type="button">รีเซ็ตข้อมูล</button></div>
+</div>
+</div>
+<script id="claimagent-v473-reset-mock-data-script">
+(function(){
+  'use strict';
+  var MOCK_STORAGE_KEYS=[
+    'claimagent-transaction-state-v251',
+    'claimagent-latest-success-account-v248',
+    'claimagent-latest-success-account-by-entity-v252',
+    'claimagent-inline-running-number-v252'
+  ];
+  function clearMockStorage(){
+    MOCK_STORAGE_KEYS.forEach(function(key){
+      try{ localStorage.removeItem(key); }catch(e){}
+    });
+  }
+  window.openResetMockDataModal=function(){
+    var modal=document.getElementById('resetMockDataModal');
+    if(!modal)return;
+    modal.style.display='flex';
+    modal.setAttribute('aria-hidden','false');
+    var cancel=modal.querySelector('.btn-modal-cancel');
+    if(cancel)window.setTimeout(function(){cancel.focus();},0);
+  };
+  window.closeResetMockDataModal=function(event){
+    if(event&&event.target!==event.currentTarget)return;
+    var modal=document.getElementById('resetMockDataModal');
+    if(!modal)return;
+    modal.style.display='none';
+    modal.setAttribute('aria-hidden','true');
+  };
+  window.confirmResetMockData=function(){
+    /* Transaction Core persists during beforeunload; clear once more afterwards
+       so the reload always starts from the HTML mock seed. */
+    window.addEventListener('beforeunload',clearMockStorage,{once:true});
+    clearMockStorage();
+    window.location.reload();
+  };
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape')window.closeResetMockDataModal();
+  });
+})();
+</script>
 </body>
 </html>
 <!-- v249: After closing the final claim success popup, return to the initial Claim Notice insured-search page instead of staying on the claim-entry form. -->
