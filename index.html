@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClaimAgent - ระบบโอนเงินอัตโนมัติ</title>
+<title>ClaimAgent v484 - ระบบโอนเงินอัตโนมัติ (Prototype)</title>
 <!-- นำเข้า Google Fonts ภาษาไทย และ Material Icons (MUI Icons) -->
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -11278,6 +11278,94 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 @media(max-width:800px){#hospitalRefundDetailPage .approve-refund-request-summary{grid-template-columns:1fr 1fr;}#hospitalRefundDetailPage .approve-refund-info-grid{grid-template-columns:1fr 1fr;}#hospitalRefundDetailPage .approve-refund-bank-card{grid-template-columns:48px 1fr;}#hospitalRefundDetailPage .approve-refund-amount-grid{grid-template-columns:1fr;}}
 @media(max-width:560px){#hospitalRefundDetailPage .hospital-refund-page-toolbar{align-items:flex-start;}#hospitalRefundDetailPage .approve-source-badge{display:none;}#hospitalRefundDetailPage .approve-refund-request-summary,#hospitalRefundDetailPage .approve-refund-info-grid,#hospitalRefundDetailPage .approve-refund-request-grid,#hospitalRefundDetailPage .approve-refund-form-grid{grid-template-columns:1fr;}#hospitalRefundDetailPage .approve-refund-request-summary>div{border-right:0;border-bottom:1px solid #D4E6F3;}#hospitalRefundDetailPage .hospital-refund-actions{flex-direction:column-reverse;}#hospitalRefundDetailPage .hospital-refund-actions .btn{width:100%;}}
 </style>
+<!-- v485: Keep the application header visible while the main workspace scrolls. -->
+<style id="claimagent-v485-sticky-topbar">
+/* .main-content is the scroll container; keep the header in normal layout. */
+.main-content > .header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    flex: 0 0 auto;
+    width: 100%;
+    background-color: var(--ca-shell, #fff) !important;
+}
+</style>
+
+<style id="claimagent-status-dev-reference-v486">
+#statusConditionPage .ca-status-intro{border:1px solid #bfd6ef;border-left:4px solid var(--primary-blue);background:#f4f9ff;border-radius:9px;padding:16px 18px;margin-bottom:16px;line-height:1.7;font-size:13px;color:#334155}
+#statusConditionPage .ca-status-intro strong{color:#084d88}
+#statusConditionPage .ca-status-caption{font-size:12px;font-weight:400;color:var(--text-muted);margin-left:auto}
+#statusConditionPage .ca-status-nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+#statusConditionPage .ca-status-nav button{font:inherit;font-size:12px;background:#fff;border:1px solid #cbd5e1;border-radius:999px;padding:7px 12px;color:var(--primary-blue);cursor:pointer}
+#statusConditionPage .ca-status-nav button:hover,#statusConditionPage .ca-status-nav button:focus-visible{background:#eff6ff;border-color:var(--primary-blue);outline:2px solid transparent}
+#statusConditionPage .ca-status-section{scroll-margin-top:110px;margin:0 0 18px;border:1px solid var(--border-color);border-radius:10px;overflow:hidden;background:#fff}
+#statusConditionPage .ca-status-section-hd{background:var(--panel-bg);border-bottom:1px solid var(--border-color);padding:13px 17px;display:flex;align-items:center;gap:9px}
+#statusConditionPage .ca-status-section-hd .material-icons{color:var(--primary-blue);font-size:21px}
+#statusConditionPage .ca-status-section-hd strong{font-size:14px}
+#statusConditionPage .ca-status-body{padding:16px 18px}
+#statusConditionPage .ca-status-subtitle{margin:0 0 12px;color:var(--text-muted);font-size:13px;line-height:1.65}
+#statusConditionPage .ca-status-table-wrap{overflow-x:auto;border:1px solid var(--border-color);border-radius:8px}
+#statusConditionPage .ca-status-table{width:100%;border-collapse:collapse;min-width:880px;font-size:13px;line-height:1.6}
+#statusConditionPage .ca-status-table th{background:var(--primary-blue);color:#fff;text-align:left;font-weight:600;padding:11px 12px}
+#statusConditionPage .ca-status-table td{padding:12px;vertical-align:top;border-top:1px solid var(--border-color)}
+#statusConditionPage .ca-status-table td:first-child{min-width:142px;width:18%}
+#statusConditionPage .ca-status-table td:nth-child(2){width:29%}
+#statusConditionPage .ca-status-table td:nth-child(3){width:26%}
+#statusConditionPage .ca-status-table td:nth-child(4){width:27%}
+#statusConditionPage .ca-status-badge{display:inline-block;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:600;white-space:normal;line-height:1.4}
+#statusConditionPage .ca-s-pending{color:#9a6000;background:#fff6e5;border:1px solid #f3d59e}
+#statusConditionPage .ca-s-success{color:#14733b;background:#e8f7ee;border:1px solid #b9e7cd}
+#statusConditionPage .ca-s-fail{color:#b42318;background:#fff0ef;border:1px solid #f5c2c2}
+#statusConditionPage .ca-s-info{color:#07579b;background:#edf6ff;border:1px solid #c6def5}
+#statusConditionPage .ca-s-hold{color:#475569;background:#eef2f7;border:1px solid #cbd5e1}
+#statusConditionPage .ca-status-note{background:#f8fafc;border:1px solid var(--border-color);border-radius:8px;padding:11px 13px;margin-top:12px;font-size:12.5px;line-height:1.7;color:#475569}
+#statusConditionPage .ca-status-note b{color:#334155}
+#statusConditionPage .ca-status-note.alert{border-color:#f4d5a2;background:#fffaf0;color:#795316}
+#statusConditionPage .ca-status-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#statusConditionPage .ca-status-rule{padding:14px 16px;border:1px solid var(--border-color);border-radius:8px;background:#fafcff;font-size:13px;line-height:1.75}
+#statusConditionPage .ca-status-rule b{color:var(--primary-blue);display:block;margin-bottom:5px}
+#statusConditionPage .ca-status-rule ul{padding-left:20px;margin:0}
+#statusConditionPage .ca-status-rule li+li{margin-top:3px}
+#statusConditionPage .ca-status-spec{font-size:12px;margin-left:auto;color:var(--primary-blue);white-space:nowrap}
+#statusConditionPage .ca-status-spec:hover{text-decoration:underline}
+#statusConditionPage .ca-status-list{margin:0;padding-left:20px;font-size:13px;line-height:1.85}
+@media(max-width:800px){#statusConditionPage .ca-status-card-grid{grid-template-columns:1fr}#statusConditionPage .ca-status-caption{display:none}#statusConditionPage .ca-status-section-hd{flex-wrap:wrap}}
+@media(prefers-color-scheme:dark){body.dark-mode #statusConditionPage .ca-status-intro{background:#142e44;color:#dbeafe;border-color:#315d83}body.dark-mode #statusConditionPage .ca-status-intro strong{color:#93c5fd}body.dark-mode #statusConditionPage .ca-status-section,body.dark-mode #statusConditionPage .ca-status-nav button{background:#192b3b;color:#e2e8f0}body.dark-mode #statusConditionPage .ca-status-rule,body.dark-mode #statusConditionPage .ca-status-note{background:#192b3b;color:#e2e8f0}}
+</style>
+<style id="claimagent-limit-review-v487">
+#limitModal .limit-form-grid { grid-template-columns: 1fr 1.3fr; align-items:start; }
+#limitModal #limitReviewNote { width:100%; min-height:88px !important; height:auto !important; resize:vertical; padding:10px 12px; line-height:1.5; }
+#limitModal #limitReviewBtn:disabled { opacity:.48; cursor:not-allowed; box-shadow:none; }
+#limitModal #limitReviewBtn:disabled:hover { transform:none; }
+#limitModal .limit-review-hint { display:block; margin-top:5px; line-height:1.45; color:var(--text-muted); font-size:12px; }
+#limitModal .limit-review-field { min-width:0; }
+#limitModal .limit-review-field > label { display:block; margin-bottom:6px; }
+#limitModal .limit-review-field > label span { color:var(--danger-strong); }
+@media (max-width:720px){#limitModal .limit-form-grid {grid-template-columns:1fr;}}
+</style>
+<style id="claimagent-v492-frontend-status-only">
+#statusConditionPage .ca-status-frontend-table{min-width:850px;table-layout:fixed}
+#statusConditionPage .ca-status-frontend-table th:nth-child(1){width:19%}
+#statusConditionPage .ca-status-frontend-table th:nth-child(2){width:19%}
+#statusConditionPage .ca-status-frontend-table th:nth-child(3){width:29%}
+#statusConditionPage .ca-status-frontend-table th:nth-child(4){width:33%}
+#statusConditionPage .ca-status-frontend-table td{overflow-wrap:anywhere}
+#statusConditionPage .ca-status-frontend-table td:first-child{min-width:unset;width:auto}
+#statusConditionPage .ca-status-frontend-table td:nth-child(2),
+#statusConditionPage .ca-status-frontend-table td:nth-child(3),
+#statusConditionPage .ca-status-frontend-table td:nth-child(4){width:auto}
+#statusConditionPage .ca-s-pending{background:#fcf8ee;border-color:#e8ddc4;color:#8a651e}
+#statusConditionPage .ca-s-info{background:#f0f6fc;border-color:#caddEF;color:#285f91}
+#statusConditionPage .ca-s-success{background:#f0f7f2;border-color:#c6ded0;color:#276749}
+#statusConditionPage .ca-s-fail{background:#fbf1f1;border-color:#e9d0d0;color:#994646}
+#statusConditionPage .ca-s-hold{background:#f1f4f7;border-color:#d6dee6;color:#475569}
+@media(max-width:800px){#statusConditionPage .ca-status-frontend-table{min-width:730px}}
+body.dark-mode #statusConditionPage .ca-s-pending{background:#382f20;color:#f3d9a9;border-color:#655132}
+body.dark-mode #statusConditionPage .ca-s-info{background:#1e344a;color:#afcdea;border-color:#365979}
+body.dark-mode #statusConditionPage .ca-s-success{background:#1b382c;color:#b3dfc4;border-color:#35684b}
+body.dark-mode #statusConditionPage .ca-s-fail{background:#402729;color:#f1c1c1;border-color:#744347}
+body.dark-mode #statusConditionPage .ca-s-hold{background:#273440;color:#cfdae6;border-color:#495a6b}
+</style>
 </head>
 <body>
 <!-- Dev Toast: แจ้งเตือนหน้าที่ยังไม่เปิดใช้งาน -->
@@ -11400,6 +11488,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <a class="menu-item" href="#" id="menuSystemFlow" onclick="selectMenu(this); switchPage('systemFlowPage')">
 <span class="material-icons mi">account_tree</span> System Flow
             </a>
+<div class="menu-title" style="margin-top:8px;">เอกสารสำหรับพัฒนา</div>
 <a class="menu-item" href="#" id="menuStatusCondition" onclick="selectMenu(this); switchPage('statusConditionPage')">
 <span class="material-icons mi">rule</span> เงื่อนไขสถานะ
             </a>
@@ -11415,7 +11504,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <!-- HEADER BAR -->
 <div class="header">
 <div style="display:flex; align-items:stretch; gap:12px;">
-<span class="material-icons" id="sidebarToggleBtn" onclick="toggleSidebar()" style="cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0 10px; color:var(--text-dark);" title="เปิด/ปิดเมนู">menu</span>
+<button aria-controls="appSidebar" aria-expanded="true" aria-label="ย่อเมนูหลัก" class="material-icons sidebar-toggle-btn" id="sidebarToggleBtn" onclick="toggleSidebar()" title="ปิดเมนู" type="button">menu</button>
 <div class="header-title-box">
 <strong id="pageHeaderTitle" style="font-size:16px;">หน้าแรก</strong>
 <div class="breadcrumb" id="breadcrumbArea">
@@ -12350,7 +12439,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </td>
 <td>จ่ายเงินเกินสิทธิ</td>
 <td class="refund-action-cell" style="text-align:center;">
-<button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด (ยังไม่เปิดใช้งาน)"><span class="material-icons">visibility</span></button>
+<button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-681200011','CL690467210','กรุงเทพมหานคร','นายกิตติ วงศ์สุวรรณ','600.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
 </td>
 </tr>
 <tr data-branch="เชียงใหม่" data-cc="CC690400069" data-cl="CL690400069" data-operation-id="REFUND-690500004" data-status="pending">
@@ -12366,7 +12455,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </td>
 <td>จ่ายเงินเกินสิทธิ</td>
 <td class="refund-action-cell" style="text-align:center;">
-<button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด (ยังไม่เปิดใช้งาน)"><span class="material-icons">visibility</span></button>
+<button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500004','CL690400069','เชียงใหม่','นางรัชชนก คำภาพันธ์','400.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
 </td>
 </tr>
 <tr data-branch="กรุงเทพมหานคร" data-cc="CC690400101" data-cl="CL690400101" data-operation-id="REFUND-690500005" data-status="pending">
@@ -12382,7 +12471,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </td>
 <td>จ่ายเงินเกินสิทธิ</td>
 <td class="refund-action-cell" style="text-align:center;">
-<button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด (ยังไม่เปิดใช้งาน)"><span class="material-icons">visibility</span></button>
+<button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500005','CL690400101','กรุงเทพมหานคร','นายสมชาย แก้วมณี','300.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
 </td>
 </tr>
 <tr data-branch="สำนักงานใหญ่" data-cc="CC690417642" data-cl="CL690417642" data-operation-id="REFUND-690500008" data-status="pending">
@@ -12398,7 +12487,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </td>
 <td>ปัญหาบัญชีผู้ใช้</td>
 <td class="refund-action-cell" style="text-align:center;">
-<button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด (ยังไม่เปิดใช้งาน)"><span class="material-icons">visibility</span></button>
+<button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500008','CL690417642','สำนักงานใหญ่','นายปารเมศ คำภาพันธ์','100.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
 </td>
 </tr>
 <tr data-branch="สำนักงานใหญ่" data-cc="CC690459081" data-cl="CL690459081" data-operation-id="REFUND-690500007" data-status="reject" id="refundRowRejected1">
@@ -12819,40 +12908,6 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <button class="icon-action-btn" onclick="openApproveModal('monitorRow1')" style="color:var(--warning-color);" title="อนุมัติ/ปฏิเสธการคืนเงิน"><span class="material-icons">fact_check</span></button>
 </td>
 </tr>
-<tr data-branch="กรุงเทพมหานคร" data-cc="CC690455197" data-cl="CL690455197" data-cpg="CPG690455197" data-operation-id="REFUND-690500010" data-owner-type="branch" data-status="success">
-<td>CL690455197</td>
-<td>CC690455197</td>
-<td>11/10/2569 12:24:23</td>
-<td>นางสาวรัชชนก สุวรรณโชค</td>
-<td>กรุงเทพมหานคร</td>
-<td style="text-align:right;">1,700.00</td>
-<td style="text-align:right;">300.00</td>
-<td style="text-align:center;">
-<span class="badge-status badge-success"><span class="badge-dot"></span>
-                                            คืนเงินสำเร็จ</span>
-</td>
-<td>จ่ายเงินเกินสิทธิ</td>
-<td style="text-align:center;">
-<button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500010','CPG690455197','กรุงเทพมหานคร','นางสาวรัชชนก สุวรรณโชค','300.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
-</td>
-</tr>
-<tr data-branch="สำนักงานใหญ่" data-cc="CC690417642" data-cl="CL690417642" data-cpg="CPG690417642" data-operation-id="REFUND-690500008" data-owner-type="branch" data-status="success">
-<td>CL690417642</td>
-<td>CC690417642</td>
-<td>10/10/2569 11:24:23</td>
-<td>นายปารเมศ คำภาพันธ์</td>
-<td>สำนักงานใหญ่</td>
-<td style="text-align:right;">1,000.00</td>
-<td style="text-align:right;">100.00</td>
-<td style="text-align:center;">
-<span class="badge-status badge-success"><span class="badge-dot"></span>
-                                            คืนเงินสำเร็จ</span>
-</td>
-<td>ปัญหาบัญชีผู้ใช้</td>
-<td style="text-align:center;">
-<button class="icon-action-btn" onclick="openApproveHistoryModal('REFUND-690500008','CPG690417642','สำนักงานใหญ่','นายปารเมศ คำภาพันธ์','100.00')" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button>
-</td>
-</tr>
 <tr data-branch="สำนักงานใหญ่" data-cc="CC690459081" data-cl="CL690459081" data-cpg="CPG690459081" data-operation-id="REFUND-690500007" data-owner-type="branch" data-status="reject">
 <td>CL690459081</td>
 <td>CC690459081</td>
@@ -12952,8 +13007,8 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <label>สถานะ</label>
 <select class="form-control" id="limitStatusFilterSelect" onchange="filterLimitTable()">
 <option value="">ทั้งหมด</option>
+<option value="pending">รอดำเนินการ</option>
 <option value="review">รอตรวจสอบ</option>
-<option value="rejected">ปฏิเสธขยายวงเงิน</option>
 </select>
 </div>
 <div class="form-group form-group-icon">
@@ -12982,13 +13037,13 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <th>เลขที่บัญชี</th>
 <th>ประเภทโอนเงิน</th>
 <th style="text-align:center;">สถานะ</th>
-<th>สาเหตุการปฏิเสธ</th>
+<th>หมายเหตุรอตรวจสอบ</th>
 <th style="text-align:center;">ดำเนินการ</th>
 </tr>
 </thead>
 <tbody id="limitTableBody">
-<tr data-branch="สำนักงานใหญ่" data-cc="CC6904000221" data-cl="CLPA690400221" data-cpg="CPG690400221" data-status="review" id="limitRowPA1"><td style="color:var(--primary-blue);">CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>สำนักงานใหญ่</td><td style="text-align:right;">8,500.00</td><td>5281137999</td><td>โอนเงินครั้งแรก</td><td id="limitRowPA1Status" style="text-align:center;"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span></td><td id="limitRowPA1Reason">-</td><td id="limitRowPA1Action" style="text-align:center;"><button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button><button class="icon-action-btn" onclick="openLimitModal('limitRowPA1')" style="color:var(--warning-color);" title="ขยายวงเงิน"><span class="material-icons">fact_check</span></button></td></tr>
-<tr data-branch="กรุงเทพมหานคร" data-cc="CC6904000962" data-cl="CL6904000962" data-cpg="CPG690600047" data-status="review" id="limitRow1">
+<tr data-branch="สำนักงานใหญ่" data-cc="CC6904000221" data-cl="CLPA690400221" data-cpg="CPG690400221" data-status="pending" id="limitRowPA1"><td style="color:var(--primary-blue);">CLPA690400221</td><td>CC6904000221</td><td>24/08/2569 10:30:00</td><td>สำนักงานใหญ่</td><td style="text-align:right;">8,500.00</td><td>5281137999</td><td>โอนเงินครั้งแรก</td><td id="limitRowPA1Status" style="text-align:center;"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td><td id="limitRowPA1Reason">-</td><td id="limitRowPA1Action" style="text-align:center;"><button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button><button class="icon-action-btn" onclick="openLimitModal('limitRowPA1')" style="color:var(--warning-color);" title="ขยายวงเงิน"><span class="material-icons">fact_check</span></button></td></tr>
+<tr data-branch="กรุงเทพมหานคร" data-cc="CC6904000962" data-cl="CL6904000962" data-cpg="CPG690600047" data-status="pending" id="limitRow1">
 <td style="color:var(--primary-blue);">CL6904000962</td>
 <td>CC6904000962</td>
 <td>22/05/2569 06:10:11</td>
@@ -12998,7 +13053,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <td>โอนเงินเพิ่ม</td>
 <td id="limitRow1Status" style="text-align:center;">
 <span class="badge-status badge-pending"><span class="badge-dot"></span>
-                                            รอตรวจสอบ</span>
+                                            รอดำเนินการ</span>
 </td>
 <td id="limitRow1Reason">-</td>
 <td id="limitRow1Action" style="text-align:center;">
@@ -13006,7 +13061,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <button class="icon-action-btn" onclick="openLimitModal('limitRow1')" style="color:var(--warning-color);" title="ขยายวงเงิน"><span class="material-icons">fact_check</span></button>
 </td>
 </tr>
-<tr data-branch="กรุงเทพมหานคร" data-cc="CC6904000784" data-cl="CL6904000784" data-cpg="CPG690600648" data-status="review" id="limitRow2">
+<tr data-branch="กรุงเทพมหานคร" data-cc="CC6904000784" data-cl="CL6904000784" data-cpg="CPG690600648" data-status="pending" id="limitRow2">
 <td style="color:var(--primary-blue);">CL6904000784</td>
 <td>CC6904000784</td>
 <td>11/10/2569 12:24:23</td>
@@ -13016,7 +13071,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <td>โอนเงินครั้งแรก</td>
 <td id="limitRow2Status" style="text-align:center;">
 <span class="badge-status badge-pending"><span class="badge-dot"></span>
-                                            รอตรวจสอบ</span>
+                                            รอดำเนินการ</span>
 </td>
 <td id="limitRow2Reason">-</td>
 <td id="limitRow2Action" style="text-align:center;">
@@ -13024,7 +13079,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <button class="icon-action-btn" onclick="openLimitModal('limitRow2')" style="color:var(--warning-color);" title="ขยายวงเงิน"><span class="material-icons">fact_check</span></button>
 </td>
 </tr>
-<tr data-branch="สำนักงานใหญ่" data-cc="CC6904000318" data-cl="CL6904000318" data-cpg="CPG690600784" data-status="review" id="limitRow3">
+<tr data-branch="สำนักงานใหญ่" data-cc="CC6904000318" data-cl="CL6904000318" data-cpg="CPG690600784" data-status="pending" id="limitRow3">
 <td style="color:var(--primary-blue);">CL6904000318</td>
 <td>CC6904000318</td>
 <td>10/10/2569 11:24:23</td>
@@ -13034,7 +13089,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <td>โอนเงินครั้งแรก</td>
 <td id="limitRow3Status" style="text-align:center;">
 <span class="badge-status badge-pending"><span class="badge-dot"></span>
-                                            รอตรวจสอบ</span>
+                                            รอดำเนินการ</span>
 </td>
 <td id="limitRow3Reason">-</td>
 <td id="limitRow3Action" style="text-align:center;">
@@ -13042,19 +13097,19 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <button class="icon-action-btn" onclick="openLimitModal('limitRow3')" style="color:var(--warning-color);" title="ขยายวงเงิน"><span class="material-icons">fact_check</span></button>
 </td>
 </tr>
-<tr data-branch="กรุงเทพมหานคร" data-cc="CC690800123" data-cl="CL690800123" data-cpg="CPG690600903" data-status="rejected" id="limitRow6">
+<tr data-branch="กรุงเทพมหานคร" data-cc="CC690800123" data-cl="CL690800123" data-cpg="CPG690600903" data-status="review" id="limitRow6">
 <td style="color:var(--primary-blue);">CL690800123</td><td>CC690800123</td><td>24/08/2569 11:05:27</td><td>กรุงเทพมหานคร</td>
 <td style="text-align:right;">3,800.00</td><td>1821000614</td><td>โอนเงินเพิ่ม</td>
-<td id="limitRow6Status" style="text-align:center;"><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span></td>
+<td id="limitRow6Status" style="text-align:center;"><span class="badge-status badge-review"><span class="badge-dot"></span> รอตรวจสอบ</span></td>
 <td id="limitRow6Reason">คำนวนยอดผิด</td>
-<td id="limitRow6Action" style="text-align:center;"><button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button></td>
+<td id="limitRow6Action" style="text-align:center;"><button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button><button class="icon-action-btn" onclick="openLimitModal('limitRow6')" style="color:var(--warning-color);" title="เปิดตรวจสอบขยายวงเงิน"><span class="material-icons">fact_check</span></button></td>
 </tr>
-<tr data-branch="สำนักงานใหญ่" data-cc="CC690800124" data-cl="CL690800124" data-cpg="CPG690600904" data-status="rejected" id="limitRow7">
+<tr data-branch="สำนักงานใหญ่" data-cc="CC690800124" data-cl="CL690800124" data-cpg="CPG690600904" data-status="review" id="limitRow7">
 <td style="color:var(--primary-blue);">CL690800124</td><td>CC690800124</td><td>24/08/2569 13:41:09</td><td>สำนักงานใหญ่</td>
 <td style="text-align:right;">5,000.00</td><td>1821000615</td><td>โอนเงินเพิ่ม</td>
-<td id="limitRow7Status" style="text-align:center;"><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span></td>
+<td id="limitRow7Status" style="text-align:center;"><span class="badge-status badge-review"><span class="badge-dot"></span> รอตรวจสอบ</span></td>
 <td id="limitRow7Reason">โอนผิดคน</td>
-<td id="limitRow7Action" style="text-align:center;"><button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button></td>
+<td id="limitRow7Action" style="text-align:center;"><button class="icon-action-btn" onclick="return false;" title="ดูรายละเอียด"><span class="material-icons">visibility</span></button><button class="icon-action-btn" onclick="openLimitModal('limitRow7')" style="color:var(--warning-color);" title="เปิดตรวจสอบขยายวงเงิน"><span class="material-icons">fact_check</span></button></td>
 </tr>
 </tbody>
 </table>
@@ -13555,7 +13610,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <div class="card-body">
 <div class="table-responsive">
 <table class="data-table" style="margin:0;">
-<thead><tr><th>ผลิตภัณฑ์</th><th>Application ID</th><th>ชื่อผู้เอาประกัน</th><th>เลขบัตรประชาชน</th><th>แผนประกัน</th><th>สถานศึกษา</th><th>สถานะ</th></tr></thead>
+<thead><tr><th>ผลิตภัณฑ์</th><th>Application ID</th><th>ชื่อผู้เอาประกัน</th><th>เลขบัตรประชาชน</th><th>แผนประกัน</th><th>สถานศึกษา</th><th>สถานะ</th><th>กรณีทดสอบ</th></tr></thead>
 <tbody id="mockClaimInsuredTableBody"></tbody>
 </table>
 </div>
@@ -13693,15 +13748,15 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <strong>Monitor - ขยายวงเงิน</strong><a class="btn btn-primary-blue" href="https://docs.google.com/spreadsheets/d/168yBij8g2k5dLN_hj_8Op6marGiJ99cF_LOodcT4_7g/edit?gid=414995110#gid=414995110&amp;range=A1" rel="noopener noreferrer" style="margin-left:auto;padding:5px 10px;display:inline-flex;align-items:center;gap:5px;font-size:12px;text-decoration:none;" target="_blank"><span class="material-icons" style="font-size:15px;">open_in_new</span>เปิด Spec</a>
 </div>
 <div style="font-size:13px;line-height:1.9;color:var(--text-muted);">
-                                    เมื่อยอดโอนรวมต่อคนต่อวันเกิน 30,000 บาท รายการจะเข้าหน้าขยายวงเงินในสถานะรอตรวจสอบ
+                                    เมื่อยอดโอนรวมต่อคนต่อวันเกิน 30,000 บาท รายการจะเข้าหน้าขยายวงเงินในสถานะรอดำเนินการ
                                 </div>
 <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
-<span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span>
+<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>
 <span>→</span><span>อนุมัติ</span><span>→</span><span style="color:var(--green-text);font-weight:600;">เพิ่มวงเงินและโอนเงินทันที</span>
 </div>
 <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;">
-<span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span>
-<span>→</span><span>ไม่อนุมัติ</span><span>→</span><span style="color:var(--red-text);font-weight:600;">ปฏิเสธและจบรายการ</span>
+<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>
+<span>→</span><span>กรอกหมายเหตุและกด “รอตรวจสอบ”</span><span>→</span><span style="color:var(--warning-color);font-weight:600;">รอตรวจสอบ (Hold) ไม่โอนเงิน</span>
 </div>
 </div>
 <div style="border:1px solid var(--border-color);border-radius:10px;padding:18px;background:#fff;">
@@ -13894,9 +13949,9 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </summary>
 <div class="flow-detail-body"><div class="flow-rule-grid">
 <div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--primary-blue);">login</span>เข้า Flow เมื่อ</div><ul><li>ยอดใช้ต่อวันต่อคนเกิน 30,000 บาท</li><li>วงเงินคงเหลือไม่เพียงพอจ่ายยอดเคลมหรือยอดโอนเพิ่ม</li></ul></div>
-<div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>ขอเพิ่มเฉพาะส่วนต่างที่เกินวงเงินคงเหลือ</li><li>อนุมัติเพิ่มวงเงินโดยไม่ต้องเลือกสาเหตุการปฏิเสธ</li><li>ปฏิเสธเมื่อเลือกสาเหตุการปฏิเสธแล้ว</li></ul></div>
-<div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>เข้า Flow หากยอดใช้ยังไม่เกิน 30,000 บาท</li><li>ขอเพิ่มเกินส่วนต่างที่จำเป็นต้องใช้</li><li>ปฏิเสธโดยไม่เลือกสาเหตุการปฏิเสธ</li></ul></div>
-<div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>อนุมัติ → เพิ่มวงเงินและดำเนินการโอนต่อทันที</li><li>ปฏิเสธ → ไม่เพิ่มวงเงิน และส่งสถานะกลับไปหน้าแจ้งเคลมออนไลน์</li></ul></div>
+<div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">check_circle</span>ทำได้</div><ul><li>ขอเพิ่มเฉพาะส่วนต่างที่เกินวงเงินคงเหลือ</li><li>อนุมัติแล้วนำรายการออกจากคิวขยายวงเงิน</li><li>กรอกหมายเหตุก่อนกด “รอตรวจสอบ” เพื่อ Hold รายการ</li></ul></div>
+<div class="flow-rule-box"><div class="flow-rule-title"><span class="material-icons" style="color:var(--red-text);">block</span>ทำไม่ได้</div><ul><li>เข้า Flow หากยอดใช้ยังไม่เกิน 30,000 บาท</li><li>ขอเพิ่มเกินส่วนต่างที่จำเป็นต้องใช้</li><li>กด “รอตรวจสอบ” เมื่อหมายเหตุรอตรวจสอบยังว่างอยู่</li></ul></div>
+<div class="flow-rule-box flow-result"><div class="flow-rule-title"><span class="material-icons" style="color:var(--green-text);">flag</span>ผลลัพธ์</div><ul><li>อนุมัติ → เพิ่มวงเงินและดำเนินการโอนต่อทันที</li><li>รอตรวจสอบ → Hold รายการ โดยไม่เพิ่มยอดโอน</li></ul></div>
 </div></div>
 </details>
 <details class="flow-detail" data-flow-name="แก้ไขการโอนเงิน" open="">
@@ -13937,239 +13992,135 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </div>
 </div>
 </div>
-<!-- ================= PAGE: STATUS CONDITIONS ================= -->
+<!-- ================= PAGE: STATUS CONDITIONS (FRONTEND-ONLY) v493 ================= -->
 <div class="content-page" id="statusConditionPage">
-<div class="container">
-<div class="card">
-<div class="card-header" style="display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">rule</span>
-<span>เงื่อนไขสถานะในแต่ละหน้า</span><span style="margin-left:auto;font-size:12px;color:var(--text-muted);font-weight:400;">แสดงเฉพาะสถานะที่มีในระบบ</span>
-</div>
-<div class="card-body">
-<div style="display:flex;flex-direction:column;gap:16px;">
-<!-- First Transfer / ติดตามการโอนเงิน -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">account_balance_wallet</span>
-<strong>แจ้งเคลมครั้งแรก / ติดตามการโอนเงิน</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead><tr><th style="width:190px;">สถานะ / เงื่อนไข</th><th>เงื่อนไขการเกิด</th><th>ผลลัพธ์ / การดำเนินการ</th></tr></thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-success"><span class="badge-dot"></span> โอนเงินสำเร็จ</span></td>
-<td>First Transfer ใช้บัญชี Mock 1821xxxxxx หรือ Retry สำเร็จด้วย 1821xxxxxx</td>
-<td>เงินออก, บันทึก Transaction History ตามบัญชีที่ใช้จริง, <code>firstTransferSuccess = true</code> และปลดล็อกโอนเพิ่ม / คืนเงิน</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> รอโอนเงิน</span></td>
-<td>สร้างรายการโอนเงินแล้ว แต่ระบบยังไม่เริ่มดำเนินการโอน</td>
-<td>รายการคงอยู่ในหน้าติดตามการโอนเงินเพื่อรอระบบเริ่มดำเนินการ</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> อยู่ระหว่างการโอน</span></td>
-<td>ระบบเริ่มส่งรายการไปยังระบบการโอนเงินแล้ว</td>
-<td>รอผลการโอนก่อนอัปเดตเป็นโอนเงินสำเร็จหรือโอนเงินไม่สำเร็จ</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> โอนเงินไม่สำเร็จ</span></td>
-<td>First Transfer หรือการ Retry ได้รับผลโอนไม่สำเร็จ</td>
-<td>เงินยังไม่ออก, <code>firstTransferSuccess = false</code> และรายการคงอยู่ในหน้าติดตามการโอนเงินเพื่อดำเนินการต่อ</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- โอนเพิ่ม -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">add_card</span>
-<strong>โอนเพิ่ม</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead>
-<tr>
-<th style="width:190px;">สถานะ / เงื่อนไข</th>
-<th>เงื่อนไขการเกิด</th>
-<th>ผลลัพธ์ / การดำเนินการ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td>
-<td>บันทึกรายการโอนเพิ่มแล้ว และอยู่ระหว่าง Mock Bank Delay</td>
-<td>คงสถานะรอดำเนินการประมาณ 10 วินาที → เมื่อสำเร็จจึงตัดเงิน เพิ่มยอดโอนรวม และบันทึก Transaction History</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
-<td>ระบบ ClaimAgent / ระบบการโอนเกิดข้อขัดข้องระหว่างการโอน</td>
-<td>ส่งรายการไปหน้า Monitor - แก้ไขการโอนเงิน เพื่อให้สั่งโอนใหม่</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- คืนเงิน -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">currency_exchange</span>
-<strong>คืนเงิน</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead>
-<tr>
-<th style="width:190px;">สถานะ / เงื่อนไข</th>
-<th>เงื่อนไขการเกิด</th>
-<th>ผลลัพธ์ / การดำเนินการ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td>
-<td>บันทึกรายการคืนเงินแล้ว และอยู่ระหว่างส่งเข้ากระบวนการอนุมัติ</td>
-<td>ส่งรายการไปหน้าอนุมัติคืนเงิน เพื่อรอผู้มีสิทธิ์พิจารณา</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span></td>
-<td>ผู้มีสิทธิ์อนุมัติรายการคืนเงินแล้ว</td>
-<td>เริ่ม Mock Bank Delay ประมาณ 10 วินาที จากนั้นจึงเปลี่ยนเป็นคืนเงินสำเร็จและตัดยอดเงินจริง</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span></td>
-<td>ได้รับสถานะปฏิเสธการคืนเงินจากหน้าอนุมัติคืนเงิน</td>
-<td>แสดงรายการที่ถูก MO ปฏิเสธการคืนเงิน เพื่อให้ทราบผลการพิจารณาจากหน้าอนุมัติคืนเงิน</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- อนุมัติคืนเงิน -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">fact_check</span>
-<strong>อนุมัติคืนเงิน (สาขา / โรงพยาบาล)</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead>
-<tr>
-<th style="width:190px;">สถานะ / เงื่อนไข</th>
-<th>เงื่อนไขการเกิด</th>
-<th>ผลลัพธ์ / การดำเนินการ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td>
-<td>รายการคืนเงินจากสาขาหรือโรงพยาบาลอยู่ระหว่างรอพิจารณา</td>
-<td>ฝั่งสาขาใช้สิทธิ์ตาม Flow เดิม ส่วนฝั่งโรงพยาบาล สาขาดูได้อย่างเดียวและกองทุนอนุมัติหรือปฏิเสธได้</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span></td>
-<td>ผู้มีสิทธิ์อนุมัติรายการคืนเงิน และระบบดำเนินการคืนเงินสำเร็จ</td>
-<td>รายการคืนเงินสำเร็จและไม่ต้องดำเนินการเพิ่มเติม</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span></td>
-<td>ผู้มีสิทธิ์ปฏิเสธรายการคืนเงิน</td>
-<td>ไม่มีการคืนเงิน และสิ้นสุดรายการอนุมัติคืนเงิน</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- ขยายวงเงิน -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">trending_up</span>
-<strong>Monitor - ขยายวงเงิน</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead>
-<tr>
-<th style="width:190px;">สถานะ</th>
-<th>เงื่อนไขการเกิด</th>
-<th>ผลลัพธ์ / การดำเนินการ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span></td>
-<td>รายการโอนเพิ่มทำให้วงเงินรวมต่อคนต่อวันเกิน 30,000 บาท</td>
-<td>รอผู้ใช้งานพิจารณาอนุมัติหรือปฏิเสธการขยายวงเงิน</td>
-</tr>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span></td>
-<td>ผู้ใช้งานไม่อนุมัติการขยายวงเงิน</td>
-<td>ไม่ดำเนินการโอนเงินและจบรายการ</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- สอบถามธนาคาร -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">account_balance</span>
-<strong>สอบถามธนาคาร</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead>
-<tr>
-<th style="width:190px;">สถานะ</th>
-<th>เงื่อนไขการแสดง</th>
-<th>ผลลัพธ์ / การดำเนินการ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
-<td>PayTransfer ไม่ตอบกลับหรือผลตรวจสอบเป็นโอนไม่สำเร็จ และต้องติดตามผลกับธนาคาร</td>
-<td>แสดงในตารางหลักของหน้าสอบถามธนาคาร</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- แก้ไขการโอนเงิน -->
-<div style="border:1px solid var(--border-color);border-radius:10px;background:#fff;overflow:hidden;">
-<div style="padding:14px 18px;background:var(--panel-bg);border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:10px;">
-<span class="material-icons" style="color:var(--primary-blue);">build_circle</span>
-<strong>Monitor - แก้ไขการโอนเงิน</strong>
-</div>
-<div style="padding:16px 18px;">
-<table class="data-table" style="margin:0;">
-<thead>
-<tr>
-<th style="width:190px;">สถานะ</th>
-<th>เงื่อนไขการแสดง</th>
-<th>ผลลัพธ์ / การดำเนินการ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="badge-status badge-reject"><span class="badge-dot"></span> โอนไม่สำเร็จ</span></td>
-<td>เกิดข้อขัดข้องจากระบบ ClaimAgent / ระบบการโอน ทำให้ไม่สามารถดำเนินการโอนได้</td>
-<td>แสดงรายการเพื่อให้ผู้ใช้งานตรวจสอบและสั่งโอนใหม่</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="container">
+    <div class="card">
+      <div class="card-header" style="display:flex;align-items:center;gap:10px;">
+        <span class="material-icons" style="color:var(--primary-blue);" aria-hidden="true">rule</span>
+        <span>เงื่อนไขสถานะที่แสดงหน้าบ้าน</span>
+        <span class="ca-status-caption">สถานะที่ผู้ใช้งานเห็นใน Prototype</span>
+      </div>
+      <div class="card-body">
+        <div class="ca-status-intro"><strong>ขอบเขต:</strong> แสดงเฉพาะชื่อสถานะที่ปรากฏในหน้าจอของ ClaimAgent พร้อมเงื่อนไขที่ทำให้แสดงสถานะนั้นและสิ่งที่ผู้ใช้เห็นหรือทำได้ ไม่รวมสถานะภายในระบบ รหัสสถานะ และเงื่อนไขจาก Mock Data <br><strong>หมายเหตุ:</strong> ข้อความสถานะอาจต่างกันตามหน้า เช่น “โอนสำเร็จ” และ “โอนเงินไม่สำเร็จ” จึงคงคำตามหน้าจอจริง</div>
+        <nav class="ca-status-nav" aria-label="เลือกหมวดสถานะที่แสดงหน้าบ้าน">
+          <button type="button" onclick="document.getElementById('statusClaim').scrollIntoView({behavior:'smooth',block:'start'})">ค้นหาเคลม / รายละเอียดเคลม</button>
+          <button type="button" onclick="document.getElementById('statusFirst').scrollIntoView({behavior:'smooth',block:'start'})">ติดตามการโอนเงิน</button>
+          <button type="button" onclick="document.getElementById('statusAdd').scrollIntoView({behavior:'smooth',block:'start'})">โอนเพิ่ม</button>
+          <button type="button" onclick="document.getElementById('statusRefund').scrollIntoView({behavior:'smooth',block:'start'})">คืนเงิน / อนุมัติคืนเงิน</button>
+          <button type="button" onclick="document.getElementById('statusLimit').scrollIntoView({behavior:'smooth',block:'start'})">ขยายวงเงิน</button>
+          <button type="button" onclick="document.getElementById('statusBank').scrollIntoView({behavior:'smooth',block:'start'})">สอบถามธนาคาร</button>
+          <button type="button" onclick="document.getElementById('statusFix').scrollIntoView({behavior:'smooth',block:'start'})">แก้ไขการโอนเงิน</button>
+          <button type="button" onclick="document.getElementById('statusAuto').scrollIntoView({behavior:'smooth',block:'start'})">ตั้งค่าการโอนเงินอัตโนมัติ</button>
+        </nav>
+        <section class="ca-status-section" id="statusClaim">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">fact_check</span><strong>1. ค้นหาเคลม / รายละเอียดเคลม</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-success">ปกติ</span></td><td>ค้นหาเคลม / รายละเอียดเคลม</td><td>สถานะเคลมแสดงว่ารายการปกติ</td><td>แสดงข้อมูลเคลมเพื่อให้ผู้ใช้งานดำเนินการตามสิทธิ์</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-success">โอนสำเร็จ</span></td><td>ค้นหาเคลม</td><td>ผลการโอนของรายการแสดงว่าสำเร็จ</td><td>แสดงสถานะสำเร็จและเปิดดูรายละเอียดรายการได้</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-info">อยู่ระหว่างการโอน</span></td><td>ค้นหาเคลม</td><td>รายการกำลังดำเนินการโอนและยังไม่แสดงผลสำเร็จ</td><td>แสดงสถานะระหว่างการโอนเพื่อให้ผู้ใช้ติดตามผล</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusFirst">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">account_balance_wallet</span><strong>2. ติดตามการโอนเงิน</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-pending">รอโอนเงิน</span></td><td>ติดตามการโอนเงิน</td><td>มีรายการรอโอน แต่ยังไม่เริ่มดำเนินการโอน</td><td>รายการอยู่ในผลการค้นหาตามตัวกรองสถานะ</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-info">อยู่ระหว่างการโอน</span></td><td>ติดตามการโอนเงิน</td><td>เริ่มกระบวนการโอนแล้วและยังรอผล</td><td>แสดงความคืบหน้าของรายการ โดยไม่แสดงว่าโอนสำเร็จก่อนมีผล</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-success">โอนสำเร็จ</span></td><td>ติดตามการโอนเงิน</td><td>ได้รับผลการโอนสำเร็จ</td><td>แสดงสถานะสำเร็จและดูรายละเอียด/ประวัติได้</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-fail">โอนไม่สำเร็จ</span></td><td>ติดตามการโอนเงิน</td><td>ได้รับผลการโอนไม่สำเร็จ</td><td>แสดงสถานะเพื่อให้ผู้ใช้งานตรวจสอบสาเหตุต่อไป</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusAdd">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">add_card</span><strong>3. โอนเพิ่ม</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-pending">รอดำเนินการ</span></td><td>รายการโอนเพิ่ม</td><td>บันทึกรายการโอนเพิ่มแล้ว และอยู่ในช่วง Delay เพื่อทยอยส่งโอนตามค่า Config ที่กำหนด</td><td>แสดงสถานะระหว่างรอรอบส่งโอนตาม Config ไม่ใช่รายการค้างคิว เมื่อดำเนินการตามรอบและได้รับผลการโอนแล้ว ระบบจึงอัปเดตผลรายการ</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-fail">โอนเงินไม่สำเร็จ</span></td><td>รายการโอนเพิ่ม</td><td>รายการแสดงผลโอนเงินไม่สำเร็จ</td><td>แสดงสาเหตุและช่องทางดูรายละเอียด/แก้ไขตามที่หน้าแสดง</td></tr>
+              </tbody>
+            </table></div>
+            <div class="ca-status-note"><b>หมายเหตุสำหรับ Dev — โอนเพิ่ม:</b> “รอดำเนินการ” คือการ Delay เพื่อทยอยส่งโอนตาม Config ไม่ใช่การค้างคิวงาน โดยไม่กำหนดจำนวนหรือช่วงเวลาตายตัวไว้ในหน้าเงื่อนไขสถานะ</div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusRefund">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">currency_exchange</span><strong>4. คืนเงิน / อนุมัติคืนเงิน</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-pending">รอดำเนินการ</span></td><td>รายการคืนเงิน / อนุมัติคืนเงิน</td><td>บันทึกคำขอคืนเงินแล้วและยังรอการดำเนินการ</td><td>แสดงรายการให้ผู้มีสิทธิ์เปิดตรวจข้อมูลและพิจารณา</td></tr>
+                                <tr><td><span class="ca-status-badge ca-s-success">คืนเงินสำเร็จ</span></td><td>รายการคืนเงิน / อนุมัติคืนเงิน</td><td>รายการคืนเงินแสดงผลสำเร็จ</td><td>แสดงรายละเอียดและประวัติการทำรายการ</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-fail">ปฏิเสธการคืนเงิน</span></td><td>รายการคืนเงิน / อนุมัติคืนเงิน</td><td>ผู้มีสิทธิ์บันทึกผลปฏิเสธการคืนเงิน</td><td>แสดงสถานะและเหตุผลที่บันทึกไว้</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-pending">รอพิจารณา</span></td><td>รายละเอียดคำขอคืนเงินโรงพยาบาล</td><td>คำขอคืนเงินยังรอการพิจารณา</td><td>แสดงสถานะคำขอในรายละเอียดรายการ</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusLimit">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">trending_up</span><strong>5. ขยายวงเงิน</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-pending">รอดำเนินการ</span></td><td>ขยายวงเงิน</td><td>ยอดที่จะใช้เกินวงเงินต่อคนต่อวัน จึงเข้าคิวขยายวงเงิน</td><td>เปิดรายละเอียดเพื่ออนุมัติ หรือกรอกหมายเหตุแล้วกด “รอตรวจสอบ”</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-info">รอตรวจสอบ</span></td><td>ขยายวงเงิน</td><td>ผู้ใช้กรอกหมายเหตุรอตรวจสอบและกด “รอตรวจสอบ”</td><td>Hold รายการไว้ ยังไม่พร้อมโอน ไม่ใช่การยกเลิก; เมื่ออนุมัติและดำเนินการเรียบร้อย รายการออกจากคิว</td></tr>
+              </tbody>
+            </table></div>
+            <div class="ca-status-note"><b>ข้อสังเกตในหน้าขยายวงเงิน:</b> ช่อง “หมายเหตุรอตรวจสอบ” เป็น Textarea และปุ่ม “รอตรวจสอบ” จะกดได้เมื่อกรอกหมายเหตุที่ไม่ใช่ช่องว่างแล้วเท่านั้น</div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusBank">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">account_balance</span><strong>6. สอบถามธนาคาร</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-fail">โอนไม่สำเร็จ</span></td><td>สอบถามธนาคาร</td><td>รายการที่แสดงในตารางมีสถานะโอนไม่สำเร็จ</td><td>เปิดรายละเอียดผลตอบกลับและดำเนินการสอบถามตามปุ่มที่หน้าแสดง</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusFix">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">build_circle</span><strong>7. แก้ไขการโอนเงิน</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-fail">โอนไม่สำเร็จ</span></td><td>แก้ไขการโอนเงิน</td><td>รายการในตารางแสดงว่าโอนไม่สำเร็จ</td><td>เปิดรายละเอียดเพื่อดูสาเหตุและใช้การดำเนินการแก้ไขตามสิทธิ์</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </section>
+        <section class="ca-status-section" id="statusAuto">
+          <div class="ca-status-section-hd"><span class="material-icons" aria-hidden="true">toggle_on</span><strong>8. ตั้งค่าการโอนเงินอัตโนมัติ</strong></div>
+          <div class="ca-status-body">
+            <div class="ca-status-table-wrap"><table class="ca-status-table ca-status-frontend-table">
+              <thead><tr><th scope="col">สถานะที่แสดงหน้าบ้าน</th><th scope="col">หน้าที่แสดง</th><th scope="col">เงื่อนไขการแสดง</th><th scope="col">ผลที่ผู้ใช้งานเห็น / ดำเนินการ</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ca-status-badge ca-s-success">เปิดใช้งาน</span></td><td>ตั้งค่าการโอนเงินอัตโนมัติ</td><td>ตั้งค่า Auto Transfer Payment เป็นเปิด</td><td>หน้าจอแสดงสถานะเปิดใช้งานและบันทึกในประวัติการตั้งค่า</td></tr>
+                <tr><td><span class="ca-status-badge ca-s-hold">ปิดใช้งาน</span></td><td>ตั้งค่าการโอนเงินอัตโนมัติ</td><td>ตั้งค่า Auto Transfer Payment เป็นปิด</td><td>หน้าจอแสดงสถานะปิดใช้งานและบันทึกในประวัติการตั้งค่า</td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="content-page" id="settingPage">
 <div class="container">
 <div class="layout-setting-grid">
-<div class="setting-left-panel">
 <div class="setting-main-card">
 <div class="setting-blue-header">
 <div class="setting-header-icon">
@@ -14200,6 +14151,18 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <span id="statusAlertText">ระบบโอนเงินอัตโนมัติกำลังทำงานอยู่</span>
 </div>
 </div>
+</div>
+<div class="help-card">
+<div class="help-header">
+<span class="material-icons">lightbulb</span>
+<span>ช่วยเหลือ</span>
+</div>
+<ul class="help-list">
+<li>- กรณีที่กดเปิด (ON) : จะทำการเปิดการใช้งานโอนเงิน Auto ตามช่วงเวลาทำการ (8:00-18:00 น.)
+                            </li>
+<li>- กรณีที่กดปิด (OFF) : จะปิดการโอนเงิน Auto รายการเคลมจะเป็นสถานะ &gt;&gt; รอโอนเงิน
+                                และระบบจะเปิดทำงาน Auto ได้ก็ต่อเมื่อมีการกดปุ่มเปิดเท่านั้น</li>
+</ul>
 </div>
 <div class="history-card">
 <div class="history-header">
@@ -14249,19 +14212,6 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="help-card">
-<div class="help-header">
-<span class="material-icons">lightbulb</span>
-<span>ช่วยเหลือ</span>
-</div>
-<ul class="help-list">
-<li>- กรณีที่กดเปิด (ON) : จะทำการเปิดการใช้งานโอนเงิน Auto ตามช่วงเวลาทำการ (8:00-18:00 น.)
-                            </li>
-<li>- กรณีที่กดปิด (OFF) : จะปิดการโอนเงิน Auto รายการเคลมจะเป็นสถานะ &gt;&gt; รอโอนเงิน
-                                และระบบจะเปิดทำงาน Auto ได้ก็ต่อเมื่อมีการกดปุ่มเปิดเท่านั้น</li>
-</ul>
 </div>
 </div>
 </div>
@@ -15131,11 +15081,11 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 </div>
 </div>
 <!-- MODAL: ยืนยันบันทึกและโอนเงิน -->
-<div class="modal-overlay" id="inlineClaimTransferConfirmModal">
+<div aria-hidden="true" aria-labelledby="inlineClaimConfirmHeading" aria-modal="true" class="modal-overlay" id="inlineClaimTransferConfirmModal" role="dialog">
 <div class="modal-content-box inline-flow-modal">
 <div class="flow-modal-header">
 <span class="flow-modal-title-icon"><span class="material-icons">account_balance_wallet</span></span>
-<strong>ยืนยันบันทึกและโอนเงิน</strong>
+<strong id="inlineClaimConfirmHeading">ยืนยันบันทึกและโอนเงิน</strong>
 <button aria-label="ปิด" class="flow-modal-close" onclick="closeModal('inlineClaimTransferConfirmModal')" type="button"><span class="material-icons">close</span></button>
 </div>
 <div class="flow-modal-body">
@@ -15148,23 +15098,23 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <div><strong>ธนาคาร : กรุงไทย</strong><div>เลขที่บัญชี : 1821000000</div><div>ชื่อบัญชี : นางสาวฉัตรชนก ปักษาทอง</div></div>
 <div class="inline-flow-amount-wrap"><span class="inline-flow-amount-label">จำนวนเงิน</span><div class="inline-flow-amount" id="inlineConfirmAmount">THB 0.00</div></div>
 </div>
-<div class="inline-flow-note"><span class="material-icons">info</span><span>กรุณาตรวจสอบข้อมูลบัญชีและจำนวนเงินให้ถูกต้องก่อนโอนเงิน ระบบจะสร้างเลข CPG, สร้างเลข CL, สร้างเลข CC และทำรายการโอนเงิน</span></div>
+<div class="inline-flow-note"><span class="material-icons">info</span><span>โหมดสาธิต (Mock): ตรวจสอบข้อมูลก่อนยืนยัน ระบบจะสร้าง CPG, CL และ CC พร้อมบันทึกผลโอนจำลอง โดยไม่มีการโอนเงินจริง</span></div>
 <div class="inline-flow-actions"><button class="btn btn-default" onclick="closeModal('inlineClaimTransferConfirmModal')" type="button">ยกเลิก</button><button class="btn btn-success" onclick="confirmInlineClaimTransfer()" type="button"><span class="material-icons" style="font-size:18px;">send</span> โอนเงิน</button></div>
 </div>
 </div>
 </div>
 <!-- MODAL: บันทึกและโอนเงินสำเร็จ -->
-<div class="modal-overlay" id="inlineClaimTransferSuccessModal">
+<div aria-hidden="true" aria-labelledby="inlineClaimSuccessHeading" aria-modal="true" class="modal-overlay" id="inlineClaimTransferSuccessModal" role="dialog">
 <div class="modal-content-box inline-flow-modal">
 <div class="flow-modal-header">
 <span class="flow-modal-title-icon" style="background:#d8f8e5;color:#14853b;"><span class="material-icons">check_circle</span></span>
-<strong>ทำรายการสำเร็จ</strong>
+<strong id="inlineClaimSuccessHeading">ทำรายการสำเร็จ (ข้อมูลจำลอง)</strong>
 <button aria-label="ปิด" class="flow-modal-close" onclick="closeInlineClaimTransferSuccess()" type="button"><span class="material-icons">close</span></button>
 </div>
 <div class="inline-flow-success">
 <div class="inline-flow-success-icon"><span class="material-icons" style="font-size:46px;">check</span></div>
 <h3 style="color:#14853b;margin:0 0 8px;">ทำรายการสำเร็จ</h3>
-<p style="color:var(--text-muted);margin:0;">ระบบสร้าง CPG, สร้าง CL, สร้าง CC และทำรายการโอนเงินเรียบร้อยแล้ว</p>
+<p style="color:var(--text-muted);margin:0;">ระบบสร้าง CPG, CL และ CC สำหรับการทดสอบ และบันทึกผลโอนเงินจำลองแล้ว (ยังไม่มีการโอนเงินจริง)</p>
 <div class="inline-flow-result">
 <div class="inline-flow-result-row"><span>เลขที่เคลม (CL)</span><span id="inlineSuccessCL">-</span></div>
 <div class="inline-flow-result-row"><span>เลขที่ Case (CC)</span><span id="inlineSuccessCC">-</span></div>
@@ -15225,8 +15175,8 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <div class="limit-section-title"><span class="material-icons">description</span>รายละเอียดเคลม</div>
 <div class="limit-detail-grid">
 <div class="limit-detail-box">
-<div class="limit-label">เลขที่เคลม :</div>
-<div class="limit-value" id="limitDetailCL" style="color:var(--primary-blue);">CL6904000962</div>
+<div class="limit-label">เลขที่เคส :</div>
+<div class="limit-value" id="limitDetailCC" style="color:var(--primary-blue);">CC6904000962</div>
 </div>
 <div class="limit-detail-box">
 <div class="limit-label">ชื่อผู้เอาประกัน :</div>
@@ -15261,13 +15211,11 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <label class="limit-readonly-label"><span>วงเงินที่ขอเพิ่ม</span><span class="limit-readonly-hint"><span class="material-icons" aria-hidden="true">lock</span>คำนวณโดยระบบ</span></label>
 <input aria-readonly="true" class="form-control limit-readonly-control" id="limitRequestAmount" readonly="" tabindex="-1" type="text" value="฿ 6,000.00"/>
 </div>
-<div class="modal-form-group-v2" style="margin-bottom:14px;">
-<label>สาเหตุการปฏิเสธ<span>*</span></label>
-<select class="form-control" id="limitRejectReasonSelect" onchange="handleLimitReasonChange()">
-<option value="">สาเหตุการปฏิเสธ</option>
-<option value="wrong_calc">คำนวนยอดผิด</option>
-<option value="wrong_transfer">โอนผิดคน</option>
-</select>
+<div class="modal-form-group-v2 limit-review-field" style="margin-bottom:14px;">
+<label for="limitReviewNote">หมายเหตุรอตรวจสอบ <span aria-hidden="true">*</span></label>
+<textarea class="form-control" id="limitReviewNote" rows="2" maxlength="500" aria-required="true" aria-describedby="limitReviewNoteHint limitReviewNoteCounter" oninput="handleLimitReviewNoteChange()" placeholder="ระบุหมายเหตุเพื่อ Hold รายการไว้รอตรวจสอบ"></textarea>
+<small id="limitReviewNoteHint" class="limit-review-hint">ต้องกรอกหมายเหตุก่อนกดปุ่ม “รอตรวจสอบ” (ระบบจะ Hold รายการ ไม่ใช่การปฏิเสธหรือโอนเงิน)</small>
+<small id="limitReviewNoteCounter" class="ca-limit-note-counter" aria-live="off">0/500</small>
 </div>
 </div>
 <div class="limit-flat-box" style="background-color:var(--green-light);">
@@ -15275,7 +15223,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <span class="limit-flat-value" style="color:var(--green-text);">฿ <span id="limitNewRemainAmount">7,000.00</span></span>
 </div>
 <div class="modal-buttons limit-modal-actions" style="margin-top:6px; flex-wrap:wrap; gap:8px;">
-<button class="btn-modal-danger" disabled="" id="limitRejectBtn" onclick="handleLimitRejectClick()">ปฏิเสธ</button>
+<button class="btn btn-default" type="button" disabled id="limitReviewBtn" onclick="handleLimitReviewClick()">รอตรวจสอบ</button>
 <button class="btn-modal-confirm" onclick="handleLimitAddClick()">อนุมัติ</button>
 </div>
 </div>
@@ -15309,29 +15257,29 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
 <button class="btn-modal-close" onclick="closeModal('addLimitSuccessModal');">ตกลง</button>
 </div>
 </div>
-<!-- MODAL: ยืนยันปฏิเสธการขยายวงเงิน? -->
-<div class="modal-overlay" id="confirmRejectLimitModal">
+<!-- MODAL: ยืนยันพักรายการเพื่อรอตรวจสอบ -->
+<div class="modal-overlay" id="confirmReviewLimitModal">
 <div class="modal-content-box">
 <div class="confirm-icon-wrapper">
 <span class="material-icons" style="font-size: 80px; color: var(--muted-icon);">question_mark</span>
 </div>
-<div class="modal-title" style="font-weight: 500;">ยืนยันปฏิเสธการขยายวงเงิน?</div>
-<div class="modal-subtitle">ต้องการปฏิเสธการขยายวงเงินหรือไม่</div>
+<div class="modal-title" style="font-weight: 500;">ยืนยันส่งรายการไปรอตรวจสอบ?</div>
+<div class="modal-subtitle">ระบบจะ Hold รายการนี้ไว้ ยังไม่โอนเงิน และบันทึกหมายเหตุรอตรวจสอบ</div>
 <div class="modal-buttons">
-<button class="btn-modal-cancel" onclick="closeModal('confirmRejectLimitModal'); document.getElementById('limitModal').classList.add('active');">ยกเลิก</button>
-<button class="btn-modal-confirm" onclick="proceedRejectLimit()">ยืนยัน</button>
+<button class="btn-modal-cancel" onclick="closeModal('confirmReviewLimitModal'); document.getElementById('limitModal').classList.add('active');">ยกเลิก</button>
+<button class="btn-modal-confirm" onclick="proceedReviewLimit()">ยืนยัน</button>
 </div>
 </div>
 </div>
-<!-- MODAL: ปฏิเสธการขยายวงเงินสำเร็จ -->
-<div class="modal-overlay" id="rejectLimitSuccessModal">
+<!-- MODAL: พักรายการรอตรวจสอบสำเร็จ -->
+<div class="modal-overlay" id="reviewLimitSuccessModal">
 <div class="modal-content-box">
 <div class="success-icon-wrapper">
 <span class="material-icons" style="font-size: 48px; color: var(--success-icon);">check</span>
 </div>
-<div class="modal-title" style="font-weight: 500;">ปฏิเสธการขยายวงเงินสำเร็จ</div>
-<div class="modal-subtitle">รายการสิ้นสุดและจะไม่มีการโอนเงิน</div>
-<button class="btn-modal-close" onclick="closeModal('rejectLimitSuccessModal'); finalizeRejectLimit();">ตกลง</button>
+<div class="modal-title" style="font-weight: 500;">ส่งรายการไปรอตรวจสอบแล้ว</div>
+<div class="modal-subtitle">รายการยังคงอยู่ในคิวรอตรวจสอบ (Hold) และสามารถกลับมาอนุมัติได้ภายหลัง</div>
+<button class="btn-modal-close" onclick="closeModal('reviewLimitSuccessModal'); finalizeReviewLimit();">ตกลง</button>
 </div>
 </div>
 <!-- MODAL: ยืนยันการสอบถามธนาคาร (Spec26) -->
@@ -15594,12 +15542,30 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
             if (!isNaN(value)) input.value = value.toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2});
         }
 
+        function escapeNativeClaimText(value) {
+            return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
+                return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character];
+            });
+        }
+
         function handleClaimAddFileChange(input) {
             if (!nativeActiveDocumentKey || !input.files || !input.files.length) return;
             var file = input.files[0];
             var allowed = ['image/jpeg','image/png','application/pdf'];
-            if (allowed.indexOf(file.type) === -1) { showDevToast('รองรับเฉพาะไฟล์ JPG, PNG หรือ PDF'); input.value=''; return; }
-            nativeClaimDocuments[nativeActiveDocumentKey] = { name:file.name, type:file.type, ocr:'ตรวจสอบแล้ว' };
+            if (allowed.indexOf(file.type) === -1) {
+                showDevToast('รองรับเฉพาะไฟล์ JPG, PNG หรือ PDF');
+                input.value = '';
+                return;
+            }
+            if (!file.size || file.size > 50 * 1024 * 1024) {
+                showDevToast(file.size ? 'ไฟล์ต้องมีขนาดไม่เกิน 50 MB' : 'ไม่สามารถแนบไฟล์ว่างได้');
+                input.value = '';
+                return;
+            }
+            // v484: Uploading a local file is NOT OCR validation. Keep a separate attachment state.
+            nativeClaimDocuments[nativeActiveDocumentKey] = {
+                name:file.name, type:file.type, size:file.size, status:'attached', ocr:'not_run'
+            };
             input.value = '';
             renderNativeClaimDocuments();
         }
@@ -15634,9 +15600,9 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
             body.innerHTML = rules.map(function (doc, index) {
                 var uploaded = nativeClaimDocuments[doc.key];
                 if (doc.checks) {
-                    return '<tr><td colspan="6"><div style="font-weight:700;margin-bottom:8px;">' + (index + 1) + '. ' + doc.name + '</div><div class="claim-ocr-document-card"><div class="claim-ocr-upload"><span class="material-icons" style="color:var(--primary-blue);font-size:28px;">cloud_upload</span><div class="claim-ocr-actions"><button type="button" class="btn btn-default" onclick="chooseNativeClaimDocument(\'' + doc.key + '\')"><span class="material-icons" style="font-size:17px;">photo_camera</span> เปิดกล้อง</button><button type="button" class="btn btn-default" onclick="chooseNativeClaimDocument(\'' + doc.key + '\')"><span class="material-icons" style="font-size:17px;">upload_file</span> อัปโหลด</button></div>' + (uploaded ? '<div style="font-size:12px;color:var(--green-btn);">' + uploaded.name + '</div>' : '') + '</div><div class="claim-ocr-checklist">' + doc.checks.map(function (label) { return '<div class="claim-ocr-check-row"><span>' + label + ' :</span><span class="claim-ocr-pending">' + (uploaded ? 'ตรวจแล้ว' : 'รอ OCR') + '</span></div>'; }).join('') + (uploaded ? '<button type="button" class="btn btn-default" style="margin-top:8px;" onclick="removeNativeClaimDocument(\'' + doc.key + '\')">ลบไฟล์</button>' : '') + '</div></div></td></tr>';
+                    return '<tr><td colspan="6"><div style="font-weight:700;margin-bottom:8px;">' + (index + 1) + '. ' + doc.name + '</div><div class="claim-ocr-document-card"><div class="claim-ocr-upload"><span class="material-icons" style="color:var(--primary-blue);font-size:28px;">cloud_upload</span><div class="claim-ocr-actions"><button type="button" class="btn btn-default" onclick="chooseNativeClaimDocument(\'' + doc.key + '\')"><span class="material-icons" style="font-size:17px;">photo_camera</span> เปิดกล้อง</button><button type="button" class="btn btn-default" onclick="chooseNativeClaimDocument(\'' + doc.key + '\')"><span class="material-icons" style="font-size:17px;">upload_file</span> อัปโหลด</button></div>' + (uploaded ? '<div class="claim-attachment-name">' + escapeNativeClaimText(uploaded.name) + '</div>' : '') + '</div><div class="claim-ocr-checklist">' + doc.checks.map(function (label) { return '<div class="claim-ocr-check-row"><span>' + label + ' :</span><span class="claim-ocr-pending">รอ OCR</span></div>'; }).join('') + (uploaded ? '<p class="claim-ocr-prototype-note">แนบไฟล์แล้ว · ยังไม่ได้อ่านข้อมูล OCR (Prototype)</p><button type="button" class="btn btn-default" style="margin-top:8px;" onclick="removeNativeClaimDocument(\'' + doc.key + '\')">ลบไฟล์</button>' : '') + '</div></div></td></tr>';
                 }
-                return '<tr><td>' + doc.code + '</td><td>' + doc.name + '</td><td style="text-align:center;">' + (doc.required ? '<span style="color:var(--red-text);font-weight:700;">จำเป็น</span>' : 'เพิ่มเติม') + '</td><td>' + (uploaded ? uploaded.name : '<span style="color:var(--text-muted);">ยังไม่ได้เลือกไฟล์</span>') + '</td><td style="text-align:center;">' + (uploaded ? '<span class="badge-status badge-success"><span class="badge-dot"></span>ตรวจสอบแล้ว</span>' : '<span class="badge-status badge-pending"><span class="badge-dot"></span>รอเอกสาร</span>') + '</td><td style="text-align:center;"><button type="button" class="btn btn-default" style="height:34px!important;min-height:34px!important;padding:0 12px;" onclick="chooseNativeClaimDocument(\'' + doc.key + '\')">' + (uploaded ? 'เปลี่ยนไฟล์' : 'เลือกไฟล์') + '</button>' + (uploaded ? ' <button type="button" class="icon-action-btn red" title="ลบ" onclick="removeNativeClaimDocument(\'' + doc.key + '\')"><span class="material-icons">delete</span></button>' : '') + '</td></tr>';
+                return '<tr><td>' + doc.code + '</td><td>' + doc.name + '</td><td style="text-align:center;">' + (doc.required ? '<span style="color:var(--red-text);font-weight:700;">จำเป็น</span>' : 'เพิ่มเติม') + '</td><td>' + (uploaded ? escapeNativeClaimText(uploaded.name) : '<span style="color:var(--text-muted);">ยังไม่ได้เลือกไฟล์</span>') + '</td><td style="text-align:center;">' + (uploaded ? '<span class="badge-status badge-info"><span class="badge-dot"></span>แนบไฟล์แล้ว</span>' : '<span class="badge-status badge-pending"><span class="badge-dot"></span>รอเอกสาร</span>') + '</td><td style="text-align:center;"><button type="button" class="btn btn-default" style="height:34px!important;min-height:34px!important;padding:0 12px;" onclick="chooseNativeClaimDocument(\'' + doc.key + '\')">' + (uploaded ? 'เปลี่ยนไฟล์' : 'เลือกไฟล์') + '</button>' + (uploaded ? ' <button type="button" class="icon-action-btn red" title="ลบ" onclick="removeNativeClaimDocument(\'' + doc.key + '\')"><span class="material-icons">delete</span></button>' : '') + '</td></tr>';
             }).join('');
         }
 
@@ -15678,23 +15644,23 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
             var coverage = document.querySelector('input[name="coverageType"]:checked');
             var sub = document.querySelector('input[name="claimSub"]:checked');
             document.getElementById('claimConfirmSchool').innerHTML =
-                '<div class="info-item"><span class="info-label">Application ID :</span><span class="info-value">' + selected.appId + '</span></div>' +
-                '<div class="info-item"><span class="info-label">สถานศึกษา :</span><span class="info-value">' + selected.school + '</span></div>' +
+                '<div class="info-item"><span class="info-label">Application ID :</span><span class="info-value">' + escapeNativeClaimText(selected.appId) + '</span></div>' +
+                '<div class="info-item"><span class="info-label">สถานศึกษา :</span><span class="info-value">' + escapeNativeClaimText(selected.school) + '</span></div>' +
                 '<div class="info-item"><span class="info-label">ผู้ประสานงาน :</span><span class="info-value">นางสาวณัฏฐณิชา โตรักษา</span></div>' +
                 '<div class="info-item"><span class="info-label">เบอร์ติดต่อ :</span><span class="info-value">099-19919999</span></div>';
             document.getElementById('claimConfirmDetails').innerHTML =
-                '<div class="info-item"><span class="info-label">ผู้เอาประกัน :</span><span class="info-value">' + selected.name + '</span></div>' +
-                '<div class="info-item"><span class="info-label">เหตุของการเคลม :</span><span class="info-value">' + (incident ? incident.value : '-') + '</span></div>' +
-                '<div class="info-item"><span class="info-label">ประเภทความคุ้มครอง :</span><span class="info-value">' + (coverage ? coverage.value : '-') + '</span></div>' +
-                '<div class="info-item"><span class="info-label">ตัวเลือกเพิ่มเติม :</span><span class="info-value">' + (sub ? sub.value : '-') + '</span></div>' +
-                '<div class="info-item"><span class="info-label">อาการสำคัญ :</span><span class="info-value">' + complaintInput.value.trim() + '</span></div>' +
-                '<div class="info-item"><span class="info-label">วันที่เกิดเหตุ :</span><span class="info-value">' + document.getElementById('claimIncidentDate').value + '</span></div>' +
-                '<div class="info-item"><span class="info-label">วันที่รักษา :</span><span class="info-value">' + document.getElementById('claimTreatmentDate').value + '</span></div>' +
-                '<div class="info-item"><span class="info-label">โรงพยาบาล :</span><span class="info-value">' + document.getElementById('claimHospital').value + '</span></div>';
+                '<div class="info-item"><span class="info-label">ผู้เอาประกัน :</span><span class="info-value">' + escapeNativeClaimText(selected.name) + '</span></div>' +
+                '<div class="info-item"><span class="info-label">เหตุของการเคลม :</span><span class="info-value">' + escapeNativeClaimText(incident ? incident.value : '-') + '</span></div>' +
+                '<div class="info-item"><span class="info-label">ประเภทความคุ้มครอง :</span><span class="info-value">' + escapeNativeClaimText(coverage ? coverage.value : '-') + '</span></div>' +
+                '<div class="info-item"><span class="info-label">ตัวเลือกเพิ่มเติม :</span><span class="info-value">' + escapeNativeClaimText(sub ? sub.value : '-') + '</span></div>' +
+                '<div class="info-item"><span class="info-label">อาการสำคัญ :</span><span class="info-value">' + escapeNativeClaimText(complaintInput.value.trim()) + '</span></div>' +
+                '<div class="info-item"><span class="info-label">วันที่เกิดเหตุ :</span><span class="info-value">' + escapeNativeClaimText(document.getElementById('claimIncidentDate').value) + '</span></div>' +
+                '<div class="info-item"><span class="info-label">วันที่รักษา :</span><span class="info-value">' + escapeNativeClaimText(document.getElementById('claimTreatmentDate').value) + '</span></div>' +
+                '<div class="info-item"><span class="info-label">โรงพยาบาล :</span><span class="info-value">' + escapeNativeClaimText(document.getElementById('claimHospital').value) + '</span></div>';
             document.getElementById('claimConfirmTotal').innerText = amount.toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' บาท';
             var uploadedDocs = getNativeClaimDocumentRules().filter(function (doc) { return nativeClaimDocuments[doc.key]; });
-            document.getElementById('claimConfirmDocuments').innerHTML = '<div style="font-weight:700;margin-bottom:8px;">ผลตรวจสอบเอกสาร OCR</div><div style="display:flex;flex-wrap:wrap;gap:8px;">' + uploadedDocs.map(function (doc) {
-                return '<span class="badge-status badge-success"><span class="badge-dot"></span>' + doc.name + ' · ข้อมูลตรงกัน</span>';
+            document.getElementById('claimConfirmDocuments').innerHTML = '<div style="font-weight:700;margin-bottom:8px;">เอกสารประกอบเคลม</div><p class="claim-ocr-prototype-note">รายการนี้เป็น Prototype: แนบไฟล์ในเครื่องเท่านั้น ยังไม่ได้ส่งเข้า DocStorage หรือผ่าน OCR</p><div style="display:flex;flex-wrap:wrap;gap:8px;">' + uploadedDocs.map(function (doc) {
+                return '<span class="badge-status badge-info"><span class="badge-dot"></span>' + escapeNativeClaimText(doc.name) + ' · แนบไฟล์แล้ว</span>';
             }).join('') + '</div>';
             var isBeneficiary = coverage && (coverage.value === 'เสียชีวิต' || coverage.value === 'ทุพพลภาพ/สูญเสียอวัยวะ');
             document.getElementById('claimConfirmAccount').innerHTML = isBeneficiary
@@ -15856,8 +15822,12 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
         function toggleSidebar() {
             var sidebar = document.getElementById('appSidebar');
             var btn = document.getElementById('sidebarToggleBtn');
+            if (!sidebar || !btn) { return; }
             var collapsed = sidebar.classList.toggle('collapsed');
             btn.title = collapsed ? 'เปิดเมนู' : 'ปิดเมนู';
+            btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            btn.setAttribute('aria-label', collapsed ? 'ขยายเมนูหลัก' : 'ย่อเมนูหลัก');
+            btn.textContent = collapsed ? 'menu_open' : 'menu';
             closeFlyout();
         }
 
@@ -16180,7 +16150,8 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
         var inlineTransactionRunningNumber = 112;
 
         function confirmInlineClaimTransfer() {
-            if (!pendingInlineClaimTransfer) return;
+            // v484: a repeated confirm action must never create a second CL / CC / CPG.
+            if (!pendingInlineClaimTransfer || pendingInlineClaimTransfer.createdRecord) return;
             var now = new Date();
             var pad = function (value, length) { return String(value).padStart(length || 2, '0'); };
             var buddhistYear = now.getFullYear() + 543;
@@ -16632,7 +16603,7 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
                 document.getElementById('statusConditionPage').classList.add('active');
                 if (statusConditionMenu) statusConditionMenu.classList.add('section-active');
                 document.getElementById('pageHeaderTitle').innerText = 'เงื่อนไขสถานะ';
-                document.getElementById('breadcrumbArea').innerHTML = 'สำหรับทดสอบ &gt; เงื่อนไขสถานะ';
+                document.getElementById('breadcrumbArea').innerHTML = 'เอกสารสำหรับพัฒนา &gt; เงื่อนไขสถานะ';
             } else if (pageId === 'settingPage') {
                 document.getElementById('settingPage').classList.add('active');
                 document.getElementById('menuSettingTransfer').classList.add('section-active');
@@ -16772,8 +16743,8 @@ body.dark-mode #approveRefundModal .approve-refund-system-modal,body.dark-mode #
                     '<td><span style="display:inline-block;padding:4px 8px;border-radius:12px;background:var(--info-bg);color:var(--primary-blue);font-weight:600;">'+row.product+'</span></td>'+
                     '<td><button type="button" onclick="copyMockValue(\''+row.appId+'\')" title="คัดลอก Application ID" style="border:none;background:none;color:var(--primary-blue);text-decoration:underline;cursor:pointer;font:inherit;padding:0;">'+row.appId+'</button></td>'+
                     '<td>'+row.name+'</td><td>'+row.idCard+'</td><td>'+row.plan+'</td><td>'+(row.school||'-')+'</td>'+
-                    '<td><span class="badge-status badge-success"><span class="badge-dot"></span>'+row.status+'</span>'+
-                    '<div style="font-size:12px;color:var(--text-muted);margin-top:5px;line-height:1.4;">'+(row.mockScenarioLabel||'Flow ปกติ')+'</div></td></tr>';
+                    '<td><span class="badge-status badge-success"><span class="badge-dot"></span>'+row.status+'</span></td>'+
+                    '<td><span style="color:var(--text-secondary);line-height:1.5;">'+(row.mockScenarioLabel||'Flow ปกติ')+'</span></td></tr>';
             }).join('');
         }
         function filterMockData(){ renderMockData(); }
@@ -18319,7 +18290,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                 tr.setAttribute('data-status', 'pending');
                 tr.setAttribute('data-cl', record.cl);
                 tr.setAttribute('data-cc', record.cc);
-                tr.innerHTML = '<td style="color:var(--primary-blue);">'+record.cl+'</td>'+
+                tr.innerHTML = '<td style="color:var(--primary-blue);">'+record.cl+'</td>'+ 
                     '<td>'+record.cc+'</td>'+
                     '<td>'+record.createdAt+'</td>'+
                     '<td>'+record.name+'</td>'+
@@ -18327,7 +18298,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                     '<td style="text-align:right;">'+formatMoney(refundAmount)+'</td>'+
                     '<td style="text-align:center;" class="refund-status-cell"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span></td>'+
                     '<td>'+reasonText+'</td>'+
-                    '<td style="text-align:center;" class="refund-action-cell"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button></td>';
+                    '<td style="text-align:center;" class="refund-action-cell"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\''+refundOperationId+'\',\''+record.cl+'\',\''+(record.branch||'สำนักงานใหญ่')+'\',\''+record.name+'\',\''+formatMoney(refundAmount)+'\')"><span class="material-icons">visibility</span></button></td>';
                 refundBody.insertBefore(tr, refundBody.firstChild);
             }
 
@@ -18393,7 +18364,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                 tr.setAttribute('data-branch',record.branch||'สำนักงานใหญ่'); tr.setAttribute('data-status','review');
                 tr.innerHTML='<td style="color:var(--primary-blue);">'+record.cl+'</td><td>'+record.cc+'</td><td>'+record.createdAt+'</td><td>'+(record.branch||'สำนักงานใหญ่')+'</td>'+
                     '<td style="text-align:right;">'+formatMoney(addAmount)+'</td><td>5281137123</td><td>โอนเงินเพิ่ม</td>'+
-                    '<td style="text-align:center;" id="'+rowId+'Status"><span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span></td>'+
+                    '<td style="text-align:center;" id="'+rowId+'Status"><span class="badge-status badge-review"><span class="badge-dot"></span> รอตรวจสอบ</span></td>'+
                     '<td id="'+rowId+'Reason">-</td>'+
                     '<td style="text-align:center;" id="'+rowId+'Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button><button class="icon-action-btn" style="color:var(--warning-color);" title="ขยายวงเงิน" onclick="openLimitModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button></td>';
                 body.insertBefore(tr,body.firstChild);
@@ -18873,7 +18844,9 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                     statusCell.innerHTML = '<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>';
                 }
                 if (actionCell) {
-                    actionCell.innerHTML = '<button class="icon-action-btn" title="ดูรายละเอียด (ยังไม่เปิดใช้งาน)" onclick="return false;"><span class="material-icons">visibility</span></button>';
+                    var successNameCell = row.children[3];
+                    var successAmountCell = row.children[5];
+                    actionCell.innerHTML = '<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\'' + operationId + '\',\'' + (row.dataset.cl || '') + '\',\'' + (row.dataset.branch || 'สำนักงานใหญ่') + '\',\'' + (successNameCell ? successNameCell.innerText.trim() : '-') + '\',\'' + (successAmountCell ? successAmountCell.innerText.trim() : '0.00') + '\')"><span class="material-icons">visibility</span></button>';
                 }
             } else if (statusType === 'reject') {
                 row.id = row.id || ('refundRow_' + String(operationId).replace(/[^a-zA-Z0-9_-]/g, '_'));
@@ -18935,7 +18908,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             // หลังอนุมัติจึงเริ่มส่งคำสั่งโอนเงินคืน และ Mock ธนาคาร Delay 10 วินาที
             if (row) { row.setAttribute('data-status', 'pending-transfer'); }
             if (statusCell) {
-                statusCell.innerHTML = '<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>';
+                statusCell.innerHTML = '<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';
             }
             if (actionCell) {
                 actionCell.innerHTML = '-';
@@ -18945,7 +18918,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
                 refundListRow.setAttribute('data-status', 'pending');
                 var listStatusCell = refundListRow.querySelector('.refund-status-cell');
                 var listActionCell = refundListRow.querySelector('.refund-action-cell');
-                if (listStatusCell) listStatusCell.innerHTML = '<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>';
+                if (listStatusCell) listStatusCell.innerHTML = '<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';
                 if (listActionCell) listActionCell.innerHTML = '-';
             }
             filterMonitorTable();
@@ -18998,15 +18971,17 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             var findHistory = function(selector){ return historyModal.querySelector(selector); };
             var setHistoryValue = function(selector,value){ var el=findHistory(selector); if(el) el.innerText=value; };
             var sourceHistoryRow=document.querySelector('#monitorTableBody tr[data-operation-id="'+operationId+'"]');
-            var claimNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cl'):cpg.replace(/^CPG/,'CL');
-            var caseNo=sourceHistoryRow?sourceHistoryRow.getAttribute('data-cc'):cpg.replace(/^CPG/,'CC');
+            var sourceListRow=document.querySelector('#refundTableBody tr[data-operation-id="'+operationId+'"]');
+            var sourceRow=sourceHistoryRow||sourceListRow;
+            var claimNo=sourceRow&&sourceRow.getAttribute('data-cl')?sourceRow.getAttribute('data-cl'):cpg.replace(/^CPG/,'CL');
+            var caseNo=sourceRow&&sourceRow.getAttribute('data-cc')?sourceRow.getAttribute('data-cc'):cpg.replace(/^CPG/,'CC');
             var historyIsHospital=sourceHistoryRow&&sourceHistoryRow.getAttribute('data-owner-type')==='hospital';
             var historyRecord=typeof getClaimRecordByCC==='function'?getClaimRecordByCC(caseNo):null;
             var historyProduct=(sourceHistoryRow&&sourceHistoryRow.getAttribute('data-product'))||(historyRecord&&historyRecord.product)||(/^CLPA/i.test(claimNo)?'PA':'PH');
             var historySchool=(sourceHistoryRow&&sourceHistoryRow.getAttribute('data-school'))||(historyRecord&&historyRecord.school)||'-';
             var historyOwnerLabel=findHistory('#approveHistoryDetailOwnerLabel');
             if(historyOwnerLabel) historyOwnerLabel.innerText=(historyIsHospital?'โรงพยาบาล':'สาขา')+' :';
-            var refundDate=sourceHistoryRow&&sourceHistoryRow.children[2]?sourceHistoryRow.children[2].innerText:'22/05/2569 06:10:11';
+            var refundDate=sourceRow&&sourceRow.children[2]?sourceRow.children[2].innerText:'-';
             setHistoryValue('#approveHistoryDetailClaimNo',claimNo);
             setHistoryValue('#approveHistoryDetailCPG',caseNo);
             setHistoryValue('#approveHistoryDetailRefundDate',refundDate);
@@ -19017,6 +18992,16 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             setHistoryValue('#approveHistoryDetailAgent','00054 - สุวัฒนา อินทะปัญญา');
             setHistoryValue('#approveHistoryDetailOwner',branch);
             setHistoryValue('#approveHistoryDetailRefundAmount',amount);
+            var refundState=(sourceListRow&&sourceListRow.getAttribute('data-status'))||(sourceHistoryRow&&sourceHistoryRow.getAttribute('data-status'))||'success';
+            var summaryLabel=findHistory('.refund-history-summary-label');
+            var summaryHelp=findHistory('.refund-history-summary-help');
+            if(refundState==='pending'||refundState==='pending-transfer'){
+                if(summaryLabel)summaryLabel.innerText='ยอดที่ขอคืน';
+                if(summaryHelp)summaryHelp.innerText='รายการอยู่ระหว่างรอดำเนินการ';
+            }else if(refundState==='reject'||refundState==='rejected'){
+                if(summaryLabel)summaryLabel.innerText='ยอดที่ขอคืน';
+                if(summaryHelp)summaryHelp.innerText='รายการถูกปฏิเสธ ไม่มีการโอนเงิน';
+            }
             var historyTable=historyModal.querySelector('.data-table'); if(historyTable) historyTable.remove();
             var historyPagination=historyModal.querySelector('.table-pagination'); if(historyPagination) historyPagination.remove();
             var rejectSelect=findHistory('#approveHistoryRejectReasonSelect'); if(rejectSelect){ var rejectArea=rejectSelect.closest('div[style*="display:flex"]'); if(rejectArea) rejectArea.remove(); }
@@ -19033,14 +19018,13 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
 
         // ================= Monitor - ขยายวงเงิน (Spec28) =================
         var limitRowDataMap = {
-            'limitRow1': { cpg: 'CPG690600047', cl: 'CL6904000962', name: 'นาย แดนชัย จันทร์ทรง', amount: '7,000.00', current: '30,000.00', used: '29,000.00', remain: '1,000.00', request: '6,000.00', newRemain: '7,000.00' },
-            'limitRow2': { cpg: 'CPG690600648', cl: 'CL6904000784', name: 'นางสาวรัชชนก สุวรรณโชค', amount: '1,700.00', current: '30,000.00', used: '29,300.00', remain: '700.00', request: '1,000.00', newRemain: '1,700.00' },
+            'limitRow1': { cpg: 'CPG690600047', cl: 'CL6904000962', cc: 'CC6904000962', name: 'นาย แดนชัย จันทร์ทรง', amount: '7,000.00', current: '30,000.00', used: '29,000.00', remain: '1,000.00', request: '6,000.00', newRemain: '7,000.00' },
+            'limitRow2': { cpg: 'CPG690600648', cl: 'CL6904000784', cc: 'CC6904000784', name: 'นางสาวรัชชนก สุวรรณโชค', amount: '1,700.00', current: '30,000.00', used: '29,300.00', remain: '700.00', request: '1,000.00', newRemain: '1,700.00' },
             'limitRow3': { cpg: 'CPG690600784', cl: 'CL6904000318', cc: 'CC6904000318', name: 'นายปารเมศ คำภาพันธ์', amount: '1,000.00', current: '30,000.00', used: '29,800.00', remain: '200.00', request: '800.00', newRemain: '1,000.00', mockBankOutcome: 'system_error' },
-            'limitRowPA1': { cpg: 'CPG690400221', cl: 'CLPA690400221', name: 'ครูสมชาย ใจดี', amount: '8,500.00', current: '30,000.00', used: '29,500.00', remain: '500.00', request: '8,000.00', newRemain: '8,500.00' }
+            'limitRowPA1': { cpg: 'CPG690400221', cl: 'CLPA690400221', cc: 'CC6904000221', name: 'ครูสมชาย ใจดี', amount: '8,500.00', current: '30,000.00', used: '29,500.00', remain: '500.00', request: '8,000.00', newRemain: '8,500.00' }
         };
         var pendingLimitRowId = null;
-        var pendingLimitRejectReason = '';
-        var limitRejectReasonLabels = { wrong_calc: 'คำนวนยอดผิด', wrong_transfer: 'โอนผิดคน' };
+        var pendingLimitReviewNote = '';
 
         function submitLimitSearch() {
             filterLimitTable();
@@ -19090,13 +19074,17 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
 
             var emptyState = document.getElementById('limitTableEmptyState');
             if (emptyState) { emptyState.style.display = visibleCount === 0 ? 'block' : 'none'; }
+            var summary = document.getElementById('limitPaginationText');
+            if (summary) summary.textContent = (visibleCount ? '1-' + visibleCount : '0-0') + ' จาก ' + visibleCount;
         }
 
         function openLimitModal(rowId) {
             var data = limitRowDataMap[rowId] || limitRowDataMap['limitRow1'];
             pendingLimitRowId = rowId;
 
-            document.getElementById('limitDetailCL').innerText = data.cl;
+            // v489: The limit approval is tied to the selected case (CC), not just the claim (CL).
+            var limitSourceRow = document.getElementById(rowId);
+            document.getElementById('limitDetailCC').textContent = data.cc || data.recordCC || (limitSourceRow && limitSourceRow.getAttribute('data-cc')) || '-';
             document.getElementById('limitDetailName').innerText = data.name;
             document.getElementById('limitDetailAmount').innerText = data.amount;
             document.getElementById('limitCurrentAmount').innerText = data.current;
@@ -19105,24 +19093,31 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             document.getElementById('limitRequestAmount').value = '฿ ' + data.request;
             document.getElementById('limitNewRemainAmount').innerText = data.newRemain;
 
-            var reasonSelect = document.getElementById('limitRejectReasonSelect');
-            reasonSelect.value = '';
-            document.getElementById('limitRejectBtn').disabled = true;
+            var reviewNote = document.getElementById('limitReviewNote');
+            var noteCell = document.getElementById(rowId + 'Reason');
+            var row = document.getElementById(rowId);
+            reviewNote.value = (data.reviewNote || (row && row.dataset.status === 'review' && noteCell ? (noteCell.dataset.fullNote || noteCell.textContent.trim()) : '') || '').replace(/^[-–]$/, '');
+            handleLimitReviewNoteChange();
 
             document.getElementById('limitModal').classList.add('active');
         }
 
-        // # จะปฏิเสธได้ก็ต่อเมื่อเลือกสาเหตุการปฏิเสธก่อน (Spec28 B77)
-        function handleLimitReasonChange() {
-            var reasonSelect = document.getElementById('limitRejectReasonSelect');
-            document.getElementById('limitRejectBtn').disabled = !reasonSelect.value;
+        // v496: ปุ่ม "รอตรวจสอบ" หมายถึง Hold รายการ; ไม่ใช่การปฏิเสธวงเงิน
+        function handleLimitReviewNoteChange() {
+            var note = document.getElementById('limitReviewNote');
+            var button = document.getElementById('limitReviewBtn');
+            var counter = document.getElementById('limitReviewNoteCounter');
+            if (button) button.disabled = !note || !note.value.trim();
+            if (counter) counter.textContent = (note ? note.value.length : 0) + '/500';
         }
 
-        function handleLimitRejectClick() {
-            var reasonSelect = document.getElementById('limitRejectReasonSelect');
-            pendingLimitRejectReason = reasonSelect.value;
+        function handleLimitReviewClick() {
+            var note = document.getElementById('limitReviewNote');
+            var button = document.getElementById('limitReviewBtn');
+            if (!note || !note.value.trim() || !button || button.disabled || !pendingLimitRowId) return;
+            pendingLimitReviewNote = note.value.trim();
             closeModal('limitModal');
-            document.getElementById('confirmRejectLimitModal').classList.add('active');
+            document.getElementById('confirmReviewLimitModal').classList.add('active');
         }
 
         function handleLimitAddClick() {
@@ -19144,7 +19139,7 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             }
             if (outcome === 'system_error') {
                 document.getElementById('failTransferModalTitle').innerText = 'ขยายวงเงินไม่สำเร็จ';
-                document.getElementById('failTransferModalSubtitle').innerText = 'ระบบไม่สามารถดำเนินการขยายวงเงินได้ รายการกลับเข้าสถานะรอตรวจสอบเพื่อให้ตรวจสอบและอนุมัติใหม่อีกครั้ง';
+                document.getElementById('failTransferModalSubtitle').innerText = 'ระบบยังไม่สามารถโอนเงินได้ รายการอยู่ในสถานะรอตรวจสอบ (Hold) เพื่อให้เจ้าหน้าที่ตรวจสอบก่อนดำเนินการต่อ';
                 document.getElementById('failTransferModal').classList.add('active');
                 return;
             }
@@ -19173,35 +19168,31 @@ var refundPartyLabel=document.getElementById('refundDetailPartyLabel');
             pendingLimitRowId = null;
         }
 
-        function proceedRejectLimit() {
-            closeModal('confirmRejectLimitModal');
-            document.getElementById('rejectLimitSuccessModal').classList.add('active');
+        function proceedReviewLimit() {
+            if (!pendingLimitRowId || !pendingLimitReviewNote.trim()) return;
+            closeModal('confirmReviewLimitModal');
+            finalizeReviewLimit();
+            document.getElementById('reviewLimitSuccessModal').classList.add('active');
         }
 
-        // Flow ขยายวงเงิน: ไม่อนุมัติ -> ปฏิเสธการขยายวงเงิน -> จบรายการ (เก็บไว้เป็นประวัติใน Monitor)
-        function finalizeRejectLimit() {
-            if (!pendingLimitRowId) { return; }
-            var rejectedLimitData=limitRowDataMap[pendingLimitRowId];
-            if(rejectedLimitData && rejectedLimitData.recordCC){ var cr=getClaimRecordByCC(rejectedLimitData.recordCC); if(cr) cr.limitPending=false; }
-            var row = document.getElementById(pendingLimitRowId);
+        // Static preview fallback; durable transaction override is installed by integration script below.
+        function finalizeReviewLimit() {
+            if (!pendingLimitRowId || !pendingLimitReviewNote.trim()) return;
+            var rowId = pendingLimitRowId;
+            var note = pendingLimitReviewNote.trim();
+            var row = document.getElementById(rowId);
             if (row) {
-                row.setAttribute('data-status', 'rejected');
-                var statusCell = document.getElementById(pendingLimitRowId + 'Status');
-                if (statusCell) {
-                    statusCell.innerHTML = '<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span>';
-                }
-                var reasonCell = document.getElementById(pendingLimitRowId + 'Reason');
-                if (reasonCell) {
-                    reasonCell.innerText = limitRejectReasonLabels[pendingLimitRejectReason] || '-';
-                }
-                var actionCell = document.getElementById(pendingLimitRowId + 'Action');
-                if (actionCell) {
-                    actionCell.innerHTML = '<button class="icon-action-btn" title="ดูรายละเอียด (ยังไม่เปิดใช้งาน)" onclick="return false;"><span class="material-icons">visibility</span></button>';
-                }
+                row.setAttribute('data-status', 'review');
+                var statusCell = document.getElementById(rowId + 'Status');
+                if (statusCell) statusCell.innerHTML = '<span class="badge-status badge-review"><span class="badge-dot"></span> รอตรวจสอบ</span>';
+                var noteCell = document.getElementById(rowId + 'Reason');
+                if (noteCell) noteCell.textContent = note;
+                if (limitRowDataMap[rowId]) limitRowDataMap[rowId].reviewNote = note;
             }
-            filterLimitTable();
             pendingLimitRowId = null;
-            pendingLimitRejectReason = '';
+            pendingLimitReviewNote = '';
+            updateLimitPaginationText();
+            filterLimitTable();
         }
 
         function updateLimitPaginationText() {
@@ -21131,26 +21122,6 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
     };
   }
 
-  if(typeof window.finalizeRejectLimit==='function'){
-    var _finalizeRejectLimit=window.finalizeRejectLimit;
-    window.finalizeRejectLimit=function(){
-      var rowId=(typeof pendingLimitRowId!=='undefined')?pendingLimitRowId:null;
-      var data=null; try{data=rowId&&(limitRowDataMap||{})[rowId];}catch(e){}
-      var result=_finalizeRejectLimit.apply(this,arguments);
-      if(data&&data.recordCC){
-        var r=getRecord(data.recordCC),amount=asNumber(data.addAmountValue);
-        if(r){
-          normalizeRecord(r);
-          var op=findOperation(r,function(o){return o.kind==='limit_transfer' && o.status==='pending_approval' && Math.abs(asNumber(o.amount)-amount)<0.001;});
-          updateOperation(op,{status:'rejected',moneyMoved:false,reason:'ปฏิเสธขยายวงเงิน',completedAt:new Date().toISOString()});
-          r.transactions.unshift({txId:makeId('TX'),date:thaiNow(),type:'ปฏิเสธขยายวงเงิน',actor:'System',amount:amount,status:'rejected',moneyMoved:false,createdAt:new Date().toISOString()});
-          persistSoon();
-        }
-      }
-      return result;
-    };
-  }
-
   // 5) Retry / 1321 / First-transfer correction: normalize + persist หลัง Flow เดิมทำงานเสร็จ
   if(typeof window.closeReTransferSuccess==='function'){
     var _closeRetry=window.closeReTransferSuccess;
@@ -21400,16 +21371,33 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
     var reason=op.reasonText||'คืนเงิน',amount=num(op.amount),remain=Math.max(0,num(record.totalTransferredGross)-num(record.refundCompletedTotal)-num(record.refundPendingTotal));
     var state=op.status, listStatus=state==='success'?'success':state==='rejected'?'reject':'pending';
     var rb=document.getElementById('refundTableBody'),rr=rb&&rb.querySelector('tr[data-operation-id="'+safeId(op.operationId)+'"]');
-    if(rb&&!rr){rr=document.createElement('tr');rr.dataset.operationId=operationId;rb.insertBefore(rr,rb.firstChild);} if(rr){rr.dataset.operationId=operationId;rr.dataset.branch=record.branch||'สำนักงานใหญ่';rr.dataset.status=listStatus;rr.dataset.cl=record.cl||'';rr.dataset.cc=record.cc||'';var badge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';rr.innerHTML='<td style="color:var(--primary-blue);">'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" class="refund-status-cell">'+badge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" class="refund-action-cell">'+(state==='success'?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button>':'-')+'</td>';}
+    if(rb&&!rr){rr=document.createElement('tr');rr.dataset.operationId=operationId;rb.insertBefore(rr,rb.firstChild);}
+    if(rr){
+      rr.dataset.operationId=operationId;
+      rr.dataset.branch=record.branch||'สำนักงานใหญ่';
+      rr.dataset.status=listStatus;
+      rr.dataset.cl=record.cl||'';
+      rr.dataset.cc=record.cc||'';
+      if(state==='rejected'&&!rr.id)rr.id='refundRow_'+safeId(operationId);
+      var badge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';
+      var listAction=state==='rejected'?'<button class="icon-action-btn" style="color: var(--red-text);" title="ยกเลิกรายการ" onclick="openCancelNoteModal(\''+rr.id+'\')"><span class="material-icons">close</span></button>':'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\''+esc(operationId)+'\',\''+esc(record.cl)+'\',\''+esc(record.branch||'สำนักงานใหญ่')+'\',\''+esc(record.name)+'\',\''+money(amount)+'\')"><span class="material-icons">visibility</span></button>';
+      rr.innerHTML='<td style="color:var(--primary-blue);">'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" class="refund-status-cell">'+badge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" class="refund-action-cell">'+listAction+'</td>';
+    }
     if(typeof monitorRowDataMap!=='undefined')monitorRowDataMap[rowId]={operationId:operationId,cpg:record.cl,branch:record.branch||'สำนักงานใหญ่',name:record.name,product:record.product||'PH',school:record.product==='PA'?(record.school||'-'):'-',agent:'00054 - สุวัฒนา อินทะปัญญา',notifyAmount:money(record.transferred),refundAmount:money(amount),remainAmount:money(remain),cl:record.cl,cc:record.cc,date:record.createdAt,recordCC:record.cc,refundAmountValue:amount};
-    var mb=document.getElementById('monitorTableBody'),mr=document.getElementById(rowId);if(mb&&!mr){mr=document.createElement('tr');mr.id=rowId;mb.insertBefore(mr,mb.firstChild);}if(mr){mr.dataset.operationId=operationId;mr.dataset.cpg=record.cl;mr.dataset.cl=record.cl;mr.dataset.cc=record.cc;mr.dataset.branch=record.branch||'สำนักงานใหญ่';mr.dataset.product=record.product||'PH';mr.dataset.school=record.product==='PA'?(record.school||'-'):'-';mr.dataset.status=state==='success'?'success':state==='rejected'?'reject':state==='transferring'?'pending-transfer':'pending';var mBadge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> กำลังโอนเงิน</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';var action=state==='pending_approval'?'<button class="icon-action-btn orange" title="ตรวจสอบ" onclick="openApproveModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button>':(state==='success'||state==='rejected')?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\''+esc(operationId)+'\',\''+esc(record.cl)+'\',\''+esc(record.branch||'สำนักงานใหญ่')+'\',\''+esc(record.name)+'\',\''+money(amount)+'\')"><span class="material-icons">visibility</span></button>':'-';mr.innerHTML='<td>'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td>'+esc(record.branch||'สำนักงานใหญ่')+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" id="'+rowId+'Status">'+mBadge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" id="'+rowId+'Action">'+action+'</td>';}
+    var mb=document.getElementById('monitorTableBody'),mr=document.getElementById(rowId);if(mb&&!mr){mr=document.createElement('tr');mr.id=rowId;mb.insertBefore(mr,mb.firstChild);}if(mr){mr.dataset.operationId=operationId;mr.dataset.cpg=record.cl;mr.dataset.cl=record.cl;mr.dataset.cc=record.cc;mr.dataset.branch=record.branch||'สำนักงานใหญ่';mr.dataset.product=record.product||'PH';mr.dataset.school=record.product==='PA'?(record.school||'-'):'-';mr.dataset.status=state==='success'?'success':state==='rejected'?'reject':state==='transferring'?'pending-transfer':'pending';var mBadge=state==='success'?'<span class="badge-status badge-success"><span class="badge-dot"></span> คืนเงินสำเร็จ</span>':state==='rejected'?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธการคืนเงิน</span>':state==='transferring'?'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอดำเนินการ</span>';var action=state==='pending_approval'?'<button class="icon-action-btn orange" title="ตรวจสอบ" onclick="openApproveModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button>':(state==='success'||state==='rejected')?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="openApproveHistoryModal(\''+esc(operationId)+'\',\''+esc(record.cl)+'\',\''+esc(record.branch||'สำนักงานใหญ่')+'\',\''+esc(record.name)+'\',\''+money(amount)+'\')"><span class="material-icons">visibility</span></button>':'-';mr.innerHTML='<td>'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.name)+'</td><td>'+esc(record.branch||'สำนักงานใหญ่')+'</td><td style="text-align:right;">'+money(record.transferred)+'</td><td style="text-align:right;">'+money(amount)+'</td><td style="text-align:center;" id="'+rowId+'Status">'+mBadge+'</td><td>'+esc(reason)+'</td><td style="text-align:center;" id="'+rowId+'Action">'+action+'</td>';}
     updateOp(op,{queueType:'refund_monitor',queueState:(state==='pending_approval'?'awaiting_approval':state==='transferring'?'waiting_bank':state),queueRowId:rowId});try{filterRefundTable();filterMonitorTable();}catch(e){}
   }
   function ensureLimitRow(record,op){
-    var body=document.getElementById('limitTableBody');if(!body||!record||!op)return null;var rowId=op.queueRowId||('limitOp_'+safeId(op.operationId)),row=document.getElementById(rowId),a=accountSnap(op.accountSnapshot||record.firstClaimAccount||{}),amount=num(op.amount),used=num(op.dailyUsedAtRequest!=null?op.dailyUsedAtRequest:record.dailyUsed),current=30000,remain=Math.max(0,current-used),request=Math.max(0,(used+amount)-current),newRemain=remain+request;op.queueRowId=rowId;
-    if(typeof limitRowDataMap!=='undefined')limitRowDataMap[rowId]={cpg:record.cl,cl:record.cl,cc:record.cc,name:record.name,amount:money(amount),current:money(current),used:money(used),remain:money(remain),request:money(request),newRemain:money(newRemain),recordCC:record.cc,addAmountValue:amount,operationId:op.operationId,accountSnapshot:a};
-    if(!row){row=document.createElement('tr');row.id=rowId;body.insertBefore(row,body.firstChild);}row.dataset.operationId=op.operationId;row.dataset.cpg=record.cl;row.dataset.cl=record.cl;row.dataset.cc=record.cc;row.dataset.branch=record.branch||'สำนักงานใหญ่';row.dataset.status=op.status==='rejected'?'rejected':'review';var rejected=op.status==='rejected';row.innerHTML='<td style="color:var(--primary-blue);">'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.branch||'สำนักงานใหญ่')+'</td><td style="text-align:right;">'+money(amount)+'</td><td>'+esc(a.accountNo||'-')+'</td><td>โอนเงินเพิ่ม</td><td style="text-align:center;" id="'+rowId+'Status">'+(rejected?'<span class="badge-status badge-reject"><span class="badge-dot"></span> ปฏิเสธขยายวงเงิน</span>':'<span class="badge-status badge-pending"><span class="badge-dot"></span> รอตรวจสอบ</span>')+'</td><td id="'+rowId+'Reason">'+esc(rejected?(op.reason||'ปฏิเสธขยายวงเงิน'):'-')+'</td><td style="text-align:center;" id="'+rowId+'Action">'+(rejected?'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button>':'<button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button><button class="icon-action-btn" style="color:var(--warning-color);" title="ขยายวงเงิน" onclick="openLimitModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button>')+'</td>';
-    updateOp(op,{queueType:'limit_monitor',queueState:rejected?'rejected':'awaiting_approval',queueRowId:rowId,accountSnapshot:a});try{updateLimitPaginationText();filterLimitTable();}catch(e){}return row;
+    var body=document.getElementById('limitTableBody');if(!body||!record||!op)return null;
+    var rowId=op.queueRowId||('limitOp_'+safeId(op.operationId)),row=document.getElementById(rowId),a=accountSnap(op.accountSnapshot||record.firstClaimAccount||{}),amount=num(op.amount),used=num(op.dailyUsedAtRequest!=null?op.dailyUsedAtRequest:record.dailyUsed),current=30000,remain=Math.max(0,current-used),request=Math.max(0,(used+amount)-current),newRemain=remain+request;
+    op.queueRowId=rowId;
+    if(typeof limitRowDataMap!=='undefined')limitRowDataMap[rowId]={cpg:record.cl,cl:record.cl,cc:record.cc,name:record.name,amount:money(amount),current:money(current),used:money(used),remain:money(remain),request:money(request),newRemain:money(newRemain),recordCC:record.cc,addAmountValue:amount,operationId:op.operationId,accountSnapshot:a,reviewNote:op.reviewNote||''};
+    if(!row){row=document.createElement('tr');row.id=rowId;body.insertBefore(row,body.firstChild);}
+    var held=op.status==='review_hold';
+    row.dataset.operationId=op.operationId;row.dataset.cpg=record.cl;row.dataset.cl=record.cl;row.dataset.cc=record.cc;row.dataset.branch=record.branch||'สำนักงานใหญ่';row.dataset.status=held?'review':'pending';
+    row.innerHTML='<td style="color:var(--primary-blue);">'+esc(record.cl)+'</td><td>'+esc(record.cc)+'</td><td>'+esc(record.createdAt)+'</td><td>'+esc(record.branch||'สำนักงานใหญ่')+'</td><td style="text-align:right;">'+money(amount)+'</td><td>'+esc(a.accountNo||'-')+'</td><td>โอนเงินเพิ่ม</td><td style="text-align:center;" id="'+rowId+'Status"><span class="badge-status '+(held?'badge-review':'badge-pending')+'"><span class="badge-dot"></span> '+(held?'รอตรวจสอบ':'รอดำเนินการ')+'</span></td><td id="'+rowId+'Reason">'+esc(op.reviewNote||'-')+'</td><td style="text-align:center;" id="'+rowId+'Action"><button class="icon-action-btn" title="ดูรายละเอียด" onclick="return false;"><span class="material-icons">visibility</span></button><button class="icon-action-btn" style="color:var(--warning-color);" title="ขยายวงเงิน" onclick="openLimitModal(\''+rowId+'\')"><span class="material-icons">fact_check</span></button></td>';
+    updateOp(op,{queueType:'limit_monitor',queueState:held?'hold_review':'awaiting_approval',queueRowId:rowId,accountSnapshot:a});
+    try{updateLimitPaginationText();filterLimitTable();}catch(e){}return row;
   }
 
   /* 5) Durable Add Transfer: pending survives refresh; 1321 fails only at Bank Response. */
@@ -21462,7 +21450,7 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
     if(outcome==='system_error'){
       r.limitPending=true;
       addTx(r,{operationId:op.operationId,type:'ขยายวงเงินไม่สำเร็จ',status:'fail',amount:null,moneyMoved:false,actor:'System',reason:'ระบบการโอนเงินขัดข้อง',accountSnapshot:a});
-      updateOp(op,{status:'pending_approval',moneyMoved:false,lastBankResult:'system_error',lastFailureReason:'ระบบการโอนเงินขัดข้อง',updatedAt:nowIso(),queueState:'awaiting_approval'});
+      updateOp(op,{status:'review_hold',moneyMoved:false,lastBankResult:'system_error',lastFailureReason:'ระบบการโอนเงินขัดข้อง',reviewNote:op.reviewNote||'ระบบการโอนเงินขัดข้อง โปรดตรวจสอบก่อนดำเนินการต่อ',updatedAt:nowIso(),queueState:'hold_review'});
       ensureLimitRow(r,op);
       pendingLimitRowId=null;
       try{updateLimitPaginationText();filterLimitTable();}catch(e){}
@@ -21505,7 +21493,24 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
     persist();
     return 'success';
   };
-  window.finalizeRejectLimit=function(){var x=selectedLimitOp();if(!x.record||!x.op)return;var reason=(typeof limitRejectReasonLabels!=='undefined'&&limitRejectReasonLabels[pendingLimitRejectReason])||'ปฏิเสธขยายวงเงิน';x.record.limitPending=false;addTx(x.record,{operationId:x.op.operationId,type:'ปฏิเสธขยายวงเงิน',status:'rejected',amount:num(x.op.amount),moneyMoved:false,reason:reason});updateOp(x.op,{status:'rejected',moneyMoved:false,reason:reason,completedAt:nowIso(),queueState:'rejected'});ensureLimitRow(x.record,x.op);pendingLimitRowId=null;pendingLimitRejectReason='';persist();};
+  window.finalizeReviewLimit=function(){
+    var x=selectedLimitOp(),note=String(pendingLimitReviewNote||'').trim();
+    if(!x.row||!note)return;
+    if(!x.record||!x.op){
+      x.row.dataset.status='review';
+      var badge=document.getElementById(pendingLimitRowId+'Status'),cell=document.getElementById(pendingLimitRowId+'Reason');
+      if(badge)badge.innerHTML='<span class="badge-status badge-review"><span class="badge-dot"></span> รอตรวจสอบ</span>';
+      if(cell)cell.textContent=note;
+      if(x.data)x.data.reviewNote=note;
+      pendingLimitRowId=null;pendingLimitReviewNote='';try{filterLimitTable();}catch(e){}return;
+    }
+    var r=x.record,op=x.op,wasHeld=op.status==='review_hold';
+    r.limitPending=true;
+    if(!wasHeld)addTx(r,{operationId:op.operationId,type:'รอตรวจสอบขยายวงเงิน',status:'review_hold',amount:null,moneyMoved:false,actor:'เจ้าหน้าที่',reason:note});
+    updateOp(op,{status:'review_hold',reviewNote:note,moneyMoved:false,queueState:'hold_review',updatedAt:nowIso()});
+    ensureLimitRow(r,op);
+    pendingLimitRowId=null;pendingLimitReviewNote='';persist();
+  };
 
   /* Exact retry integration for Monitor rows. */
   if(typeof window.confirmReTransfer==='function'){
@@ -21533,7 +21538,11 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
       if(op.kind==='add_transfer'&&op.status==='pending'){if(!op.dueAt)op.dueAt=new Date(new Date(op.createdAt||nowIso()).getTime()+10000).toISOString();ensureAddRow(r,op);schedule(op,function(){finalizeAdd(r,op);});}
       else if(op.kind==='add_transfer'&&op.status==='fail'){ensureAddRow(r,op);}
       if(op.kind==='refund'&&['pending_approval','transferring','rejected','success'].indexOf(op.status)>=0){ensureRefundRows(r,op);if(op.status==='transferring'){if(!op.dueAt)op.dueAt=new Date(new Date(op.approvedAt||op.updatedAt||nowIso()).getTime()+10000).toISOString();schedule(op,function(){finishRefund(r,op);});}}
-      if(op.kind==='limit_transfer'&&['pending_approval','rejected'].indexOf(op.status)>=0){ensureLimitRow(r,op);}
+      if(op.kind==='limit_transfer'&&op.status==='rejected'){
+        op.status='review_hold';op.reviewNote=op.reviewNote||op.reason||'รอตรวจสอบเพิ่มเติม';op.moneyMoved=false;op.queueState='hold_review';
+        (r.transactions||[]).forEach(function(tx){if(tx.operationId===op.operationId&&tx.status==='rejected'){tx.type='รอตรวจสอบขยายวงเงิน';tx.status='review_hold';tx.moneyMoved=false;tx.reason=op.reviewNote;}});
+      }
+      if(op.kind==='limit_transfer'&&['pending_approval','review_hold'].indexOf(op.status)>=0){ensureLimitRow(r,op);}
       else if(op.kind==='limit_transfer'&&op.status==='fail'){ensureAddRow(r,op);}
     });});
     try{filterNativeTransferTracking();filterTransferTable();filterRefundTable();filterMonitorTable();filterLimitTable();}catch(e){}saveRunning();persist();
@@ -21783,15 +21792,6 @@ body.dark-mode .account-closed-warning-v241 .material-icons,
       var out=_approveLimit.apply(this,arguments); persist(); return out;
     };
   }
-  if(typeof window.finalizeRejectLimit==='function'){
-    var _rejectLimit=window.finalizeRejectLimit;
-    window.finalizeRejectLimit=function(){
-      var x=null; try{x=opFromRow(typeof pendingLimitRowId!=='undefined'?pendingLimitRowId:null,typeof limitRowDataMap!=='undefined'?limitRowDataMap:null);}catch(e){}
-      if(x&&x.op){var i=currentIdentity();x.op.rejectedBy=i.displayName;x.op.rejectedByUserId=i.userId||'';}
-      var out=_rejectLimit.apply(this,arguments); persist(); return out;
-    };
-  }
-
   // The claim-creation transaction is a user action. Replace old prototype hard-code only for newly created rows.
   if(typeof window.confirmInlineClaimTransfer==='function'){
     var _claim=window.confirmInlineClaimTransfer;
@@ -23855,10 +23855,10 @@ html[data-theme="dark"] .ca-filter-selector-bar{
   outline:2px solid var(--ca-focus,#93C5FD) !important;
   outline-offset:2px !important;
 }
-#claimTransferTrackingNativePage .transfer-status-option.success.active{color:#15803D !important;border-color:#4ADE80 !important;background:#DCFCE7 !important;}
-#claimTransferTrackingNativePage .transfer-status-option.waiting.active{color:#A16207 !important;border-color:#FACC15 !important;background:#FEF9C3 !important;}
-#claimTransferTrackingNativePage .transfer-status-option.transferring.active{color:#1D4ED8 !important;border-color:#60A5FA !important;background:#DBEAFE !important;}
-#claimTransferTrackingNativePage .transfer-status-option.fail.active{color:#B91C1C !important;border-color:#F87171 !important;background:#FEE2E2 !important;}
+#claimTransferTrackingNativePage .transfer-status-option.success.active{color:#276749 !important;border-color:#C6DED0 !important;background:#F0F7F2 !important;}
+#claimTransferTrackingNativePage .transfer-status-option.waiting.active{color:#8A651E !important;border-color:#E8DDC4 !important;background:#FCF8EE !important;}
+#claimTransferTrackingNativePage .transfer-status-option.transferring.active{color:#285F91 !important;border-color:#CADDEF !important;background:#F0F6FC !important;}
+#claimTransferTrackingNativePage .transfer-status-option.fail.active{color:#994646 !important;border-color:#E9D0D0 !important;background:#FBF1F1 !important;}
 body.dark-mode #claimTransferTrackingNativePage .transfer-status-option,
 html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option{
   color:#94A3B8 !important;
@@ -23866,13 +23866,13 @@ html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option
   background:#1E293B !important;
 }
 body.dark-mode #claimTransferTrackingNativePage .transfer-status-option.success.active,
-html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.success.active{color:#86EFAC !important;border-color:rgba(74,222,128,.52) !important;background:rgba(22,163,74,.20) !important;}
+html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.success.active{color:#A8D6B8 !important;border-color:#426954 !important;background:#20382D !important;}
 body.dark-mode #claimTransferTrackingNativePage .transfer-status-option.waiting.active,
-html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.waiting.active{color:#FDE047 !important;border-color:rgba(250,204,21,.52) !important;background:rgba(202,138,4,.20) !important;}
+html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.waiting.active{color:#E1C889 !important;border-color:#6B5B3A !important;background:#383124 !important;}
 body.dark-mode #claimTransferTrackingNativePage .transfer-status-option.transferring.active,
-html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.transferring.active{color:#93C5FD !important;border-color:rgba(96,165,250,.52) !important;background:rgba(37,99,235,.20) !important;}
+html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.transferring.active{color:#A8C9E9 !important;border-color:#456381 !important;background:#213347 !important;}
 body.dark-mode #claimTransferTrackingNativePage .transfer-status-option.fail.active,
-html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.fail.active{color:#FCA5A5 !important;border-color:rgba(248,113,113,.54) !important;background:rgba(220,38,38,.20) !important;}
+html[data-theme="dark"] #claimTransferTrackingNativePage .transfer-status-option.fail.active{color:#E3ACAC !important;border-color:#775050 !important;background:#3D282B !important;}
 @media (max-width:1100px){
   #claimTransferTrackingNativePage .transfer-filter-layout{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
   #claimTransferTrackingNativePage .transfer-filter-layout > .transfer-filter-column:nth-of-type(1) > .form-group:nth-of-type(1),
@@ -24563,9 +24563,9 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
       if(phase==='rejected')return /โอนเพิ่ม\s*ปฏิเสธ/.test(type);
     }
     if(kind==='limit_transfer'){
-      if(phase==='request')return /ขยายวงเงิน/.test(type) && !/สำเร็จ|ปฏิเสธ/.test(type);
+      if(phase==='request')return type==='ขยายวงเงิน';
+      if(phase==='hold')return /รอตรวจสอบขยายวงเงิน/.test(type);
       if(phase==='success')return /ขยายวงเงินและโอนเพิ่มสำเร็จ/.test(type);
-      if(phase==='rejected')return /ปฏิเสธขยายวงเงิน|โอนเพิ่ม\s*ปฏิเสธ/.test(type);
     }
     if(kind==='refund'){
       if(phase==='request')return type==='แจ้งคืนเงิน'||type==='คืนเงิน'||type==='รอดำเนินการคืนเงิน';
@@ -24868,8 +24868,8 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
         var limitDate=op.completedAt||op.updatedAt||op.createdAt;
         if(status==='success')push('โอนเงินสำเร็จ','System',amount,limitDate,'limit_success',60);
         else if(status==='fail'||status==='failed')push('โอนเงินไม่สำเร็จ','System',null,limitDate,'limit_fail',60);
-        else if(status==='rejected')push('ปฏิเสธขยายวงเงิน',decisionActor(record,op,'rejected'),null,limitDate,'limit_rejected',55);
-        else if(status==='pending_approval'&&s(op.lastBankResult)==='system_error')push('ขยายวงเงินไม่สำเร็จ','System',null,op.updatedAt||op.createdAt,'limit_system_fail',60);
+        else if(status==='review_hold')push('รอตรวจสอบ',decisionActor(record,op,'review_hold'),null,limitDate,'limit_hold',55);
+        else if(status==='review_hold'&&s(op.lastBankResult)==='system_error')push('ขยายวงเงินไม่สำเร็จ','System',null,op.updatedAt||op.createdAt,'limit_system_fail',60);
         return;
       }
       if(kind==='refund'){
@@ -24889,9 +24889,10 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
     if(/โอนเพิ่มสำเร็จ/.test(t)&&!/ขยายวงเงิน/.test(t))return 'add_success';
     if(/โอนเพิ่มไม่สำเร็จ/.test(t))return 'add_fail';
     if(/โอนเพิ่ม\s*ปฏิเสธ|ปฏิเสธการโอนเพิ่ม/.test(t))return 'add_rejected';
-    if(/ขยายวงเงิน/.test(t)&&!/สำเร็จ|ปฏิเสธ/.test(t))return 'limit_request';
+    if(/รอตรวจสอบขยายวงเงิน/.test(t))return 'limit_hold';
+    if(t==='ขยายวงเงิน')return 'limit_request';
     if(/ขยายวงเงินและโอนเพิ่มสำเร็จ/.test(t))return 'limit_success';
-    if(/ปฏิเสธขยายวงเงิน/.test(t))return 'limit_rejected';
+    
     if(t==='คืนเงิน'||t==='แจ้งคืนเงิน'||t==='รอดำเนินการคืนเงิน')return 'refund_request';
     if(/คืนเงิน\s*สำเร็จ|คืนเงินสำเร็จ/.test(t))return 'refund_success';
     if(/คืนเงิน\s*ปฏิเสธ|ปฏิเสธการคืนเงิน/.test(t))return 'refund_rejected';
@@ -25561,22 +25562,35 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
   var MOCK_ROW_ID='limitRow3';
   var MOCK_CC='CC6904000318';
   var MOCK_OPERATION_ID='LIMIT-MOCK-CC6904000318';
+  var MOCK_ACCOUNT={relation:'ผู้เอาประกัน',bankCode:'KTB',bankName:'กรุงไทย',accountNo:'1821000453',accountName:'นายปารเมศ คำภาพันธ์'};
 
   function nowThai(){
     var d=new Date(),pad=function(v){return String(v).padStart(2,'0');};
     return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+(d.getFullYear()+543)+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
   }
   function records(){try{return Array.isArray(claimSearchData)?claimSearchData:[];}catch(e){return [];}}
+  function ensureAccountSnapshot(record){
+    if(!record)return record;
+    record.firstClaimAccount=Object.assign({},record.firstClaimAccount||{},MOCK_ACCOUNT);
+    record.transactionOperations=Array.isArray(record.transactionOperations)?record.transactionOperations:[];
+    record.transactionOperations.forEach(function(operation){
+      if(!operation)return;
+      var isTarget=operation.operationId===MOCK_OPERATION_ID || (operation.kind==='limit_transfer'&&Number(operation.amount||0)===800);
+      if(isTarget)operation.accountSnapshot=Object.assign({},MOCK_ACCOUNT);
+    });
+    return record;
+  }
   function findOrCreateRecord(){
     var list=records(),record=list.find(function(item){return item&&item.cc===MOCK_CC;});
-    if(record)return record;
+    if(record)return ensureAccountSnapshot(record);
     record={
       product:'PH',cl:'CL6904000318',cc:MOCK_CC,cpg:'CPG690600784',
       coverage:'อุบัติเหตุ/ค่ารักษา/OPD',createdAt:'10/10/2569 11:24:23',
       amount:'1,000.00',initialTransfer:1000,transferred:1000,totalTransferredGross:1000,
       coverageLimit:30000,dailyUsed:29800,daysSinceFirstClaim:1,isFirstClaim:true,
       firstTransferSuccess:true,name:'นายปารเมศ คำภาพันธ์',school:'-',branch:'สำนักงานใหญ่',
-      claimStatus:'normal',limitPending:true,transactions:[],transferHistory:[],refundHistory:[],transactionOperations:[]
+      firstClaimAccount:Object.assign({},MOCK_ACCOUNT),claimStatus:'normal',limitPending:true,
+      transactions:[],transferHistory:[],refundHistory:[],transactionOperations:[]
     };
     list.push(record);
     return record;
@@ -25587,9 +25601,10 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
     record.transactionOperations=Array.isArray(record.transactionOperations)?record.transactionOperations:[];
     var operation=record.transactionOperations.find(function(item){return item&&item.operationId===MOCK_OPERATION_ID;});
     if(!operation){
-      operation={operationId:MOCK_OPERATION_ID,kind:'limit_transfer',status:'pending_approval',amount:800,moneyMoved:false,createdAt:new Date().toISOString(),queueType:'limit_monitor'};
+      operation={operationId:MOCK_OPERATION_ID,kind:'limit_transfer',status:'pending_approval',amount:800,moneyMoved:false,accountSnapshot:Object.assign({},MOCK_ACCOUNT),createdAt:new Date().toISOString(),queueType:'limit_monitor'};
       record.transactionOperations.push(operation);
     }
+    operation.accountSnapshot=Object.assign({},MOCK_ACCOUNT);
     operation.status='pending_approval';
     operation.moneyMoved=false;
     operation.queueState='awaiting_approval';
@@ -25616,6 +25631,16 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
       if(rowId===MOCK_ROW_ID&&data&&data.mockBankOutcome==='system_error')return logSystemFailure();
       return previousFinalize.apply(this,arguments);
     };
+  }
+
+  /* Migrate persisted v460 mock data that was created before accountSnapshot existed. */
+  var savedRecord=records().find(function(item){return item&&item.cc===MOCK_CC;});
+  if(savedRecord){
+    ensureAccountSnapshot(savedRecord);
+    try{if(window.ClaimTransactionCore&&typeof window.ClaimTransactionCore.persist==='function')window.ClaimTransactionCore.persist();}catch(e){}
+    window.setTimeout(function(){
+      try{if(window.ClaimAgentTransactionV317&&typeof window.ClaimAgentTransactionV317.refresh==='function')window.ClaimAgentTransactionV317.refresh();}catch(e){}
+    },0);
   }
 
   window.ClaimAgentLimitSystemErrorMockV460={rowId:MOCK_ROW_ID,operationId:MOCK_OPERATION_ID,log:logSystemFailure};
@@ -25692,20 +25717,26 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
       try{ localStorage.removeItem(key); }catch(e){}
     });
   }
+  var resetDialogReturnFocus=null;
   window.openResetMockDataModal=function(){
     var modal=document.getElementById('resetMockDataModal');
     if(!modal)return;
+    resetDialogReturnFocus=document.activeElement;
     modal.style.display='flex';
+    modal.classList.add('active');
     modal.setAttribute('aria-hidden','false');
     var cancel=modal.querySelector('.btn-modal-cancel');
-    if(cancel)window.setTimeout(function(){cancel.focus();},0);
+    if(cancel)window.setTimeout(function(){if(modal.classList.contains('active'))cancel.focus();},50);
   };
   window.closeResetMockDataModal=function(event){
     if(event&&event.target!==event.currentTarget)return;
     var modal=document.getElementById('resetMockDataModal');
-    if(!modal)return;
+    if(!modal||!modal.classList.contains('active'))return;
+    modal.classList.remove('active');
     modal.style.display='none';
     modal.setAttribute('aria-hidden','true');
+    if(resetDialogReturnFocus&&resetDialogReturnFocus.isConnected)resetDialogReturnFocus.focus();
+    resetDialogReturnFocus=null;
   };
   window.confirmResetMockData=function(){
     /* Transaction Core persists during beforeunload; clear once more afterwards
@@ -25715,10 +25746,567 @@ body.dark-mode #refundAddPage .refund-add-hint,html[data-theme="dark"] #refundAd
     window.location.reload();
   };
   document.addEventListener('keydown',function(event){
-    if(event.key==='Escape')window.closeResetMockDataModal();
+    var modal=document.getElementById('resetMockDataModal');
+    if(!modal||!modal.classList.contains('active'))return;
+    if(event.key==='Escape'){
+      event.preventDefault();
+      window.closeResetMockDataModal();
+      return;
+    }
+    if(event.key==='Tab'){
+      var controls=Array.from(modal.querySelectorAll('button:not([disabled]),a[href],input:not([disabled])'));
+      if(!controls.length)return;
+      var first=controls[0],last=controls[controls.length-1];
+      if(event.shiftKey&&(document.activeElement===first||!modal.contains(document.activeElement))){
+        event.preventDefault();last.focus();
+      }else if(!event.shiftKey&&(document.activeElement===last||!modal.contains(document.activeElement))){
+        event.preventDefault();first.focus();
+      }
+    }
   });
 })();
 </script>
+<style id="claimagent-v482-dark-mode-coverage">
+/* Final dark-mode coverage: keep late component styles on the shared system tokens. */
+body.dark-mode .ca-cal-select{
+  background:var(--ca-input)!important;
+  color:var(--ca-text)!important;
+  border-color:var(--ca-border-strong)!important;
+}
+body.dark-mode .ca-day.today{background:var(--ca-surface-3)!important;color:var(--ca-primary)!important;}
+body.dark-mode .ca-day.muted{color:var(--ca-text-muted)!important;}
+
+body.dark-mode #branchApproveRefundModal .approve-owner-type-badge{
+  background:var(--ca-surface-3)!important;color:var(--ca-text-secondary)!important;
+}
+body.dark-mode #branchApproveRefundModal .branch-approve-case{
+  background:var(--ca-info-bg)!important;border-color:var(--ca-info-border)!important;color:var(--ca-info)!important;
+}
+body.dark-mode #branchApproveRefundModal .branch-approve-amount-grid>div{
+  background:var(--ca-surface-2)!important;border-color:var(--ca-border)!important;
+}
+body.dark-mode #branchApproveRefundModal .branch-approve-actions .btn-modal-danger,
+body.dark-mode #approveRefundModal .approve-refund-actions .btn-modal-danger{
+  background:var(--ca-surface)!important;border-color:var(--ca-danger)!important;color:var(--ca-danger)!important;
+}
+body.dark-mode #branchApproveRefundModal .branch-approve-actions .btn-modal-danger:hover:not(:disabled),
+body.dark-mode #approveRefundModal .approve-refund-actions .btn-modal-danger:hover:not(:disabled){background:var(--ca-danger-bg)!important;}
+
+body.dark-mode #approveRefundModal .approve-source-badge,
+body.dark-mode #hospitalRefundDetailPage .approve-source-badge{
+  background:var(--ca-info-bg)!important;color:var(--ca-info)!important;
+}
+body.dark-mode #approveRefundModal .approve-owner-type-badge,
+body.dark-mode #hospitalRefundDetailPage .approve-owner-type-badge{
+  background:var(--ca-surface-3)!important;color:var(--ca-text-secondary)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-source-note,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-source-note{
+  background:var(--ca-info-bg)!important;border-color:var(--ca-info-border)!important;color:var(--ca-text-secondary)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-source-note .material-icons,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-source-note .material-icons{color:var(--ca-info)!important;}
+body.dark-mode #approveRefundModal .approve-refund-request-summary,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-request-summary{
+  background:var(--ca-info-bg)!important;border-color:var(--ca-info-border)!important;border-left-color:var(--ca-primary)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-request-summary>div,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-request-summary>div{border-color:var(--ca-info-border)!important;}
+body.dark-mode #approveRefundModal .approve-refund-request-summary strong,
+body.dark-mode #approveRefundModal .approve-refund-pending-text,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-request-summary strong,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-pending-text{color:var(--ca-info)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card{background:var(--ca-surface-2)!important;border-color:var(--ca-border)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--notify,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--notify{
+  background:var(--ca-info-bg)!important;border-color:var(--ca-info-border)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--refund,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--refund{
+  background:var(--ca-danger-bg)!important;border-color:var(--ca-danger-border)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--remain,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--remain{
+  background:var(--ca-success-bg)!important;border-color:var(--ca-success-border)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--notify .info-label,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--notify .info-label{color:var(--ca-text-secondary)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--notify .info-value,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--notify .info-value{color:var(--ca-info)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--refund .info-label,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--refund .info-label{color:var(--ca-danger)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--refund .info-value,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--refund .info-value{color:var(--ca-danger)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--remain .info-label,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--remain .info-label{color:var(--ca-success)!important;}
+body.dark-mode #approveRefundModal .approve-refund-amount-card--remain .info-value,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-amount-card--remain .info-value{color:var(--ca-success)!important;}
+body.dark-mode #approveRefundModal .approve-refund-bank-card,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-bank-card{
+  background:var(--ca-surface-2)!important;border-color:var(--ca-info-border)!important;
+}
+body.dark-mode #approveRefundModal .approve-refund-view-only,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-view-only{
+  background:var(--ca-warning-bg)!important;border-color:var(--ca-warning-border)!important;color:var(--ca-warning)!important;
+}
+body.dark-mode #hospitalRefundDetailPage .approve-refund-section,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-decision,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-request-grid>div,
+body.dark-mode #hospitalRefundDetailPage .approve-refund-document-row{background:var(--ca-surface)!important;border-color:var(--ca-border)!important;}
+
+body.dark-mode #approveHistoryModal .old-account-card{background:var(--ca-surface)!important;color:var(--ca-text)!important;}
+body.dark-mode #approveHistoryModal .refund-history-summary-card{
+  background:var(--ca-success-bg)!important;border-color:var(--ca-success-border)!important;
+}
+body.dark-mode #approveHistoryModal .refund-history-summary-label,
+body.dark-mode #approveHistoryModal .refund-history-summary-help,
+body.dark-mode #approveHistoryModal .refund-history-summary-card strong{color:var(--ca-success)!important;}
+
+body.dark-mode #systemFlowPage [style*="background:#EFF6FF" i]{
+  background:var(--ca-info-bg)!important;border-color:var(--ca-info-border)!important;color:var(--ca-text-secondary)!important;
+}
+body.dark-mode #addSpecChoiceModal>div,
+body.dark-mode #refundSpecChoiceModal>div{background:var(--ca-surface)!important;color:var(--ca-text)!important;}
+body.dark-mode #addSpecChoiceModal>div>div:first-child,
+body.dark-mode #refundSpecChoiceModal>div>div:first-child{border-bottom-color:var(--ca-border)!important;}
+body.dark-mode #addSpecChoiceModal strong,
+body.dark-mode #refundSpecChoiceModal strong{color:var(--ca-text-strong)!important;}
+body.dark-mode #addSpecChoiceModal a[style*="background:#fff" i],
+body.dark-mode #refundSpecChoiceModal a[style*="background:#fff" i]{background:var(--ca-surface-2)!important;color:var(--ca-primary)!important;border-color:var(--ca-primary)!important;}
+</style>
+<script id="claimagent-v484-inline-dialog-accessibility">
+(function(){
+  'use strict';
+  var ids=['inlineClaimTransferConfirmModal','inlineClaimTransferSuccessModal'];
+  var returnFocus=new WeakMap();
+  function sync(modal){
+    var open=modal.classList.contains('active');
+    modal.setAttribute('aria-hidden',open?'false':'true');
+    if(open){
+      if(!returnFocus.has(modal))returnFocus.set(modal,document.activeElement);
+      window.setTimeout(function(){
+        if(modal.classList.contains('active')){
+          var target=modal.querySelector('.flow-modal-close');
+          if(target && !modal.contains(document.activeElement))target.focus();
+        }
+      },50);
+    } else if(returnFocus.has(modal)){
+      var previous=returnFocus.get(modal);
+      returnFocus.delete(modal);
+      if(previous && previous.isConnected && !document.querySelector('.modal-overlay.active'))previous.focus();
+    }
+  }
+  ids.forEach(function(id){
+    var modal=document.getElementById(id);
+    if(!modal)return;
+    new MutationObserver(function(){sync(modal);}).observe(modal,{attributes:true,attributeFilter:['class']});
+    sync(modal);
+  });
+})();
+</script>
+<style id="claimagent-v484-document-status">
+.claim-attachment-name{max-width:100%;overflow-wrap:anywhere;font-size:12px;color:var(--ca-primary,var(--primary-blue));}
+.claim-ocr-prototype-note{margin:8px 0 0;font-size:12px;line-height:1.5;color:var(--ca-warning,var(--warning-color));}
+body.dark-mode .claim-ocr-prototype-note{color:var(--ca-warning,var(--warning-color));}
+</style>
+<style id="claimagent-v483-hamburger-complete">
+.sidebar-toggle-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  min-width:40px;
+  padding:0;
+  border:0;
+  border-radius:6px;
+  background:transparent;
+  color:var(--ca-text-secondary,var(--text-dark));
+  cursor:pointer;
+  font-size:24px!important;
+  line-height:1;
+  transition:background-color .15s ease,color .15s ease,box-shadow .15s ease;
+}
+.sidebar-toggle-btn:hover{background:var(--ca-surface-3,var(--panel-bg));color:var(--ca-text,var(--text-dark));}
+.sidebar-toggle-btn:focus-visible{outline:0;box-shadow:0 0 0 3px var(--ca-focus,rgba(0,86,157,.20));}
+.sidebar.collapsed .menu-item{font-size:0!important;gap:0!important;}
+.sidebar.collapsed .menu-item .mi,
+.sidebar.collapsed .menu-item #themeToggleIcon{font-size:20px!important;line-height:1!important;margin:0!important;}
+.sidebar.collapsed .menu-item.section-active,
+.sidebar.collapsed .menu-item.active{width:48px!important;min-width:48px!important;margin-left:8px!important;margin-right:8px!important;box-sizing:border-box!important;}
+.sidebar.collapsed .menu-item:focus-visible{outline:2px solid rgba(255,255,255,.78);outline-offset:-4px;}
+.sidebar.collapsed .menu-item[title]::after{display:none!important;}
+@media(max-width:720px){
+  .sidebar-toggle-btn{width:38px;height:38px;min-width:38px;}
+}
+</style>
+
+<!-- v488: Layout only; preserve v487 hold/approve business logic and the existing UI theme. -->
+<style id="claimagent-v488-limit-modal-layout">
+/* Keep the original cards while recovering vertical space for the longer note field. */
+#limitModal .limit-modal-titlebar { margin-bottom: 12px !important; }
+#limitModal .limit-claim-panel { padding: 13px !important; margin-bottom: 14px !important; }
+#limitModal .limit-detail-grid { margin-bottom: 12px !important; }
+#limitModal .limit-detail-box { min-height: 68px !important; padding: 10px 14px !important; }
+#limitModal .limit-claim-panel + hr { margin-bottom: 12px !important; }
+#limitModal .limit-stat-grid { margin-bottom: 10px !important; }
+#limitModal .limit-stat-box { min-height: 80px !important; padding: 10px 14px !important; }
+#limitModal .limit-flat-box { min-height: 52px !important; padding: 10px 16px !important; margin-bottom: 12px !important; }
+/* A single reading path removes the empty area beneath the short, calculated input. */
+#limitModal .limit-form-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: 12px !important;
+  margin: 0 0 14px !important;
+}
+#limitModal .limit-form-grid > .modal-form-group-v2 {
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+#limitModal .limit-readonly-label {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px 10px !important;
+}
+#limitModal .limit-readonly-control {
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+}
+#limitModal #limitReviewNote {
+  display: block !important;
+  width: 100% !important;
+  min-height: 56px !important;
+  height: 56px !important;
+  max-height: none !important;
+  padding: 8px 12px !important;
+  line-height: 1.4 !important;
+  box-sizing: border-box !important;
+  resize: vertical !important;
+}
+#limitModal .limit-review-hint {
+  display: block !important;
+  margin: 6px 0 0 !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere;
+}
+#limitModal .limit-modal-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 172px)) !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 auto !important;
+  padding: 12px 0 2px !important;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: var(--card-bg, #fff);
+  border-top: 1px solid var(--border-color, #e2e8f0);
+}
+#limitModal .modal-content-box {
+  overscroll-behavior: contain;
+}
+body.dark-mode #limitModal .limit-modal-actions {
+  background: var(--card-bg, #192b3b) !important;
+}
+@media (max-width: 720px) {
+  #limitModal .limit-form-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+  #limitModal .limit-modal-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    padding-bottom: 3px !important;
+  }
+}
+
+/* v490: Review/Hold status uses blue, distinct from amber pending status. */
+.badge-status.badge-review {
+  background: var(--ca-info-bg, #EDF6FC) !important;
+  color: var(--ca-info, #226EA8) !important;
+  border-color: var(--ca-info-border, #C8E2F4) !important;
+}
+.badge-status.badge-review .badge-dot {
+  background: currentColor;
+}
+</style>
+
+
+<style id="claimagent-v494-auto-transfer-layout">
+/* Settings at left, a content-height help card at right, and full-width history below. */
+#settingPage .layout-setting-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(290px, 1.15fr);
+    align-items: start;
+    gap: 16px 20px;
+}
+#settingPage .setting-main-card {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    margin: 0;
+    flex-grow: 0;
+}
+#settingPage .help-card {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    flex: none;
+    margin: 0;
+}
+#settingPage .history-card {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    overflow-x: auto;
+}
+#settingPage .history-table {
+    width: 100%;
+    min-width: 560px;
+    table-layout: fixed;
+}
+@media (max-width: 980px) {
+    #settingPage .layout-setting-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+    #settingPage .setting-main-card { grid-column: 1; grid-row: 1; }
+    #settingPage .help-card { grid-column: 1; grid-row: 2; }
+    #settingPage .history-card { grid-column: 1; grid-row: 3; }
+}
+@media (max-width: 620px) {
+    #settingPage .toggle-row { gap: 12px; flex-wrap: wrap; }
+    #settingPage .setting-card-body, #settingPage .help-card { padding: 16px; }
+}
+</style>
+
+<style id="claimagent-v497-review-btn-status-color">
+/* v497: active "รอตรวจสอบ" button uses the same soft-blue palette as the review status badge. */
+#limitModal #limitReviewBtn:not(:disabled){
+  background: var(--ca-info-bg, #EDF6FC) !important;
+  color: var(--ca-info, #226EA8) !important;
+  border: 1px solid var(--ca-info-border, #C8E2F4) !important;
+  box-shadow: none !important;
+}
+#limitModal #limitReviewBtn:not(:disabled):hover{
+  background: #e5f1fb !important;
+  border-color: #b9d6ee !important;
+  color: #1f6296 !important;
+}
+#limitModal #limitReviewBtn:not(:disabled):focus-visible{
+  outline: 2px solid rgba(34,110,168,.20) !important;
+  outline-offset: 2px;
+}
+body.dark-mode #limitModal #limitReviewBtn:not(:disabled){
+  background: #1e344a !important;
+  color: #afcdea !important;
+  border-color: #365979 !important;
+}
+body.dark-mode #limitModal #limitReviewBtn:not(:disabled):hover{
+  background: #24405a !important;
+  border-color: #44698b !important;
+  color: #c3ddf4 !important;
+}
+</style>
+
+
+<!-- v498: Front-end free-text display only; hold/approve flow and persisted note remain unchanged. -->
+<style id="claimagent-v498-freetext-note">
+#monitorLimitPage #limitTableBody > tr > td:nth-child(9),
+#monitorLimitPage table.data-table > thead > tr > th:nth-child(9) {
+  width: 240px;
+  min-width: 200px;
+  max-width: 240px;
+}
+#monitorLimitPage .ca-limit-note-cell { vertical-align: top; }
+#monitorLimitPage .ca-limit-note-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+  line-height: 1.45;
+  max-height: 2.9em;
+  color: var(--ca-text, #333333);
+}
+#monitorLimitPage .ca-limit-note-open {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 0;
+  margin-top: 3px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--ca-info, #226EA8);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+#monitorLimitPage .ca-limit-note-open[hidden] { display:none !important; }
+#monitorLimitPage .ca-limit-note-open:focus-visible {
+  outline: 2px solid var(--ca-info, #226EA8);
+  outline-offset: 3px;
+}
+#limitModal .ca-limit-note-counter {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text-muted, #64748b);
+  text-align: right;
+}
+#caFullReviewNoteDialog {
+  position: fixed;
+  inset: 0;
+  width: min(560px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  max-height: min(78vh, 620px);
+  padding: 0;
+  border: 1px solid var(--ca-border, #E2E8F0);
+  border-radius: 12px;
+  background: var(--ca-surface, #fff);
+  color: var(--ca-text, #333);
+  box-shadow: 0 16px 42px rgba(15,23,42,.20);
+  font-family: 'Sarabun', sans-serif;
+}
+#caFullReviewNoteDialog::backdrop { background: rgba(15,23,42,.46); }
+#caFullReviewNoteDialog .ca-note-dialog-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--ca-border, #E2E8F0);
+}
+#caFullReviewNoteDialog .ca-note-dialog-head strong { font-size: 16px; color:inherit; }
+#caFullReviewNoteDialog .ca-note-dialog-close {
+  display:inline-grid;
+  place-items:center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor:pointer;
+}
+#caFullReviewNoteDialog .ca-note-dialog-close:hover { background: var(--ca-surface-soft, #f1f5f9); }
+#caFullReviewNoteDialog .ca-note-dialog-close:focus-visible {
+  outline:2px solid var(--ca-info, #226EA8);
+  outline-offset: 2px;
+}
+#caFullReviewNoteDialog .ca-note-dialog-body { padding: 18px 20px 22px; overflow:auto; max-height: calc(min(78vh, 620px) - 69px); }
+#caFullReviewNoteDialog .ca-note-dialog-cc { font-size:12px; color:var(--text-muted, #64748b); margin-bottom: 8px; }
+#caFullReviewNoteDialog .ca-note-dialog-text {
+  font-size:14px;
+  line-height:1.65;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  margin:0;
+  color:inherit;
+}
+body.dark-mode #caFullReviewNoteDialog {
+  background: var(--ca-surface, #192b3b);
+  color: var(--ca-text, #ecf3fb);
+  border-color: var(--ca-border, #405268);
+}
+</style>
+<dialog id="caFullReviewNoteDialog" aria-labelledby="caFullReviewNoteTitle" aria-describedby="caFullReviewNoteText">
+  <div class="ca-note-dialog-head">
+    <strong id="caFullReviewNoteTitle">หมายเหตุรอตรวจสอบ</strong>
+    <button class="ca-note-dialog-close" id="caFullReviewNoteClose" type="button" aria-label="ปิดหน้าต่างหมายเหตุ"><span class="material-icons" aria-hidden="true">close</span></button>
+  </div>
+  <div class="ca-note-dialog-body">
+    <p id="caFullReviewNoteCC" class="ca-note-dialog-cc"></p>
+    <p id="caFullReviewNoteText" class="ca-note-dialog-text"></p>
+  </div>
+</dialog>
+<script id="claimagent-v498-freetext-note-script">
+(function(){
+  'use strict';
+  var body=document.getElementById('limitTableBody');
+  var dialog=document.getElementById('caFullReviewNoteDialog');
+  if(!body||!dialog)return;
+  var returnFocus=null, scheduled=false;
+  function isBlank(s){return !s||s.trim()===''||s.trim()==='-'||s.trim()==='–';}
+  function renderCell(cell){
+    var preview=cell.querySelector('.ca-limit-note-text');
+    // A business-flow update can replace the cell's contents with textContent.
+    // If that happens, recapture the full text before clamping it visually.
+    if(!preview){
+      var raw=cell.textContent||'';
+      var note=isBlank(raw)?'':raw.trim();
+      cell.dataset.fullNote=note;
+      cell.classList.add('ca-limit-note-cell');
+      // Avoid re-writing an existing '-' (which would retrigger the observer forever).
+      if(!note){if(cell.textContent.trim()!=='-')cell.textContent='-';return;}
+      cell.replaceChildren();
+      preview=document.createElement('span');
+      preview.className='ca-limit-note-text';
+      preview.textContent=note;
+      var open=document.createElement('button');
+      open.type='button';
+      open.className='ca-limit-note-open';
+      open.hidden=true;
+      open.textContent='ดูทั้งหมด';
+      var row=cell.closest('tr');
+      open.setAttribute('aria-label','ดูหมายเหตุรอตรวจสอบทั้งหมดของ '+((row&&row.dataset.cc)||'รายการนี้'));
+      cell.append(preview,open);
+    }
+    var button=cell.querySelector('.ca-limit-note-open');
+    if(button){
+      // A hidden page cannot be measured; measure again when the page opens.
+      if(!preview.getClientRects().length){button.hidden=true;return;}
+      button.hidden=!(preview.scrollHeight>preview.clientHeight+2);
+    }
+  }
+  function renderAll(){
+    scheduled=false;
+    body.querySelectorAll('td[id$="Reason"]').forEach(renderCell);
+  }
+  function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(renderAll);}
+  function close(){if(dialog.open)dialog.close();}
+  body.addEventListener('click',function(e){
+    var button=e.target.closest('.ca-limit-note-open');
+    if(!button||!body.contains(button))return;
+    var cell=button.closest('td'), row=button.closest('tr');
+    if(!cell)return;
+    returnFocus=button;
+    document.getElementById('caFullReviewNoteText').textContent=cell.dataset.fullNote||'';
+    document.getElementById('caFullReviewNoteCC').textContent=row&&row.dataset.cc?'เลขที่เคส: '+row.dataset.cc:'';
+    if(!dialog.open)dialog.showModal();
+    document.getElementById('caFullReviewNoteClose').focus();
+  });
+  document.getElementById('caFullReviewNoteClose').addEventListener('click',close);
+  dialog.addEventListener('click',function(e){if(e.target===dialog)close();});
+  dialog.addEventListener('close',function(){if(returnFocus&&returnFocus.isConnected)returnFocus.focus();returnFocus=null;});
+  new MutationObserver(schedule).observe(body,{subtree:true,childList:true,characterData:true});
+  var page=document.getElementById('monitorLimitPage');
+  if(page)new MutationObserver(schedule).observe(page,{attributes:true,attributeFilter:['class']});
+  window.addEventListener('resize',schedule);
+  schedule();
+})();
+</script>
+
 </body>
 </html>
 <!-- v249: After closing the final claim success popup, return to the initial Claim Notice insured-search page instead of staying on the claim-entry form. -->
