@@ -12195,7 +12195,9 @@ body.dark-mode #claimSearchNativePage .ca523-checks{background:var(--ca-surface,
 <a class="menu-item sub-item" href="#" id="menuTransferAdd" onclick="selectMenu(this); switchPage('transferListPage')">
 <span class="material-icons mi" style="font-size:16px;">add_card</span> โอนเพิ่ม
                     </a>
-<span id="menuRefund" hidden aria-hidden="true"></span>
+<a class="menu-item sub-item" href="#" id="menuRefund" onclick="selectMenu(this); switchPage('refundListPage')">
+<span class="material-icons mi" style="font-size:16px;">currency_exchange</span> คืนเงิน
+                    </a>
 <a class="menu-item sub-item" href="#" id="menuMonitorApprove" onclick="selectMenu(this); switchPage('monitorApprovePage')"><span class="material-icons mi" style="font-size:16px;">person</span> อนุมัติคืนเงิน</a>
 <a class="menu-item sub-item" href="#" id="menuMonitorLimit" onclick="selectMenu(this); switchPage('monitorLimitPage')"><span class="material-icons mi" style="font-size:16px;">trending_up</span> ขยายวงเงิน</a>
 <a class="menu-item sub-item" href="#" id="menuEditTransfer" onclick="selectMenu(this); switchPage('editTransferPage')">
@@ -13188,7 +13190,6 @@ body.dark-mode #claimSearchNativePage .ca523-checks{background:var(--ca-surface,
 <select class="form-control" id="refundStatusFilterSelect" onchange="filterRefundTable(true)">
 <option value="">ทั้งหมด</option>
 <option value="pending">รอดำเนินการ</option>
-<option value="success">คืนเงินสำเร็จ</option>
 <option value="reject">ปฏิเสธการคืนเงิน</option>
 </select>
 </div>
@@ -17524,14 +17525,14 @@ body.dark-mode #claimSearchNativePage .ca523-checks{background:var(--ca-surface,
             } else if (pageId === 'refundListPage') {
                 document.getElementById('refundListPage').classList.add('active');
                 document.getElementById('menuClaimSection').classList.add('section-active');
-                document.getElementById('menuMonitorApprove').classList.add('active');
+                document.getElementById('menuRefund').classList.add('active');
 
                 document.getElementById('pageHeaderTitle').innerText = 'เมนูคืนเงิน';
                 document.getElementById('breadcrumbArea').innerHTML = 'จัดการเงินเคลม &gt; เมนูคืนเงิน';
             } else if (pageId === 'refundAddPage') {
                 document.getElementById('refundAddPage').classList.add('active');
                 document.getElementById('menuClaimSection').classList.add('section-active');
-                document.getElementById('menuMonitorApprove').classList.add('active');
+                document.getElementById('menuRefund').classList.add('active');
 
                 document.getElementById('pageHeaderTitle').innerText = 'เมนูคืนเงิน';
                 document.getElementById('breadcrumbArea').innerHTML = 'จัดการเงินเคลม &gt; <a href="#" onclick="switchPage(\'refundListPage\'); return false;">เมนูคืนเงิน</a> &gt; ' + (document.getElementById('refundCpgText') ? document.getElementById('refundCpgText').innerText : 'CPG690467210');
@@ -29545,16 +29546,6 @@ html body #inlineClaimTransferSuccessModal .inline-flow-result-row { min-height:
 html body #inlineClaimTransferSuccessModal .inline-flow-success>.btn { min-height:36px!important;height:36px!important;padding:0 20px!important; }
 @media(max-width:420px){html body #inlineClaimTransferSuccessModal .inline-flow-result-row{grid-template-columns:minmax(0,1fr)!important;gap:4px!important;}html body #inlineClaimTransferSuccessModal .inline-flow-success{padding:16px!important;}}
 </style>
-<style id="claimagent-v611-remove-refund-list">
-#refundListPage, #menuRefund { display:none!important; }
-</style>
-<script id="claimagent-v611-refund-navigation">
-(function(){
- var previous=window.switchPage;
- window.switchPage=function(pageId){var args=Array.prototype.slice.call(arguments);if(pageId==='refundListPage')args[0]='monitorApprovePage';return previous.apply(this,args);};
- if(document.getElementById('refundListPage').classList.contains('active'))window.switchPage('monitorApprovePage');
-})();
-</script>
 </body>
 </html>
 <!-- v249: After closing the final claim success popup, return to the initial Claim Notice insured-search page instead of staying on the claim-entry form. -->
